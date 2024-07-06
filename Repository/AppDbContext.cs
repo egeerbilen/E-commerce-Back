@@ -21,6 +21,7 @@ namespace Repository
         //public DbSet<Product> Products { get; set; }
         //public DbSet<UserBasket> UserBaskets{ get; set; }
         public DbSet<UserFavoritesProducts> UserFavoritesProducts { get; set; }
+        public DbSet<UserBaskets> userBaskets{ get; set; }
         public DbSet<Product> Products { get; set; } // ProductFeatures Bu şekilde eklersek bağımsız olarak ProductFeatures satırlarını bağımsız olarak ekleye bilirim veya güncelleye bilirim
         public DbSet<ProductDetails> ProductDetails { get; set; }
         public DbSet<Role> Roles{ get; set; }
