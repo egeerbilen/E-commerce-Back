@@ -32,5 +32,9 @@ namespace NLayer.Repository.Repositories
                                  .FirstOrDefaultAsync(x => x.Id == productId);
         }
 
+        public async Task<List<Product>> GetUserProducts(int userId)
+        {
+            return await _context.Products.Where(x => x.UserId == userId).ToListAsync();
+        }
     }
 }

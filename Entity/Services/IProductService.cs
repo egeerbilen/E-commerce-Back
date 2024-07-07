@@ -12,5 +12,6 @@ namespace Core.Services
         Task<CustomResponseDto<NoContentDto>> UpdateAsync(ProductUpdateDto dto);
         Task<CustomResponseDto<ProductDto>> AddAsync(ProductCreateDto dto); // ProductDto dönecek -- ProductCreateDto alacak
         Task<CustomResponseDto<ProductDto>> GetProductByIdWithProductDetailsAsync(int productId); // Task ile async bir işlem olacakğını belirttik
+        Task<CustomResponseDto<List<ProductDto>>> GetUserProducts(int userId);
     }
 }

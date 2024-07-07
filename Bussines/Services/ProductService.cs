@@ -46,6 +46,14 @@ namespace Service.Services
             return CustomResponseDto<List<ProductWithCategoryDto>>.Success(200, productsDto);
         }
 
+        public async Task<CustomResponseDto<List<ProductDto>>> GetUserProducts(int userId)
+        {
+            var products = await _productRepository.GetUserProducts(userId);
+
+            var productsDto = _mapper.Map<List<ProductDto>>(products);
+            return CustomResponseDto<List<ProductDto>>.Success(200, productsDto);
+        }
+
         public async Task<CustomResponseDto<NoContentDto>> UpdateAsync(ProductUpdateDto dto)
         {
             var entity = _mapper.Map<Product>(dto);

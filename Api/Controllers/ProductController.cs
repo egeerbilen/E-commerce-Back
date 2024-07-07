@@ -31,6 +31,14 @@ namespace API.Controllers
             return CreateActionResult(result);
         }
 
+        [ServiceFilter(typeof(NotFoundFilter<User>))]
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetUserProducts(int userId)
+        {
+            var result = await _service.GetUserProducts(userId);
+            return CreateActionResult(result);
+        }
+
         [ServiceFilter(typeof(NotFoundFilter<Product>))]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProductByIdWithProductDetailsAsync(int id)
