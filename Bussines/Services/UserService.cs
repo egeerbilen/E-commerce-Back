@@ -61,7 +61,10 @@ namespace Bussines.Services
 
             var claims = new List<Claim>
             {
-                new Claim("Email", user.Email)
+                new Claim("email", user.Email),
+                new Claim("firstName", user.FirstName),
+                new Claim("lastName", user.LastName),
+                new Claim("userId", user.Id.ToString())
             };
 
             foreach (var userRole in user.UserRoles)
