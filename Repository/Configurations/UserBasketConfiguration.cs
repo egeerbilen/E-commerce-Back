@@ -6,7 +6,7 @@ namespace Repository.Configurations
 {
     internal class UserBasketConfiguration : IEntityTypeConfiguration<UserBaskets>
     {
-        internal void Configure(EntityTypeBuilder<UserBaskets> builder)
+        public void Configure(EntityTypeBuilder<UserBaskets> builder)
         {
             // Tablo adı
             builder.ToTable("UserBaskets");
