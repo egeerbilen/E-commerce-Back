@@ -4,6 +4,7 @@ using Entity.DTOs;
 using Entity.Model;
 using Entity.Services;
 using Microsoft.AspNetCore.Mvc;
+using NLayer.API.Filters;
 
 namespace YourNamespace.Controllers
 {
@@ -14,6 +15,13 @@ namespace YourNamespace.Controllers
         public UserFavoritesController(IUserFavoritesProductsService userFavoritesProductsServices)
         {
             _userFavoritesProductsServices = userFavoritesProductsServices;
+        }
+
+        [ServiceFilter(typeof(NotFoundFilter<User>))]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserFavoritesById(int id)
+        {
+            return CreateActionResult(await _userFavoritesProductsServices.GetUserFavoritesById(id));
         }
 
         [HttpPost]

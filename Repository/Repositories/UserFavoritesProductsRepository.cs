@@ -49,5 +49,9 @@ namespace DataAccess.Repositories
             return false;
         }
 
+        public async Task<List<UserFavoritesProducts>> GetUserFavoritesById(int userId)
+        {
+            return await _context.UserFavoritesProducts.Where(ufp => ufp.UserId == userId).ToListAsync();
+        }
     }
 }
