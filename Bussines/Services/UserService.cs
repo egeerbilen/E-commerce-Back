@@ -32,6 +32,7 @@ namespace Bussines.Services
 
         public async Task<CustomResponseDto<BaseDto>> AddAsync(UserCreateDto dto)
         {
+            dto.Password = PasswordHelper.HashPassword(dto.Password);
             var newEntity = _mapper.Map<User>(dto);
             await _userRepository.AddAsync(newEntity);
             await _unitOfWork.CommitAsync();
@@ -41,6 +42,7 @@ namespace Bussines.Services
 
         public async Task<CustomResponseDto<NoContentDto>> UpdateAsync(UserUpdateDto dto)
         {
+            dto.Password = PasswordHelper.HashPassword(dto.Password);
             var entity = _mapper.Map<User>(dto);
             _userRepository.Update(entity);
             await _unitOfWork.CommitAsync();
