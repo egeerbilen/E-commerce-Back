@@ -51,7 +51,7 @@ namespace Service.Services
             var entity = _mapper.Map<Product>(dto);
             _productRepository.Update(entity);
             await _unitOfWork.CommitAsync();
-            return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status204NoContent);
+            return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status200OK);
         }
     }
 }

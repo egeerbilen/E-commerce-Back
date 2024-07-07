@@ -79,7 +79,7 @@ namespace Service.Services
             _repository.Remove(entity);
             await _unitOfWork.CommitAsync();
 
-            return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status204NoContent);
+            return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status200OK);
         }
 
         public async Task<CustomResponseDto<NoContentDto>> RemoveRangeAsync(IEnumerable<int> ids)
@@ -87,7 +87,7 @@ namespace Service.Services
             var entities = await _repository.Where(x => ids.Contains(x.Id)).ToListAsync();
             _repository.RemoveRange(entities);
             await _unitOfWork.CommitAsync();
-            return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status204NoContent);
+            return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status200OK);
         }
 
         public async Task<CustomResponseDto<NoContentDto>> UpdateAsync(Dto dto)
@@ -95,7 +95,7 @@ namespace Service.Services
             var entity = _mapper.Map<Entity>(dto);
             _repository.Update(entity);
             await _unitOfWork.CommitAsync();
-            return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status204NoContent);
+            return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status200OK);
         }
 
         public async Task<CustomResponseDto<IEnumerable<Dto>>> Where(Expression<Func<Entity, bool>> expression)

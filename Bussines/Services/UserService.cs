@@ -44,7 +44,7 @@ namespace Bussines.Services
             var entity = _mapper.Map<User>(dto);
             _userRepository.Update(entity);
             await _unitOfWork.CommitAsync();
-            return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status204NoContent);
+            return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status200OK);
         }
 
         public async Task<CustomResponseDto<string>> createJwtToken(UserLoginRequestDto dto)
