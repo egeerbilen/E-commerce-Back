@@ -16,6 +16,7 @@ namespace API.Controllers
             _service = service;
         }
 
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetProducts()
         {
@@ -23,6 +24,7 @@ namespace API.Controllers
             return CreateActionResult(result);
         }
 
+        //[Authorize(Roles = "Admin, User")]
         [ServiceFilter(typeof(NotFoundFilter<Product>))]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
@@ -54,6 +56,7 @@ namespace API.Controllers
             return CreateActionResult(result);
         }
 
+        //[Authorize(Roles = "Admin")]
         [HttpPut]
         public async Task<IActionResult> Update(ProductUpdateDto productDto)
         {
@@ -61,6 +64,7 @@ namespace API.Controllers
             return CreateActionResult(result);
         }
 
+        //[Authorize(Roles = "Admin")]
         [ServiceFilter(typeof(NotFoundFilter<Product>))]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)

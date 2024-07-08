@@ -1,6 +1,7 @@
 ﻿using Entity.DTOs;
 using Entity.Model;
 using Entity.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NLayer.API.Filters;
 

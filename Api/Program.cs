@@ -163,12 +163,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("AllowSpecificOrigin");
+app.UseAuthorization(); // bir request geldiðinde token doðrulamasý bu midleware de gerçekleþir
 app.UseHttpsRedirection(); // https yönledirmesi
 app.UseMiddleware<LowercaseResponseMiddleware>();
 app.UseCustomException(); // bu bizim eklediðimiz hata katmaný bu hata katmanýnýn üst tarafta olmasý önemli
 app.UseIpRateLimiting();
-
-
-app.UseAuthorization(); // bir request geldiðinde token doðrulamasý bu midleware de gerçekleþir
 app.MapControllers();
 app.Run();
