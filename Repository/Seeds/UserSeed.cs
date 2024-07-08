@@ -21,8 +21,8 @@ internal class UserSeed : IEntityTypeConfiguration<User>
         {
             Id = 2,
             FirstName = "Ece",
-            LastName = "Doe",
-            Email = "ece.doe@example.com",
+            LastName = "Erbilen",
+            Email = "ece.erbilen@example.com",
             Password = PasswordHelper.HashPassword("password"),
             CreatedDate = DateTime.Now
         };
