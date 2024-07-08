@@ -12,8 +12,7 @@ namespace Repository.Seeds
             builder.HasData(
                 new Category { Id = 1, Name = "Electronics", CreatedDate = DateTime.Now },
                 new Category { Id = 2, Name = "Home Appliances", CreatedDate = DateTime.Now },
-                new Category { Id = 3, Name = "Books", CreatedDate = DateTime.Now },
-                new Category { Id = 4, Name = "Car", CreatedDate = DateTime.Now }
+                new Category { Id = 3, Name = "Books", CreatedDate = DateTime.Now }
             );
         }
     }

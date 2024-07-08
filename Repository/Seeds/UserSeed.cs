@@ -37,16 +37,6 @@ internal class UserSeed : IEntityTypeConfiguration<User>
             CreatedDate = DateTime.Now
         };
 
-
-        var user4 = new User
-        {
-            Id = 4,
-            FirstName = "Mehmet",
-            LastName = "Demir",
-            Email = "mehmet.demir@example.com",
-            Password = PasswordHelper.HashPassword("password"),
-            CreatedDate = DateTime.Now
-        };
-        builder.HasData(user1, user2, user3, user4); // Yeni kullanıcı eklendi
+        builder.HasData(user1, user2, user3); // Yeni kullanıcı eklendi
     }
 }

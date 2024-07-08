@@ -8,7 +8,7 @@ internal class UserFavoritesProductsSeed : IEntityTypeConfiguration<UserFavorite
     {
         builder.HasData(
             new UserFavoritesProducts { UserId = 1, ProductId = 1 },
-            new UserFavoritesProducts { UserId = 1, ProductId = 3 },
+            new UserFavoritesProducts { UserId = 1, ProductId = 2 },
             new UserFavoritesProducts { UserId = 2, ProductId = 2 },
             new UserFavoritesProducts { UserId = 2, ProductId = 3 }
         );
