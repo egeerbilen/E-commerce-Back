@@ -1,6 +1,8 @@
 ﻿using Entity.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Runtime.ConstrainedExecution;
 
 namespace Repository.Configurations
 {
@@ -13,6 +15,8 @@ namespace Repository.Configurations
 
             // Composite primary key
             builder.HasKey(b => new { b.UserId, b.ProductId });
+            // Bu yapı ile Favorite tablosunda FavoriteId sütununa gerek kalmaz ve birincil anahtar olarak UserId ve ProductId
+            // sütunlarının birleşimi kullanılır.Bu, her kullanıcı ve ürün çiftinin tabloda yalnızca bir kez bulunmasını garanti eder.
 
             // Properties
             builder.Property(b => b.UserId).IsRequired();
