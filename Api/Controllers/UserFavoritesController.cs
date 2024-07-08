@@ -30,10 +30,11 @@ namespace YourNamespace.Controllers
             return CreateActionResult(await _userFavoritesProductsServices.CreateUserFavoriteProductsAsync(userFavoritesProductsDto));
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteUserFavoriteProduct(UserFavoritesProductsDto userFavoritesProductsDto)
+        [ServiceFilter(typeof(NotFoundFilter<User>))]
+        [HttpDelete("{userId}/{productId}")]
+        public async Task<IActionResult> DeleteUserFavoriteProduct(int userId, int productId)
         {
-            return CreateActionResult(await _userFavoritesProductsServices.DeleteUserFavoriteProductsAsync(userFavoritesProductsDto.UserId, userFavoritesProductsDto.ProductId));
+            return CreateActionResult(await _userFavoritesProductsServices.DeleteUserFavoriteProductsAsync(userId, productId));
         }
     }
 }
