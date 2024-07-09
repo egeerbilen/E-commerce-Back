@@ -24,6 +24,13 @@ namespace YourNamespace.Controllers
             return CreateActionResult(await _userFavoritesProductsServices.GetUserFavoritesById(id));
         }
 
+        [ServiceFilter(typeof(NotFoundFilter<User>))]
+        [HttpGet("{userId}/{productId}")]
+        public async Task<IActionResult> IsFavoriteProduct(int userId, int productId)
+        {
+            return CreateActionResult(await _userFavoritesProductsServices.IsFavoriteProduct(userId, productId));
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateUserFavoriteProduct(FavoritesDto userFavoritesProductsDto)
         {

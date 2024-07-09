@@ -16,7 +16,7 @@ namespace DataAccess.Repositories
 
         public async Task<User> FindUserByEmailWithUserRoles(UserLoginRequestDto dto)
         {
-            return await _context.Users.Include(x => x.UserRoles).Where(x => x.Email == dto.Email).SingleOrDefaultAsync();
+            return await _context.Users.Include(x => x.UserRoles).Where(x => x.Email == dto.Email).AsNoTracking().SingleOrDefaultAsync();
         }
     }
 }

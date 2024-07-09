@@ -32,12 +32,10 @@ namespace Repository.Configurations
                    .WithOne(ufp => ufp.User)
                    .HasForeignKey(ufp => ufp.UserId);
 
-            // Eğer UserBaskets ilişkisini de eklerseniz
-            /*
-            builder.HasMany(u => u.UserBaskets)
-                   .WithOne(ub => ub.User)
-                   .HasForeignKey(ub => ub.UserId);
-            */
+            // DeleteBehavior.Cascade: İlişkili kayıtları otomatik olarak siler(döngü veya çoklu yol sorunlarına neden olabilir).
+            // DeleteBehavior.NoAction: Silme işlemi sırasında herhangi bir işlem yapmaz, ancak veri tutarsızlıklarına neden olabilir.
+            // DeleteBehavior.SetNull: İlişkili kayıtların yabancı anahtarlarını null olarak ayarlar.
+            // DeleteBehavior.Restrict: Silme işlemini kısıtlar ve hata verir.
 
             builder.ToTable("Users");
         }

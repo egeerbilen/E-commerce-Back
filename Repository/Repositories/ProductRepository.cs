@@ -20,7 +20,7 @@ namespace NLayer.Repository.Repositories
             // Include, Entity Framework'te kullanılan bir metottur ve sorgu sonucunda ilişkili verileri (bağlantılı tabloları) almak için kullanılır.
             // Entity Framework'te ilişkili tablolar arasında bir ilişki (relationship) tanımlandığında, varsayılan olarak sorgular yalnızca doğrudan seçilen tabloya ait verileri getirir. Ancak, genellikle ilişkili tablolardan gelen verilere de ihtiyaç duyulur. İşte burada Include devreye girer.
             // Includemetodu ile Eager loading yaptık yani dataları da çekerken katagorilerinde alınmasını istedik
-            return await _context.Products.Include(x => x.Category).ToListAsync();
+            return await _context.Products.Include(x => x.Category).AsNoTracking().ToListAsync();
             // ToListAsync() IQueryable sorgusundan elde edilen sonuçları List<T> türüne dönüştürmek için kullanılır.
         }
 
@@ -28,7 +28,7 @@ namespace NLayer.Repository.Repositories
 
         public async Task<List<Product>> GetUserProducts(int userId)
         {
-            return await _context.Products.Where(x => x.UserId == userId).ToListAsync();
+            return await _context.Products.Where(x => x.UserId == userId).AsNoTracking().ToListAsync();
         }
     }
 }
