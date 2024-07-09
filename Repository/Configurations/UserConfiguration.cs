@@ -28,7 +28,7 @@ namespace Repository.Configurations
                    .WithOne(p => p.User)
                    .HasForeignKey(p => p.UserId);
 
-            builder.HasMany(u => u.UserFavoritesProducts)
+            builder.HasMany(u => u.Favorites)
                    .WithOne(ufp => ufp.User)
                    .HasForeignKey(ufp => ufp.UserId);
 

@@ -12,7 +12,7 @@ namespace Entity.Model
         public User User { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
-        public List<UserFavoritesProducts> UserFavoritesProducts { get; set; }
+        public List<Favorites> Favorites { get; set; }
         //public ICollection<UserBaskets> UserBaskets { get; set; }
     }
 }

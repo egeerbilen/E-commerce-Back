@@ -6,9 +6,9 @@ using System.Runtime.ConstrainedExecution;
 
 namespace Repository.Configurations
 {
-    internal class UserFavoritesProductsConfiguration : IEntityTypeConfiguration<UserFavoritesProducts>
+    internal class FavoritesConfiguration : IEntityTypeConfiguration<Favorites>
     {
-        public void Configure(EntityTypeBuilder<UserFavoritesProducts> builder)
+        public void Configure(EntityTypeBuilder<Favorites> builder)
         {
             // Table name
             builder.ToTable("UsersFavoritesProducts");
@@ -24,12 +24,12 @@ namespace Repository.Configurations
 
             // Relationships
             builder.HasOne(b => b.User)
-                   .WithMany(u => u.UserFavoritesProducts)
+                   .WithMany(u => u.Favorites)
                    .HasForeignKey(b => b.UserId)
                    .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(b => b.Product)
-                   .WithMany(p => p.UserFavoritesProducts)
+                   .WithMany(p => p.Favorites)
                    .HasForeignKey(b => b.ProductId)
                    .OnDelete(DeleteBehavior.Restrict);
 

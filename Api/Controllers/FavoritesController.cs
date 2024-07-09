@@ -8,11 +8,11 @@ using NLayer.API.Filters;
 
 namespace YourNamespace.Controllers
 {
-    public class UserFavoritesController : CustomBaseController
+    public class FavoritesController : CustomBaseController
     {
-        private readonly IUserFavoritesProductsService _userFavoritesProductsServices;
+        private readonly IFavoritesService _userFavoritesProductsServices;
 
-        public UserFavoritesController(IUserFavoritesProductsService userFavoritesProductsServices)
+        public FavoritesController(IFavoritesService userFavoritesProductsServices)
         {
             _userFavoritesProductsServices = userFavoritesProductsServices;
         }
@@ -25,7 +25,7 @@ namespace YourNamespace.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUserFavoriteProduct(UserFavoritesProductsDto userFavoritesProductsDto)
+        public async Task<IActionResult> CreateUserFavoriteProduct(FavoritesDto userFavoritesProductsDto)
         {
             return CreateActionResult(await _userFavoritesProductsServices.CreateUserFavoriteProductsAsync(userFavoritesProductsDto));
         }

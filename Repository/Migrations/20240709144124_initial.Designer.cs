@@ -12,7 +12,7 @@ using Repository;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240709142811_initial")]
+    [Migration("20240709144124_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -55,20 +55,57 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(673),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 41, 24, 12, DateTimeKind.Local).AddTicks(4754),
                             Name = "Electronics"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(685),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 41, 24, 12, DateTimeKind.Local).AddTicks(4766),
                             Name = "Home Appliances"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(685),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 41, 24, 12, DateTimeKind.Local).AddTicks(4767),
                             Name = "Books"
+                        });
+                });
+
+            modelBuilder.Entity("Entity.Model.Favorites", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("UsersFavoritesProducts", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            ProductId = 1
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            ProductId = 2
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            ProductId = 2
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            ProductId = 3
                         });
                 });
 
@@ -122,7 +159,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(968),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 41, 24, 12, DateTimeKind.Local).AddTicks(4909),
                             Description = "Description 1",
                             Name = "Product 1",
                             Price = 100.0m,
@@ -132,7 +169,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(970),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 41, 24, 12, DateTimeKind.Local).AddTicks(4911),
                             Description = "Description 1",
                             Name = "Product 2",
                             Price = 200.0m,
@@ -142,7 +179,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 3,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(971),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 41, 24, 12, DateTimeKind.Local).AddTicks(4912),
                             Name = "Product 3",
                             Price = 150.0m,
                             UserId = 2
@@ -151,7 +188,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 4,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(972),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 41, 24, 12, DateTimeKind.Local).AddTicks(4913),
                             Description = "Description 1",
                             Name = "Product 4",
                             Price = 250.0m,
@@ -161,7 +198,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 5,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(973),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 41, 24, 12, DateTimeKind.Local).AddTicks(4914),
                             Description = "Description 1",
                             Name = "Product 5",
                             Price = 300.0m,
@@ -199,19 +236,19 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(1058),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 41, 24, 12, DateTimeKind.Local).AddTicks(5004),
                             RoleName = "Admin"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(1058),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 41, 24, 12, DateTimeKind.Local).AddTicks(5005),
                             RoleName = "User"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(1059),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 41, 24, 12, DateTimeKind.Local).AddTicks(5005),
                             RoleName = "Guest"
                         });
                 });
@@ -269,7 +306,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(1629),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 41, 24, 12, DateTimeKind.Local).AddTicks(5505),
                             Email = "ege.erbilen@example.com",
                             FirstName = "Ege",
                             LastName = "Erbilen",
@@ -278,7 +315,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(1649),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 41, 24, 12, DateTimeKind.Local).AddTicks(5525),
                             Email = "ece.erbilen@example.com",
                             FirstName = "Ece",
                             LastName = "Erbilen",
@@ -287,48 +324,11 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(1664),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 41, 24, 12, DateTimeKind.Local).AddTicks(5556),
                             Email = "ahmet.yilmaz@example.com",
                             FirstName = "Ahmet",
                             LastName = "Yılmaz",
                             Password = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"
-                        });
-                });
-
-            modelBuilder.Entity("Entity.Model.UserFavoritesProducts", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("UsersFavoritesProducts", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            ProductId = 1
-                        },
-                        new
-                        {
-                            UserId = 1,
-                            ProductId = 2
-                        },
-                        new
-                        {
-                            UserId = 2,
-                            ProductId = 2
-                        },
-                        new
-                        {
-                            UserId = 2,
-                            ProductId = 3
                         });
                 });
 
@@ -364,6 +364,25 @@ namespace DataAccess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Entity.Model.Favorites", b =>
+                {
+                    b.HasOne("Entity.Model.Product", "Product")
+                        .WithMany("Favorites")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Entity.Model.User", "User")
+                        .WithMany("Favorites")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Entity.Model.Product", b =>
                 {
                     b.HasOne("Entity.Model.Category", "Category")
@@ -379,25 +398,6 @@ namespace DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Entity.Model.UserFavoritesProducts", b =>
-                {
-                    b.HasOne("Entity.Model.Product", "Product")
-                        .WithMany("UserFavoritesProducts")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Entity.Model.User", "User")
-                        .WithMany("UserFavoritesProducts")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
 
                     b.Navigation("User");
                 });
@@ -428,7 +428,7 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Model.Product", b =>
                 {
-                    b.Navigation("UserFavoritesProducts");
+                    b.Navigation("Favorites");
                 });
 
             modelBuilder.Entity("Entity.Model.Role", b =>
@@ -438,9 +438,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Model.User", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("Favorites");
 
-                    b.Navigation("UserFavoritesProducts");
+                    b.Navigation("Products");
 
                     b.Navigation("UserRoles");
                 });

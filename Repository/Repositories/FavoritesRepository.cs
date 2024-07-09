@@ -8,28 +8,28 @@ using Repository.Repositories;
 
 namespace DataAccess.Repositories
 {
-    public class UserFavoritesProductsRepository : IUserFavoritesProductsRepository
+    public class FavoritesRepository : IFavoritesRepository
     {
         protected readonly AppDbContext _context;
         // dbSet bizim veri tabanındaki tablomuza karşılık geliyor
         // readonly çünkü bu değişkenler constroctur ve ya altta değer atana bilir sonrasında değer atanamaz
-        private readonly DbSet<UserFavoritesProducts> _dbSet;
-        public UserFavoritesProductsRepository(AppDbContext context)
+        private readonly DbSet<Favorites> _dbSet;
+        public FavoritesRepository(AppDbContext context)
         {
             _context = context;
-            _dbSet = _context.Set<UserFavoritesProducts>();
+            _dbSet = _context.Set<Favorites>();
         }
-        public async Task<UserFavoritesProducts> CreateUserFavoriteProductsAsync(UserFavoritesProducts userFavoritesProducts)
+        public async Task<Favorites> CreateUserFavoriteProductsAsync(Favorites favorites)
         {
             // Yeni favori ürünü ekle
-            _context.UserFavoritesProducts.AddAsync(userFavoritesProducts);
+            _context.Favorites.AddAsync(favorites);
 
             // Değişiklikleri kaydet
             await _context.SaveChangesAsync();
 
             // Güncellenmiş favori ürünü al
-            var updatedUserFavorite = await _context.UserFavoritesProducts
-                .Where(u => u.UserId == userFavoritesProducts.UserId)
+            var updatedUserFavorite = await _context.Favorites
+                .Where(u => u.UserId == favorites.UserId)
                 .FirstOrDefaultAsync();
 
             return updatedUserFavorite;
@@ -37,11 +37,11 @@ namespace DataAccess.Repositories
 
         public async Task<bool> DeleteUserFavoriteProductsAsync(int userId, int productId)
         {
-            var userFavoriteProduct = await _context.UserFavoritesProducts.FirstOrDefaultAsync(u => u.UserId == userId && u.ProductId == productId);
+            var userFavoriteProduct = await _context.Favorites.FirstOrDefaultAsync(u => u.UserId == userId && u.ProductId == productId);
 
             if (userFavoriteProduct != null)
             {
-                _context.UserFavoritesProducts.Remove(userFavoriteProduct);
+                _context.Favorites.Remove(userFavoriteProduct);
                 await _context.SaveChangesAsync();
                 return true;
             }
@@ -51,7 +51,7 @@ namespace DataAccess.Repositories
 
         public async Task<List<Product>> GetUserFavoritesById(int userId)
         {
-            var userFavorites = await _context.UserFavoritesProducts
+            var userFavorites = await _context.Favorites
                 .Where(ufp => ufp.UserId == userId)
                 .Include(ufp => ufp.Product)
                 .AsNoTracking()

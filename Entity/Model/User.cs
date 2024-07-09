@@ -11,7 +11,7 @@ namespace Entity.Model
         public string? Address { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
         public ICollection<Product> Products{ get; set; }
-        public ICollection<UserFavoritesProducts> UserFavoritesProducts { get; set; }
+        public ICollection<Favorites> Favorites { get; set; }
         //public ICollection<UserBaskets> UserBaskets{ get; set; }
     }
 }

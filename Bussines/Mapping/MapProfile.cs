@@ -24,8 +24,8 @@ namespace Service.Mapping
             CreateMap<UserCreateDto, User>();
             CreateMap<UserUpdateDto, User>();
             CreateMap<User, UserLoginDto>();
-            CreateMap<UserFavoritesProducts, UserFavoritesProductsDto>().ReverseMap();
-            CreateMap<UserFavoritesProductsDto, UserFavoritesProducts>().ReverseMap();
+            CreateMap<Favorites, FavoritesDto>().ReverseMap();
+            CreateMap<FavoritesDto, Favorites>().ReverseMap();
             CreateMap<User, BaseDto>().ReverseMap();
 
         }

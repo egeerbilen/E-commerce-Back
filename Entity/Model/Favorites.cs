@@ -2,7 +2,7 @@
 
 namespace Entity.Model
 {
-    public class UserFavoritesProducts
+    public class Favorites
     {
         public int UserId { get; set; }
         public int ProductId { get; set; }

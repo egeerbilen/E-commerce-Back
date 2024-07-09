@@ -4,10 +4,10 @@ using Entity.Model;
 
 namespace Entity.Repositories
 {
-    public interface IUserFavoritesProductsRepository
+    public interface IFavoritesRepository
     {
         Task<List<Product>> GetUserFavoritesById(int userId);
-        Task<UserFavoritesProducts> CreateUserFavoriteProductsAsync(UserFavoritesProducts userFavoritesProducts);
+        Task<Favorites> CreateUserFavoriteProductsAsync(Favorites favorites);
         Task<bool> DeleteUserFavoriteProductsAsync(int userId, int productId);
     }
 }
