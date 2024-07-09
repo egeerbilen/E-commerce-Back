@@ -174,9 +174,9 @@ namespace DataAccess.Migrations
                 columns: new[] { "Id", "CreatedDate", "Name", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(8756), "Electronics", null },
-                    { 2, new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(8771), "Home Appliances", null },
-                    { 3, new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(8772), "Books", null }
+                    { 1, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(2863), "Electronics", null },
+                    { 2, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(2877), "Home Appliances", null },
+                    { 3, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(2878), "Books", null }
                 });
 
             migrationBuilder.InsertData(
@@ -184,9 +184,9 @@ namespace DataAccess.Migrations
                 columns: new[] { "Id", "CreatedDate", "RoleName", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(9149), "Admin", null },
-                    { 2, new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(9150), "User", null },
-                    { 3, new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(9150), "Guest", null }
+                    { 1, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3287), "Admin", null },
+                    { 2, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3307), "User", null },
+                    { 3, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3308), "Guest", null }
                 });
 
             migrationBuilder.InsertData(
@@ -194,9 +194,9 @@ namespace DataAccess.Migrations
                 columns: new[] { "Id", "Address", "CreatedDate", "Email", "FirstName", "LastName", "Password", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(9678), "ege.erbilen@example.com", "Ege", "Erbilen", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", null },
-                    { 2, null, new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(9697), "ece.erbilen@example.com", "Ece", "Erbilen", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", null },
-                    { 3, null, new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(9711), "ahmet.yilmaz@example.com", "Ahmet", "Yılmaz", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", null }
+                    { 1, null, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3894), "ege.erbilen@example.com", "Ege", "Erbilen", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", null },
+                    { 2, null, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3913), "ece.erbilen@example.com", "Ece", "Erbilen", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", null },
+                    { 3, null, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3936), "ahmet.yilmaz@example.com", "Ahmet", "Yılmaz", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", null }
                 });
 
             migrationBuilder.InsertData(
@@ -204,11 +204,11 @@ namespace DataAccess.Migrations
                 columns: new[] { "Id", "CategoryId", "CreatedDate", "ImageData", "Name", "Price", "UpdatedDate", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(9046), null, "Product 1", 100.0m, null, 1 },
-                    { 2, 1, new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(9048), null, "Product 2", 200.0m, null, 1 },
-                    { 3, 2, new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(9049), null, "Product 3", 150.0m, null, 2 },
-                    { 4, 2, new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(9068), null, "Product 4", 250.0m, null, 2 },
-                    { 5, 3, new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(9069), null, "Product 5", 300.0m, null, 3 }
+                    { 1, 1, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3186), null, "Product 1", 100.0m, null, 1 },
+                    { 2, 1, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3187), null, "Product 2", 200.0m, null, 1 },
+                    { 3, 2, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3188), null, "Product 3", 150.0m, null, 2 },
+                    { 4, 2, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3189), null, "Product 4", 250.0m, null, 2 },
+                    { 5, 3, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3189), null, "Product 5", 300.0m, null, 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -226,11 +226,11 @@ namespace DataAccess.Migrations
                 columns: new[] { "Id", "CreatedDate", "Description", "ProductId", "Stock", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(8941), "Latest model smartphone with advanced features", 1, 150, null },
-                    { 2, new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(8942), "High-performance laptop for gaming and work", 2, 100, null },
-                    { 3, new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(8942), "Energy-efficient refrigerator with spacious compartments", 3, 75, null },
-                    { 4, new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(8943), "Front-loading washing machine with quick wash feature", 4, 50, null },
-                    { 5, new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(8944), "Best-selling fiction novel", 5, 200, null }
+                    { 1, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3065), "Latest model smartphone with advanced features", 1, 150, null },
+                    { 2, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3065), "High-performance laptop for gaming and work", 2, 100, null },
+                    { 3, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3066), "Energy-efficient refrigerator with spacious compartments", 3, 75, null },
+                    { 4, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3067), "Front-loading washing machine with quick wash feature", 4, 50, null },
+                    { 5, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3067), "Best-selling fiction novel", 5, 200, null }
                 });
 
             migrationBuilder.InsertData(

@@ -49,19 +49,19 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(8756),
+                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(2863),
                             Name = "Electronics"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(8771),
+                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(2877),
                             Name = "Home Appliances"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(8772),
+                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(2878),
                             Name = "Books"
                         });
                 });
@@ -110,7 +110,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(9046),
+                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3186),
                             Name = "Product 1",
                             Price = 100.0m,
                             UserId = 1
@@ -119,7 +119,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(9048),
+                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3187),
                             Name = "Product 2",
                             Price = 200.0m,
                             UserId = 1
@@ -128,7 +128,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 3,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(9049),
+                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3188),
                             Name = "Product 3",
                             Price = 150.0m,
                             UserId = 2
@@ -137,7 +137,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 4,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(9068),
+                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3189),
                             Name = "Product 4",
                             Price = 250.0m,
                             UserId = 2
@@ -146,7 +146,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 5,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(9069),
+                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3189),
                             Name = "Product 5",
                             Price = 300.0m,
                             UserId = 3
@@ -189,7 +189,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(8941),
+                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3065),
                             Description = "Latest model smartphone with advanced features",
                             ProductId = 1,
                             Stock = 150
@@ -197,7 +197,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(8942),
+                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3065),
                             Description = "High-performance laptop for gaming and work",
                             ProductId = 2,
                             Stock = 100
@@ -205,7 +205,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(8942),
+                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3066),
                             Description = "Energy-efficient refrigerator with spacious compartments",
                             ProductId = 3,
                             Stock = 75
@@ -213,7 +213,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(8943),
+                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3067),
                             Description = "Front-loading washing machine with quick wash feature",
                             ProductId = 4,
                             Stock = 50
@@ -221,7 +221,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(8944),
+                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3067),
                             Description = "Best-selling fiction novel",
                             ProductId = 5,
                             Stock = 200
@@ -255,19 +255,19 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(9149),
+                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3287),
                             RoleName = "Admin"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(9150),
+                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3307),
                             RoleName = "User"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(9150),
+                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3308),
                             RoleName = "Guest"
                         });
                 });
@@ -322,7 +322,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(9678),
+                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3894),
                             Email = "ege.erbilen@example.com",
                             FirstName = "Ege",
                             LastName = "Erbilen",
@@ -331,7 +331,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(9697),
+                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3913),
                             Email = "ece.erbilen@example.com",
                             FirstName = "Ece",
                             LastName = "Erbilen",
@@ -340,7 +340,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 40, 0, 400, DateTimeKind.Local).AddTicks(9711),
+                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3936),
                             Email = "ahmet.yilmaz@example.com",
                             FirstName = "Ahmet",
                             LastName = "Yılmaz",

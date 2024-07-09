@@ -1,4 +1,6 @@
-﻿namespace Core.DTOs
+﻿using Entity.DTOs;
+
+namespace Core.DTOs
 {
     public class ProductUpdateDto
     {
@@ -10,5 +12,6 @@
         public decimal Price { get; set; }
         public int CategoryId { get; set; }
         public int UserId { get; set; }
+        public ProductDetailsDto ProductDetails { get; set; }
     }
 }
