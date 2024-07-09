@@ -38,6 +38,9 @@ namespace DataAccess.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<bool?>("SoftDelete")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
@@ -49,19 +52,19 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1193),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(673),
                             Name = "Electronics"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1205),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(685),
                             Name = "Home Appliances"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1206),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(685),
                             Name = "Books"
                         });
                 });
@@ -94,10 +97,13 @@ namespace DataAccess.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<bool?>("SoftDelete")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -113,7 +119,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1408),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(968),
                             Description = "Description 1",
                             Name = "Product 1",
                             Price = 100.0m,
@@ -123,7 +129,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1410),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(970),
                             Description = "Description 1",
                             Name = "Product 2",
                             Price = 200.0m,
@@ -133,7 +139,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 3,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1411),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(971),
                             Name = "Product 3",
                             Price = 150.0m,
                             UserId = 2
@@ -142,7 +148,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 4,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1412),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(972),
                             Description = "Description 1",
                             Name = "Product 4",
                             Price = 250.0m,
@@ -152,7 +158,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 5,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1413),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(973),
                             Description = "Description 1",
                             Name = "Product 5",
                             Price = 300.0m,
@@ -176,6 +182,9 @@ namespace DataAccess.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<bool?>("SoftDelete")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
@@ -187,19 +196,19 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1505),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(1058),
                             RoleName = "Admin"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1506),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(1058),
                             RoleName = "User"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1506),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(1059),
                             RoleName = "Guest"
                         });
                 });
@@ -238,6 +247,9 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("SoftDelete")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
@@ -254,7 +266,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(2119),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(1629),
                             Email = "ege.erbilen@example.com",
                             FirstName = "Ege",
                             LastName = "Erbilen",
@@ -263,7 +275,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(2139),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(1649),
                             Email = "ece.erbilen@example.com",
                             FirstName = "Ece",
                             LastName = "Erbilen",
@@ -272,7 +284,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(2153),
+                            CreatedDate = new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(1664),
                             Email = "ahmet.yilmaz@example.com",
                             FirstName = "Ahmet",
                             LastName = "Yılmaz",
@@ -359,7 +371,9 @@ namespace DataAccess.Migrations
 
                     b.HasOne("Entity.Model.User", "User")
                         .WithMany("Products")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
 
@@ -371,7 +385,7 @@ namespace DataAccess.Migrations
                     b.HasOne("Entity.Model.Product", "Product")
                         .WithMany("UserFavoritesProducts")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Entity.Model.User", "User")

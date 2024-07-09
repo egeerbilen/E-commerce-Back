@@ -37,6 +37,6 @@ internal class UserSeed : IEntityTypeConfiguration<User>
             CreatedDate = DateTime.Now
         };
 
-        builder.HasData(user1, user2, user3); // Yeni kullanıcı eklendi
+        builder.HasData(user1, user2, user3);
     }
 }

@@ -21,7 +21,8 @@ namespace DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    SoftDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -36,7 +37,8 @@ namespace DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RoleName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    SoftDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -55,7 +57,8 @@ namespace DataAccess.Migrations
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    SoftDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -74,10 +77,11 @@ namespace DataAccess.Migrations
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ImageData = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    SoftDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -92,7 +96,8 @@ namespace DataAccess.Migrations
                         name: "FK_Products_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -134,7 +139,7 @@ namespace DataAccess.Migrations
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_UsersFavoritesProducts_Users_UserId",
                         column: x => x.UserId,
@@ -145,44 +150,44 @@ namespace DataAccess.Migrations
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "Id", "CreatedDate", "Name", "UpdatedDate" },
+                columns: new[] { "Id", "CreatedDate", "Name", "SoftDelete", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1193), "Electronics", null },
-                    { 2, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1205), "Home Appliances", null },
-                    { 3, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1206), "Books", null }
+                    { 1, new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(673), "Electronics", null, null },
+                    { 2, new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(685), "Home Appliances", null, null },
+                    { 3, new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(685), "Books", null, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Roles",
-                columns: new[] { "Id", "CreatedDate", "RoleName", "UpdatedDate" },
+                columns: new[] { "Id", "CreatedDate", "RoleName", "SoftDelete", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1505), "Admin", null },
-                    { 2, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1506), "User", null },
-                    { 3, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1506), "Guest", null }
+                    { 1, new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(1058), "Admin", null, null },
+                    { 2, new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(1058), "User", null, null },
+                    { 3, new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(1059), "Guest", null, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Address", "CreatedDate", "Email", "FirstName", "LastName", "Password", "UpdatedDate" },
+                columns: new[] { "Id", "Address", "CreatedDate", "Email", "FirstName", "LastName", "Password", "SoftDelete", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(2119), "ege.erbilen@example.com", "Ege", "Erbilen", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", null },
-                    { 2, null, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(2139), "ece.erbilen@example.com", "Ece", "Erbilen", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", null },
-                    { 3, null, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(2153), "ahmet.yilmaz@example.com", "Ahmet", "Yılmaz", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", null }
+                    { 1, null, new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(1629), "ege.erbilen@example.com", "Ege", "Erbilen", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", null, null },
+                    { 2, null, new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(1649), "ece.erbilen@example.com", "Ece", "Erbilen", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", null, null },
+                    { 3, null, new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(1664), "ahmet.yilmaz@example.com", "Ahmet", "Yılmaz", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", null, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "CategoryId", "CreatedDate", "Description", "ImageData", "Name", "Price", "UpdatedDate", "UserId" },
+                columns: new[] { "Id", "CategoryId", "CreatedDate", "Description", "ImageData", "Name", "Price", "SoftDelete", "UpdatedDate", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1408), "Description 1", null, "Product 1", 100.0m, null, 1 },
-                    { 2, 1, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1410), "Description 1", null, "Product 2", 200.0m, null, 1 },
-                    { 3, 2, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1411), null, null, "Product 3", 150.0m, null, 2 },
-                    { 4, 2, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1412), "Description 1", null, "Product 4", 250.0m, null, 2 },
-                    { 5, 3, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1413), "Description 1", null, "Product 5", 300.0m, null, 3 }
+                    { 1, 1, new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(968), "Description 1", null, "Product 1", 100.0m, null, null, 1 },
+                    { 2, 1, new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(970), "Description 1", null, "Product 2", 200.0m, null, null, 1 },
+                    { 3, 2, new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(971), null, null, "Product 3", 150.0m, null, null, 2 },
+                    { 4, 2, new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(972), "Description 1", null, "Product 4", 250.0m, null, null, 2 },
+                    { 5, 3, new DateTime(2024, 7, 9, 17, 28, 11, 427, DateTimeKind.Local).AddTicks(973), "Description 1", null, "Product 5", 300.0m, null, null, 3 }
                 });
 
             migrationBuilder.InsertData(

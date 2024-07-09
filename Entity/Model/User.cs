@@ -9,9 +9,9 @@ namespace Entity.Model
         public string Email { get; set; }
         public string Password { get; set; }
         public string? Address { get; set; }
-        public List<UserRole> UserRoles { get; set; }
-        public List<Product> Products{ get; set; }
-        public List<UserFavoritesProducts> UserFavoritesProducts { get; set; }
+        public ICollection<UserRole> UserRoles { get; set; }
+        public ICollection<Product> Products{ get; set; }
+        public ICollection<UserFavoritesProducts> UserFavoritesProducts { get; set; }
         //public ICollection<UserBaskets> UserBaskets{ get; set; }
     }
 }

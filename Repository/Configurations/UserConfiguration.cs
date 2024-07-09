@@ -19,6 +19,25 @@ namespace Repository.Configurations
             builder.HasCheckConstraint("FirstName", "LEN(FirstName) >= 3");
             builder.HasCheckConstraint("LastName", "LEN(LastName) >= 3");
 
+            // Relationships
+            builder.HasMany(u => u.UserRoles)
+                   .WithOne()
+                   .HasForeignKey(ur => ur.UserId);
+
+            builder.HasMany(u => u.Products)
+                   .WithOne(p => p.User)
+                   .HasForeignKey(p => p.UserId);
+
+            builder.HasMany(u => u.UserFavoritesProducts)
+                   .WithOne(ufp => ufp.User)
+                   .HasForeignKey(ufp => ufp.UserId);
+
+            // Eğer UserBaskets ilişkisini de eklerseniz
+            /*
+            builder.HasMany(u => u.UserBaskets)
+                   .WithOne(ub => ub.User)
+                   .HasForeignKey(ub => ub.UserId);
+            */
 
             builder.ToTable("Users");
         }

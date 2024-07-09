@@ -8,5 +8,6 @@ namespace Core.Model
         public int Id { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; } // eklendiği esnada null olacağı için ? koyduk
+        public bool? SoftDelete { get; set; } // eklendiği esnada null olacağı için ? koyduk
     }
 }

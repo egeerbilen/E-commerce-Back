@@ -19,8 +19,8 @@ namespace Repository.Configurations
             // sütunlarının birleşimi kullanılır.Bu, her kullanıcı ve ürün çiftinin tabloda yalnızca bir kez bulunmasını garanti eder.
 
             // Properties
-            //builder.Property(b => b.UserId).IsRequired();
-            //builder.Property(b => b.ProductId).IsRequired();
+            builder.Property(b => b.UserId).IsRequired();
+            builder.Property(b => b.ProductId).IsRequired();
 
             // Relationships
             builder.HasOne(b => b.User)
@@ -31,7 +31,7 @@ namespace Repository.Configurations
             builder.HasOne(b => b.Product)
                    .WithMany(p => p.UserFavoritesProducts)
                    .HasForeignKey(b => b.ProductId)
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .OnDelete(DeleteBehavior.Restrict);
 
         }
     }
