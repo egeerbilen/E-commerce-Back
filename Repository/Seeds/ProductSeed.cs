@@ -30,6 +30,7 @@ namespace Repository.Seeds
                     UserId = 1,
                     CategoryId = 1,
                     Name = "Product 1",
+                    Description = "Description 1",
                     Price = 100.0m,
                     CreatedDate = DateTime.Now,
                     ImageData = null //ConvertImageToByteArray(imagePaths[0])
@@ -40,6 +41,7 @@ namespace Repository.Seeds
                     UserId = 1,
                     CategoryId = 1,
                     Name = "Product 2",
+                    Description = "Description 1",
                     Price = 200.0m,
                     CreatedDate = DateTime.Now,
                     ImageData = null //ConvertImageToByteArray(imagePaths[1])
@@ -60,6 +62,7 @@ namespace Repository.Seeds
                     UserId = 2,
                     CategoryId = 2,
                     Name = "Product 4",
+                    Description = "Description 1",
                     Price = 250.0m,
                     CreatedDate = DateTime.Now,
                     ImageData = null //ConvertImageToByteArray(imagePaths[3])
@@ -70,6 +73,7 @@ namespace Repository.Seeds
                     UserId = 3,
                     CategoryId = 3,
                     Name = "Product 5",
+                    Description = "Description 1",
                     Price = 300.0m,
                     CreatedDate = DateTime.Now,
                     ImageData = null //ConvertImageToByteArray(imagePaths[4])

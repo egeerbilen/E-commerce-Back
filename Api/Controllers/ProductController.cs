@@ -40,14 +40,7 @@ namespace API.Controllers
             var result = await _service.GetUserProducts(userId);
             return CreateActionResult(result);
         }
-
-        [ServiceFilter(typeof(NotFoundFilter<Product>))]
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetProductByIdWithProductDetailsAsync(int id)
-        {
-            var result = await _service.GetProductByIdWithProductDetailsAsync(id);
-            return CreateActionResult(result);
-        }
+         
 
         [HttpPost]
         public async Task<IActionResult> Create(ProductCreateDto productDto)

@@ -49,19 +49,19 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(2863),
+                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1193),
                             Name = "Electronics"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(2877),
+                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1205),
                             Name = "Home Appliances"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(2878),
+                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1206),
                             Name = "Books"
                         });
                 });
@@ -80,6 +80,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<byte[]>("ImageData")
                         .HasColumnType("varbinary(max)");
 
@@ -94,7 +97,7 @@ namespace DataAccess.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -110,7 +113,8 @@ namespace DataAccess.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3186),
+                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1408),
+                            Description = "Description 1",
                             Name = "Product 1",
                             Price = 100.0m,
                             UserId = 1
@@ -119,7 +123,8 @@ namespace DataAccess.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3187),
+                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1410),
+                            Description = "Description 1",
                             Name = "Product 2",
                             Price = 200.0m,
                             UserId = 1
@@ -128,7 +133,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 3,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3188),
+                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1411),
                             Name = "Product 3",
                             Price = 150.0m,
                             UserId = 2
@@ -137,7 +142,8 @@ namespace DataAccess.Migrations
                         {
                             Id = 4,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3189),
+                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1412),
+                            Description = "Description 1",
                             Name = "Product 4",
                             Price = 250.0m,
                             UserId = 2
@@ -146,85 +152,11 @@ namespace DataAccess.Migrations
                         {
                             Id = 5,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3189),
+                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1413),
+                            Description = "Description 1",
                             Name = "Product 5",
                             Price = 300.0m,
                             UserId = 3
-                        });
-                });
-
-            modelBuilder.Entity("Entity.Model.ProductDetails", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Stock")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId")
-                        .IsUnique();
-
-                    b.ToTable("ProductDetails", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3065),
-                            Description = "Latest model smartphone with advanced features",
-                            ProductId = 1,
-                            Stock = 150
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3065),
-                            Description = "High-performance laptop for gaming and work",
-                            ProductId = 2,
-                            Stock = 100
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3066),
-                            Description = "Energy-efficient refrigerator with spacious compartments",
-                            ProductId = 3,
-                            Stock = 75
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3067),
-                            Description = "Front-loading washing machine with quick wash feature",
-                            ProductId = 4,
-                            Stock = 50
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3067),
-                            Description = "Best-selling fiction novel",
-                            ProductId = 5,
-                            Stock = 200
                         });
                 });
 
@@ -255,19 +187,19 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3287),
+                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1505),
                             RoleName = "Admin"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3307),
+                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1506),
                             RoleName = "User"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3308),
+                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1506),
                             RoleName = "Guest"
                         });
                 });
@@ -322,7 +254,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3894),
+                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(2119),
                             Email = "ege.erbilen@example.com",
                             FirstName = "Ege",
                             LastName = "Erbilen",
@@ -331,7 +263,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3913),
+                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(2139),
                             Email = "ece.erbilen@example.com",
                             FirstName = "Ece",
                             LastName = "Erbilen",
@@ -340,7 +272,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3936),
+                            CreatedDate = new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(2153),
                             Email = "ahmet.yilmaz@example.com",
                             FirstName = "Ahmet",
                             LastName = "Yılmaz",
@@ -356,15 +288,6 @@ namespace DataAccess.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("UserId", "ProductId");
 
                     b.HasIndex("ProductId");
@@ -375,30 +298,22 @@ namespace DataAccess.Migrations
                         new
                         {
                             UserId = 1,
-                            ProductId = 1,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Id = 0
+                            ProductId = 1
                         },
                         new
                         {
                             UserId = 1,
-                            ProductId = 2,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Id = 0
+                            ProductId = 2
                         },
                         new
                         {
                             UserId = 2,
-                            ProductId = 2,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Id = 0
+                            ProductId = 2
                         },
                         new
                         {
                             UserId = 2,
-                            ProductId = 3,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Id = 0
+                            ProductId = 3
                         });
                 });
 
@@ -444,24 +359,11 @@ namespace DataAccess.Migrations
 
                     b.HasOne("Entity.Model.User", "User")
                         .WithMany("Products")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Category");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Entity.Model.ProductDetails", b =>
-                {
-                    b.HasOne("Entity.Model.Product", "Product")
-                        .WithOne("ProductDetails")
-                        .HasForeignKey("Entity.Model.ProductDetails", "ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Entity.Model.UserFavoritesProducts", b =>
@@ -469,13 +371,13 @@ namespace DataAccess.Migrations
                     b.HasOne("Entity.Model.Product", "Product")
                         .WithMany("UserFavoritesProducts")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Entity.Model.User", "User")
                         .WithMany("UserFavoritesProducts")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Product");
@@ -509,9 +411,6 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Model.Product", b =>
                 {
-                    b.Navigation("ProductDetails")
-                        .IsRequired();
-
                     b.Navigation("UserFavoritesProducts");
                 });
 

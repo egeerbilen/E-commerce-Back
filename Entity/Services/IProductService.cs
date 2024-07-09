@@ -11,7 +11,6 @@ namespace Core.Services
         // UpdateAsync için üst sınıfadan gelen bir upda te motodu var istediğimiz zaman ProductUpdateDto ya geçer bilirim yada productdto ya geçe biliriz
         Task<CustomResponseDto<NoContentDto>> UpdateAsync(ProductUpdateDto dto);
         Task<CustomResponseDto<ProductDto>> AddAsync(ProductCreateDto dto); // ProductDto dönecek -- ProductCreateDto alacak
-        Task<CustomResponseDto<ProductDto>> GetProductByIdWithProductDetailsAsync(int productId); // Task ile async bir işlem olacakğını belirttik
         Task<CustomResponseDto<List<ProductDto>>> GetUserProducts(int userId);
     }
 }

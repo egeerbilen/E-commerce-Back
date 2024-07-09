@@ -29,13 +29,6 @@ namespace Service.Services
             return CustomResponseDto<ProductDto>.Success(StatusCodes.Status200OK, newDto);
         }
 
-        public async Task<CustomResponseDto<ProductDto>> GetProductByIdWithProductDetailsAsync(int productId)
-        {
-            var products = await _productRepository.GetProductByIdWithProductDetailsAsync(productId);
-
-            var productsDto = _mapper.Map<ProductDto>(products);
-            return CustomResponseDto<ProductDto>.Success(200, productsDto);
-        }
 
         public async Task<CustomResponseDto<List<ProductWithCategoryDto>>> GetProductsWitCategoryAsync()
         {

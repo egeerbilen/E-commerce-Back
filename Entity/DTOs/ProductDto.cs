@@ -8,6 +8,5 @@ namespace Core.DTOs
         public byte[] ImageData { get; set; }
         public decimal Price { get; set; }
         public int CategoryId { get; set; }
-        public ProductDetailsDto ProductDetails { get; set; }
     }
 }

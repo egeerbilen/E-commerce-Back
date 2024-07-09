@@ -25,12 +25,6 @@ namespace NLayer.Repository.Repositories
         }
 
 
-        public async Task<Product> GetProductByIdWithProductDetailsAsync(int productId)
-        {
-            return await _context.Products
-                                 .Include(x => x.ProductDetails)
-                                 .FirstOrDefaultAsync(x => x.Id == productId);
-        }
 
         public async Task<List<Product>> GetUserProducts(int userId)
         {

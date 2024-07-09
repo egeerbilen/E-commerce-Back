@@ -73,7 +73,8 @@ namespace DataAccess.Migrations
                     Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ImageData = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -91,8 +92,7 @@ namespace DataAccess.Migrations
                         name: "FK_Products_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -120,37 +120,11 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductDetails",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    Stock = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductDetails", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ProductDetails_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "UsersFavoritesProducts",
                 columns: table => new
                 {
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ProductId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -160,13 +134,13 @@ namespace DataAccess.Migrations
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UsersFavoritesProducts_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -174,9 +148,9 @@ namespace DataAccess.Migrations
                 columns: new[] { "Id", "CreatedDate", "Name", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(2863), "Electronics", null },
-                    { 2, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(2877), "Home Appliances", null },
-                    { 3, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(2878), "Books", null }
+                    { 1, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1193), "Electronics", null },
+                    { 2, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1205), "Home Appliances", null },
+                    { 3, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1206), "Books", null }
                 });
 
             migrationBuilder.InsertData(
@@ -184,9 +158,9 @@ namespace DataAccess.Migrations
                 columns: new[] { "Id", "CreatedDate", "RoleName", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3287), "Admin", null },
-                    { 2, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3307), "User", null },
-                    { 3, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3308), "Guest", null }
+                    { 1, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1505), "Admin", null },
+                    { 2, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1506), "User", null },
+                    { 3, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1506), "Guest", null }
                 });
 
             migrationBuilder.InsertData(
@@ -194,21 +168,21 @@ namespace DataAccess.Migrations
                 columns: new[] { "Id", "Address", "CreatedDate", "Email", "FirstName", "LastName", "Password", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3894), "ege.erbilen@example.com", "Ege", "Erbilen", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", null },
-                    { 2, null, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3913), "ece.erbilen@example.com", "Ece", "Erbilen", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", null },
-                    { 3, null, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3936), "ahmet.yilmaz@example.com", "Ahmet", "Yılmaz", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", null }
+                    { 1, null, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(2119), "ege.erbilen@example.com", "Ege", "Erbilen", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", null },
+                    { 2, null, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(2139), "ece.erbilen@example.com", "Ece", "Erbilen", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", null },
+                    { 3, null, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(2153), "ahmet.yilmaz@example.com", "Ahmet", "Yılmaz", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "CategoryId", "CreatedDate", "ImageData", "Name", "Price", "UpdatedDate", "UserId" },
+                columns: new[] { "Id", "CategoryId", "CreatedDate", "Description", "ImageData", "Name", "Price", "UpdatedDate", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3186), null, "Product 1", 100.0m, null, 1 },
-                    { 2, 1, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3187), null, "Product 2", 200.0m, null, 1 },
-                    { 3, 2, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3188), null, "Product 3", 150.0m, null, 2 },
-                    { 4, 2, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3189), null, "Product 4", 250.0m, null, 2 },
-                    { 5, 3, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3189), null, "Product 5", 300.0m, null, 3 }
+                    { 1, 1, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1408), "Description 1", null, "Product 1", 100.0m, null, 1 },
+                    { 2, 1, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1410), "Description 1", null, "Product 2", 200.0m, null, 1 },
+                    { 3, 2, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1411), null, null, "Product 3", 150.0m, null, 2 },
+                    { 4, 2, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1412), "Description 1", null, "Product 4", 250.0m, null, 2 },
+                    { 5, 3, new DateTime(2024, 7, 9, 15, 58, 32, 244, DateTimeKind.Local).AddTicks(1413), "Description 1", null, "Product 5", 300.0m, null, 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -222,33 +196,15 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "ProductDetails",
-                columns: new[] { "Id", "CreatedDate", "Description", "ProductId", "Stock", "UpdatedDate" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3065), "Latest model smartphone with advanced features", 1, 150, null },
-                    { 2, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3065), "High-performance laptop for gaming and work", 2, 100, null },
-                    { 3, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3066), "Energy-efficient refrigerator with spacious compartments", 3, 75, null },
-                    { 4, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3067), "Front-loading washing machine with quick wash feature", 4, 50, null },
-                    { 5, new DateTime(2024, 7, 9, 6, 56, 13, 430, DateTimeKind.Local).AddTicks(3067), "Best-selling fiction novel", 5, 200, null }
-                });
-
-            migrationBuilder.InsertData(
                 table: "UsersFavoritesProducts",
-                columns: new[] { "ProductId", "UserId", "CreatedDate", "Id", "UpdatedDate" },
+                columns: new[] { "ProductId", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null },
-                    { 2, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null },
-                    { 2, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null },
-                    { 3, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null }
+                    { 1, 1 },
+                    { 2, 1 },
+                    { 2, 2 },
+                    { 3, 2 }
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductDetails_ProductId",
-                table: "ProductDetails",
-                column: "ProductId",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
@@ -274,9 +230,6 @@ namespace DataAccess.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "ProductDetails");
-
             migrationBuilder.DropTable(
                 name: "UsersFavoritesProducts");
 
