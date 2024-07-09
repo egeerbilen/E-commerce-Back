@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.DTOs;
+
 using Entity.DTOs;
 using Entity.Model;
 using NLayer.Core.DTOs;
@@ -20,13 +21,16 @@ namespace Service.Mapping
             CreateMap<Product, ProductWithCategoryDto>();
             CreateMap<Category, CategoryWithProductsDto>();
             CreateMap<ProductCreateDto, Product>().ReverseMap();
-            CreateMap<User, UserDto>();
             CreateMap<UserCreateDto, User>();
             CreateMap<UserUpdateDto, User>();
-            CreateMap<User, UserLoginDto>();
             CreateMap<Favorites, FavoritesDto>().ReverseMap();
             CreateMap<FavoritesDto, Favorites>().ReverseMap();
             CreateMap<User, BaseDto>().ReverseMap();
+            CreateMap<User, UserDto>().ReverseMap(); 
+            CreateMap<UserCreateDto, User>().ReverseMap(); 
+            CreateMap<UserUpdateDto, User>().ReverseMap();
+            CreateMap<User, UserLoginDto>().ReverseMap(); 
+
 
         }
     }

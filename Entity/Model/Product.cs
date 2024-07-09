@@ -6,13 +6,14 @@ namespace Entity.Model
     {
         public string Name { get; set; }
         public decimal Price { get; set; }
+        public int? Stock { get; set; }
         public byte[]? ImageData { get; set; }
         public string? Description { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
-        public List<Favorites> Favorites { get; set; }
+        public ICollection<Favorites> Favorites { get; set; }
         //public ICollection<UserBaskets> UserBaskets { get; set; }
     }
 }

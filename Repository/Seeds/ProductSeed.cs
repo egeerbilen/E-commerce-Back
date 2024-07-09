@@ -32,6 +32,7 @@ namespace Repository.Seeds
                     Name = "Product 1",
                     Description = "Description 1",
                     Price = 100.0m,
+                    Stock = 2,
                     CreatedDate = DateTime.Now,
                     ImageData = ConvertImageToByteArray(imagePaths[0])
                 },
@@ -43,6 +44,7 @@ namespace Repository.Seeds
                     Name = "Product 2",
                     Description = "Description 1",
                     Price = 200.0m,
+                    Stock = 1,
                     CreatedDate = DateTime.Now,
                     ImageData = ConvertImageToByteArray(imagePaths[1])
                 },
@@ -53,6 +55,7 @@ namespace Repository.Seeds
                     CategoryId = 2,
                     Name = "Product 3",
                     Price = 150.0m,
+                    Stock = 4,
                     CreatedDate = DateTime.Now,
                     ImageData = ConvertImageToByteArray(imagePaths[2])
                 },
@@ -64,6 +67,7 @@ namespace Repository.Seeds
                     Name = "Product 4",
                     Description = "Description 1",
                     Price = 250.0m,
+                    Stock = 12,
                     CreatedDate = DateTime.Now,
                     ImageData = ConvertImageToByteArray(imagePaths[3])
                 },
@@ -75,6 +79,7 @@ namespace Repository.Seeds
                     Name = "Product 5",
                     Description = "Description 1",
                     Price = 300.0m,
+                    Stock = 14,
                     CreatedDate = DateTime.Now,
                     ImageData = ConvertImageToByteArray(imagePaths[4])
                 }
