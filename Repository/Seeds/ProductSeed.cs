@@ -32,7 +32,7 @@ namespace Repository.Seeds
                     Name = "Product 1",
                     Price = 100.0m,
                     CreatedDate = DateTime.Now,
-                    ImageData = ConvertImageToByteArray(imagePaths[0])
+                    ImageData = null //ConvertImageToByteArray(imagePaths[0])
                 },
                 new Product
                 {
@@ -42,7 +42,7 @@ namespace Repository.Seeds
                     Name = "Product 2",
                     Price = 200.0m,
                     CreatedDate = DateTime.Now,
-                    ImageData = ConvertImageToByteArray(imagePaths[1])
+                    ImageData = null //ConvertImageToByteArray(imagePaths[1])
                 },
                 new Product
                 {
@@ -52,7 +52,7 @@ namespace Repository.Seeds
                     Name = "Product 3",
                     Price = 150.0m,
                     CreatedDate = DateTime.Now,
-                    ImageData = ConvertImageToByteArray(imagePaths[2])
+                    ImageData = null //ConvertImageToByteArray(imagePaths[2])
                 },
                 new Product
                 {
@@ -62,7 +62,7 @@ namespace Repository.Seeds
                     Name = "Product 4",
                     Price = 250.0m,
                     CreatedDate = DateTime.Now,
-                    ImageData = ConvertImageToByteArray(imagePaths[3])
+                    ImageData = null //ConvertImageToByteArray(imagePaths[3])
                 },
                 new Product
                 {
@@ -72,7 +72,7 @@ namespace Repository.Seeds
                     Name = "Product 5",
                     Price = 300.0m,
                     CreatedDate = DateTime.Now,
-                    ImageData = ConvertImageToByteArray(imagePaths[4])
+                    ImageData = null //ConvertImageToByteArray(imagePaths[4])
                 }
             );
         }

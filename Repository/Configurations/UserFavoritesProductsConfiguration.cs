@@ -26,15 +26,13 @@ namespace Repository.Configurations
             builder.HasOne(b => b.User)
                    .WithMany(u => u.UserFavoritesProducts)
                    .HasForeignKey(b => b.UserId)
-                   .OnDelete(DeleteBehavior.NoAction); // Silme işlemi için NoAction
+                   .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(b => b.Product)
                    .WithMany(p => p.UserFavoritesProducts)
                    .HasForeignKey(b => b.ProductId)
-                   .OnDelete(DeleteBehavior.Cascade); // Silme işlemi için NoAction
+                   .OnDelete(DeleteBehavior.Restrict);
 
-            // Indexes
-            builder.HasIndex(b => b.UserId).IsUnique(false);
         }
     }
 }

@@ -19,10 +19,6 @@ namespace Repository.Configurations
             builder.HasCheckConstraint("FirstName", "LEN(FirstName) >= 3");
             builder.HasCheckConstraint("LastName", "LEN(LastName) >= 3");
 
-            builder.HasMany(u => u.UserFavoritesProducts)
-                   .WithOne(uf => uf.User)
-                   .HasForeignKey(uf => uf.UserId)
-                   .OnDelete(DeleteBehavior.Cascade);
 
             builder.ToTable("Users");
         }
