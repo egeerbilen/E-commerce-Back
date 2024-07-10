@@ -8,7 +8,7 @@ namespace Entity.Repositories
     {
         Task<bool> IsFavoriteProduct(int userId, int productId);
         Task<List<Product>> GetUserFavoritesById(int userId);
-        Task<Favorites> CreateUserFavoriteProductsAsync(Favorites favorites);
+        Task<Favorite> CreateUserFavoriteProductsAsync(Favorite favorites);
         Task<bool> DeleteUserFavoriteProductsAsync(int userId, int productId);
     }
 }

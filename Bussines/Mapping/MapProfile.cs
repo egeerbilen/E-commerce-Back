@@ -21,15 +21,13 @@ namespace Service.Mapping
             CreateMap<Product, ProductWithCategoryDto>();
             CreateMap<Category, CategoryWithProductsDto>();
             CreateMap<ProductCreateDto, Product>().ReverseMap();
-            CreateMap<UserCreateDto, User>();
-            CreateMap<UserUpdateDto, User>();
-            CreateMap<Favorites, FavoritesDto>().ReverseMap();
-            CreateMap<FavoritesDto, Favorites>().ReverseMap();
             CreateMap<User, BaseDto>().ReverseMap();
             CreateMap<User, UserDto>().ReverseMap(); 
+            CreateMap<User, UserLoginDto>().ReverseMap(); 
             CreateMap<UserCreateDto, User>().ReverseMap(); 
             CreateMap<UserUpdateDto, User>().ReverseMap();
-            CreateMap<User, UserLoginDto>().ReverseMap(); 
+            CreateMap<Basket, BasketDto>().ReverseMap();
+            CreateMap<Favorite, FavoritesDto>().ReverseMap();
 
 
         }

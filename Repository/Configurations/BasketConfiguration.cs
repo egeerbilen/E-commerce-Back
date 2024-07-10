@@ -1,17 +1,15 @@
 ﻿using Entity.Model;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Runtime.ConstrainedExecution;
+using Microsoft.EntityFrameworkCore;
 
-namespace Repository.Configurations
+namespace DataAccess.Configurations
 {
-    internal class FavoritesConfiguration : IEntityTypeConfiguration<Favorite>
+    internal class BasketConfiguration : IEntityTypeConfiguration<Basket>
     {
-        public void Configure(EntityTypeBuilder<Favorite> builder)
+        public void Configure(EntityTypeBuilder<Basket> builder)
         {
             // Table name
-            builder.ToTable("UsersFavoritesProducts");
+            builder.ToTable("UsersBasketsProducts");
 
             // Composite primary key
             builder.HasKey(b => new { b.UserId, b.ProductId });
@@ -24,12 +22,12 @@ namespace Repository.Configurations
 
             // Relationships
             builder.HasOne(b => b.User)
-                   .WithMany(u => u.Favorites)
+                   .WithMany(u => u.Baskets)
                    .HasForeignKey(b => b.UserId)
                    .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(b => b.Product)
-                   .WithMany(p => p.Favorites)
+                   .WithMany(p => p.Baskets)
                    .HasForeignKey(b => b.ProductId)
                    .OnDelete(DeleteBehavior.Restrict);
 

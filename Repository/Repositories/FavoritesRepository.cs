@@ -13,13 +13,13 @@ namespace DataAccess.Repositories
         protected readonly AppDbContext _context;
         // dbSet bizim veri tabanındaki tablomuza karşılık geliyor
         // readonly çünkü bu değişkenler constroctur ve ya altta değer atana bilir sonrasında değer atanamaz
-        private readonly DbSet<Favorites> _dbSet;
+        private readonly DbSet<Favorite> _dbSet;
         public FavoritesRepository(AppDbContext context)
         {
             _context = context;
-            _dbSet = _context.Set<Favorites>();
+            _dbSet = _context.Set<Favorite>();
         }
-        public async Task<Favorites> CreateUserFavoriteProductsAsync(Favorites favorites)
+        public async Task<Favorite> CreateUserFavoriteProductsAsync(Favorite favorites)
         {
             // Yeni favori ürünü ekle
             _context.Favorites.AddAsync(favorites);

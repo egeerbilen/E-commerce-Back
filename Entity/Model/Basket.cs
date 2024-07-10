@@ -1,8 +1,6 @@
-﻿using Core.Model;
-
-namespace Entity.Model
+﻿namespace Entity.Model
 {
-    public class Favorites
+    public class Basket
     {
         public int UserId { get; set; }
         public int ProductId { get; set; }

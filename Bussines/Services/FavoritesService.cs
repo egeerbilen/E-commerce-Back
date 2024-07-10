@@ -20,7 +20,7 @@ namespace Bussines.Services
 
         public async Task<CustomResponseDto<NoContentDto>> CreateUserFavoriteProductsAsync(FavoritesDto favorites)
         {
-            var newDto = _mapper.Map<Favorites>(favorites);
+            var newDto = _mapper.Map<Favorite>(favorites);
             await _favoritesRepository.CreateUserFavoriteProductsAsync(newDto);
             await _unitOfWork.CommitAsync(); // Unitofwork üzerinden save change metodunu çağırıyoruz
 
