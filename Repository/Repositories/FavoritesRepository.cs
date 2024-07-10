@@ -49,7 +49,7 @@ namespace DataAccess.Repositories
             return false;
         }
 
-        public async Task<List<Product>> GetUserFavoritesById(int userId)
+        public async Task<List<Product>> GetUserFavoritesByIdAsync(int userId)
         {
             var userFavorites = await _context.Favorites
                 .Where(ufp => ufp.UserId == userId)
@@ -60,7 +60,7 @@ namespace DataAccess.Repositories
             return userFavorites.Select(ufp => ufp.Product).ToList();
         }
 
-        public async Task<bool> IsFavoriteProduct(int userId, int productId)
+        public async Task<bool> IsFavoriteProductAsync(int userId, int productId)
         {
             return await _context.Favorites
                                  .Where(x => x.UserId == userId)

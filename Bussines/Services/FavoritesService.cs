@@ -38,16 +38,16 @@ namespace Bussines.Services
             return CustomResponseDto<NoContentDto>.Fail(StatusCodes.Status404NotFound, "User favorite product not found.");
         }
 
-        public async Task<CustomResponseDto<List<ProductDto>>> GetUserFavoritesById(int userId)
+        public async Task<CustomResponseDto<List<ProductDto>>> GetUserFavoritesByIdAsync(int userId)
         {
-            var favorites = await _favoritesRepository.GetUserFavoritesById(userId);
+            var favorites = await _favoritesRepository.GetUserFavoritesByIdAsync(userId);
             var dtos = _mapper.Map<List<ProductDto>>(favorites);
             return CustomResponseDto<List<ProductDto>>.Success(StatusCodes.Status200OK, dtos);
         }
 
-        public async Task<CustomResponseDto<bool>> IsFavoriteProduct(int userId, int productId)
+        public async Task<CustomResponseDto<bool>> IsFavoriteProductAsync(int userId, int productId)
         {
-            var favorites = await _favoritesRepository.IsFavoriteProduct(userId, productId);
+            var favorites = await _favoritesRepository.IsFavoriteProductAsync(userId, productId);
             return CustomResponseDto<bool>.Success(StatusCodes.Status200OK, favorites);
         }
     }

@@ -21,14 +21,14 @@ namespace YourNamespace.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserFavoritesById(int id)
         {
-            return CreateActionResult(await _userFavoritesServices.GetUserFavoritesById(id));
+            return CreateActionResult(await _userFavoritesServices.GetUserFavoritesByIdAsync(id));
         }
 
         [ServiceFilter(typeof(NotFoundFilter<User>))]
         [HttpGet("{userId}/{productId}")]
         public async Task<IActionResult> IsFavoriteProduct(int userId, int productId)
         {
-            return CreateActionResult(await _userFavoritesServices.IsFavoriteProduct(userId, productId));
+            return CreateActionResult(await _userFavoritesServices.IsFavoriteProductAsync(userId, productId));
         }
 
         [HttpPost]

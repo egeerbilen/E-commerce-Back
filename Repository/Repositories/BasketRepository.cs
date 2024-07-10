@@ -44,7 +44,7 @@ namespace DataAccess.Repositories
             return false;
         }
 
-        public async Task<List<Product>> GetUserBasketsById(int userId)
+        public async Task<List<Product>> GetUserBasketsByIdAsync(int userId)
         {
             var userBaskets = await _context.Baskets
                 .Where(ufp => ufp.UserId == userId)
@@ -55,7 +55,7 @@ namespace DataAccess.Repositories
             return userBaskets.Select(ufp => ufp.Product).ToList();
         }
 
-        public async Task<bool> IsBasketProduct(int userId, int productId)
+        public async Task<bool> IsBasketProductAsync(int userId, int productId)
         {
             return await _context.Baskets
                                  .Where(x => x.UserId == userId)

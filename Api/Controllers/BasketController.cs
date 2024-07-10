@@ -20,14 +20,14 @@ namespace Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserBasketsById(int id)
         {
-            return CreateActionResult(await _userBasketServices.GetUserBasketsById(id));
+            return CreateActionResult(await _userBasketServices.GetUserBasketsByIdAsync(id));
         }
 
         [ServiceFilter(typeof(NotFoundFilter<User>))]
         [HttpGet("{userId}/{productId}")]
         public async Task<IActionResult> IsBasketProduct(int userId, int productId)
         {
-            return CreateActionResult(await _userBasketServices.IsBasketProduct(userId, productId));
+            return CreateActionResult(await _userBasketServices.IsBasketProductAsync(userId, productId));
         }
 
         [HttpPost]

@@ -7,8 +7,8 @@ namespace Entity.Services
     // generic servisi kaldır IGenericService buna gerek yok ya da override et buna conroller da yazman gerekecek çümkü sen burada favorite ye erişiyorsun senin [UserFavorites] tablosuna erişmen gerek generin yapmasan da olur
     public interface IFavoritesService
     {
-        Task<CustomResponseDto<bool>> IsFavoriteProduct(int userId, int productId);
-        Task<CustomResponseDto<List<ProductDto>>> GetUserFavoritesById(int userId);
+        Task<CustomResponseDto<bool>> IsFavoriteProductAsync(int userId, int productId);
+        Task<CustomResponseDto<List<ProductDto>>> GetUserFavoritesByIdAsync(int userId);
         Task<CustomResponseDto<NoContentDto>> CreateUserFavoriteProductAsync(FavoritesDto favorites);
         Task<CustomResponseDto<NoContentDto>> DeleteUserFavoriteProductAsync(int userId, int productId);
 
