@@ -9,7 +9,7 @@ namespace DataAccess.Configurations
         public void Configure(EntityTypeBuilder<Basket> builder)
         {
             // Table name
-            builder.ToTable("UsersBasketsProducts");
+            builder.ToTable("Baskets");
 
             // Composite primary key
             builder.HasKey(b => new { b.UserId, b.ProductId });

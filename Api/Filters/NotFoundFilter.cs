@@ -41,7 +41,8 @@ namespace NLayer.API.Filters
                 }
             }
 
-            var anyEntity = await _service.AnyAsync(x => x.Id == id); // id var mı yok mu kontrol edecek 
+
+            var anyEntity = await _service.AnyAsync(x => x.Id == id && !x.IsDeleted); // id var mı yok mu kontrol edecek 
             // GetByIdAsync belirli bir ID'ye sahip bir öğeyi getirmek için kullanılır. Eğer bir öğenin belirli bir kimliğiyle bir varlık almak istiyorsanız, GetByIdAsync kullanmak daha uygundur. Bu yöntem, bir öğe varsa onu döndürür veya null döner.
             // AnyAsync, belirli bir koşula sahip herhangi bir öğe olup olmadığını kontrol etmek için kullanılır.Bu metot, verilen koşulu karşılayan herhangi bir öğe varsa true döndürür; aksi takdirde false döner.Özellikle bir öğenin kendisini almak yerine, bir koşulu kontrol etmek istediğinizde kullanışlıdır.
             // Eğer belirli bir ID'ye sahip bir varlık almak istiyorsanız, GetByIdAsync kullanmak daha doğru olabilir. Ancak eğer sadece belirli bir koşulu kontrol etmek istiyorsanız ve öğenin kendisine ihtiyacınız yoksa, AnyAsync kullanabilirsiniz.

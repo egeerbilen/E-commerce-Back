@@ -12,14 +12,14 @@ namespace Repository.Seeds
                 new Role
                 {
                     Id = 1,
-                    RoleName = "Admin",
+                    RoleName = "Seller",
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 },
                 new Role
                 {
                     Id = 2,
-                    RoleName = "User",
+                    RoleName = "Customer",
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 },

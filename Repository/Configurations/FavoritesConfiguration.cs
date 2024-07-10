@@ -11,7 +11,7 @@ namespace Repository.Configurations
         public void Configure(EntityTypeBuilder<Favorite> builder)
         {
             // Table name
-            builder.ToTable("UsersFavoritesProducts");
+            builder.ToTable("Favorites");
 
             // Composite primary key
             builder.HasKey(b => new { b.UserId, b.ProductId });

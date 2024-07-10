@@ -9,8 +9,10 @@ using Entity.Repositories;
 using Entity.Services;
 using JwtInDotnetCore;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using NLayer.Core.Repositories;
 using Service.Services;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -22,11 +24,18 @@ namespace Bussines.Services
     {
         private IConfiguration _config;
         private readonly IUserRepository _userRepository;
+        private readonly IProductRepository _productRepository;
+        private readonly IBasketRepository _basketRepository;
+        private readonly IFavoritesRepository _favoritesRepository;
         private readonly IRoleRepository _roleRepository;
-        public UserService(IGenericRepository<User> repository, IRoleRepository roleRepository, IConfiguration config, IUnitOfWork unitOfWork, IMapper mapper, IUserRepository userRepository) : base(repository, unitOfWork, mapper)
+        public UserService(IGenericRepository<User> repository, IRoleRepository roleRepository, IConfiguration config, IFavoritesRepository favoritesRepository, IBasketRepository basketRepository,
+        IUnitOfWork unitOfWork, IMapper mapper, IUserRepository userRepository, IProductRepository productRepository) : base(repository, unitOfWork, mapper)
         {
             _userRepository = userRepository;
             _roleRepository = roleRepository;
+            _basketRepository = basketRepository;
+            _favoritesRepository = favoritesRepository;
+            _productRepository = productRepository;
             _config = config;
         }
 
@@ -46,6 +55,27 @@ namespace Bussines.Services
             var entity = _mapper.Map<User>(dto);
             _userRepository.Update(entity);
             await _unitOfWork.CommitAsync();
+            return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status200OK);
+        }
+
+        public async Task<CustomResponseDto<NoContentDto>> RemoveUserAsync(int userId)
+        {
+            var entity = await _userRepository.GetByIdAsync(userId);
+            // id değeri zaten midle varede kontrol ediliyor o yüzden burada kontrole gerek yok
+            //if (entity == null)
+            //{
+            //    return CustomResponseDto<NoContentDto>.Fail(StatusCodes.Status404NotFound, "User not found");
+            //}
+
+            var userProducts = await _productRepository.GetUserProducts(userId);
+            _productRepository.RemoveRange(userProducts);
+            await _unitOfWork.CommitAsync();
+
+
+
+            _userRepository.Remove(entity);
+            await _unitOfWork.CommitAsync();
+
             return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status200OK);
         }
 
