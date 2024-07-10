@@ -23,8 +23,7 @@ namespace DataAccess.Configurations
             // Relationships
             builder.HasOne(b => b.User)
                    .WithMany(u => u.Baskets)
-                   .HasForeignKey(b => b.UserId)
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .HasForeignKey(b => b.UserId);
 
             builder.HasOne(b => b.Product)
                    .WithMany(p => p.Baskets)

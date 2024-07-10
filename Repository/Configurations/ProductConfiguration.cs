@@ -16,7 +16,8 @@ namespace Repository.Configurations
             builder.Property(x => x.Description).HasMaxLength(500);
 
             builder.ToTable("Products");
-
+            // ğer silmek istediğin bir ürün başka bir tabloda kullanılıyor ise bu silme işlemini yapmaz
+            // başka bir kullanıcı favoride veya baskette kullandısya bunu ürünü silmez relationların hepsini koparıp silmek gerek
             // İlişkileri ekleyin
             builder.HasOne(x => x.Category)
                    .WithMany(x => x.Products)
