@@ -15,6 +15,7 @@ namespace Repository.Configurations
             builder.Property(x => x.Email).IsRequired().HasMaxLength(100);
             builder.Property(x => x.Password).IsRequired();
             builder.Property(x => x.Address).HasMaxLength(500);
+            builder.Property(x => x.IsDeleted).IsRequired();
 
             builder.HasCheckConstraint("FirstName", "LEN(FirstName) >= 3");
             builder.HasCheckConstraint("LastName", "LEN(LastName) >= 3");

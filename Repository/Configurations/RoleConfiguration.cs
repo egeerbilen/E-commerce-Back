@@ -11,6 +11,7 @@ namespace Repository.Configurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).UseIdentityColumn(); 
             builder.Property(x => x.RoleName).IsRequired().HasMaxLength(50);
+            builder.Property(x => x.IsDeleted).IsRequired();
 
 
             builder.ToTable("Roles");

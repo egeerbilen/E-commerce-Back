@@ -1,4 +1,5 @@
-﻿using Core.Repositories;
+﻿using Core.Model;
+using Core.Repositories;
 using Entity.Interface;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -6,7 +7,7 @@ using System.Security.Principal;
 
 namespace Repository.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class // T nin de bir class olduğunu belirttik yoksa ne olduğu belli değil where ile yazdığımız ifade generic tipli bir class diyoruz
+    public class GenericRepository<T> : IGenericRepository<T> where T : class, IBaseEntity // T nin de bir class olduğunu belirttik yoksa ne olduğu belli değil where ile yazdığımız ifade generic tipli bir class diyoruz
     {
         // protected çünkü ilerde temel crud operasyonları dışında da bir şeye ihtiyaç duyabileceğim için
         // protected: sadece miras alınan sınıflardan erişmek için
@@ -22,12 +23,27 @@ namespace Repository.Repositories
 
         public async Task AddAsync(T entity)
         {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity), "Entity cannot be null");
+            }
+
+            entity.IsDeleted = false;
             // Otomatik Kaydetme: Takip işlemi sayesinde, DbContext üzerinde izlenen nesnelerdeki değişiklikler otomatik olarak veritabanına kaydedilebilir. Bu, SaveChanges() metodunu çağırmadan önce yapılan değişikliklerin otomatik olarak veritabanına uygulanmasını sağlar.
             await _dbSet.AddAsync(entity); // AddAsync metodu, Entity Framework'teki bir DbSet nesnesine yeni bir nesne eklemek için kullanılır. Bu metod, veritabanına asenkron bir şekilde bir nesne eklemeyi sağlar. Özellikle async/await yapısını kullanarak asenkron olarak çalışan programlar için faydalıdır.
         }
 
         public async Task AddRangeAsync(IEnumerable<T> entities)
         {
+            if (entities == null)
+            {
+                throw new ArgumentNullException(nameof(entities), "Entity cannot be null");
+            }
+            foreach (var entity in entities)
+            {
+                entity.IsDeleted = false; // SoftDelete değerini false olarak ayarlıyoruz.
+            }
+
             await _dbSet.AddRangeAsync(entities); // AddRangeAsync metodu, Entity Framework'teki bir DbSet nesnesine toplu halde yeni nesneler eklemek için kullanılır. Bu metod, bir koleksiyon veya liste içinde bulunan birden fazla nesneyi veritabanına asenkron bir şekilde eklemeyi sağlar.
         }
 
@@ -45,7 +61,7 @@ namespace Repository.Repositories
             // AsNoTracking, Entity Framework'te sorgu sonuçları üzerinde takip (tracking) işlemini devre dışı bırakmak için kullanılan bir metottur. Bu metot, sorgulanan verilerin değişikliklerini takip etmeyi devre dışı bırakarak bellek kullanımını azaltır ve performansı artırır.
             // ama .AsNoTracking() metotdu sorgulanan verilerin takibini bırakarak, veritabanından okunan nesnelerin DbContext'teki değişikliklerini takip etmemeyi sağlar. Bu genellikle okuma işlemleri için faydalıdır, çünkü verilerin sadece okunması ve değiştirilmemesi durumunda performans artışı sağlayabilir.
             // datayı çekip bir değierini değiştirmeye çalıştıkdan sonra save atmaya çalışırsam eğer AsNoTracking kulanılmışsa hata alabiliriz       
-            return _dbSet.AsNoTracking().AsQueryable();
+            return _dbSet.AsNoTracking().Where(e => !e.IsDeleted).AsQueryable();
             //return _dbSet.AsNoTracking(); --> şeklindede çalışır
             // AsQueryable, bir koleksiyonu veya başka bir veri kaynağını IQueryable türüne dönüştürmek için kullanılan bir LINQ operatörüdür. Bu operatör genellikle IEnumerable koleksiyonlarını IQueryable'a dönüştürmek amacıyla kullanılır.
             // Bu, sorgu sonuçlarındaki nesneler üzerinde yapılan değişikliklerin veritabanına geri yansıtılmayacağı anlamına gelir.
@@ -53,32 +69,58 @@ namespace Repository.Repositories
 
         public async Task<T> GetByIdAsync(int id)
         {
-            return await _dbSet.FindAsync(id); // FindAsync, Entity Framework'te birincil anahtar (primary key) değerine dayalı olarak bir nesneyi asenkron bir şekilde bulmak için kullanılan bir metottur. Bu metod, bir varlık sınıfının birincil anahtar değerine göre veritabanında bir nesneyi arar ve bulursa o nesneyi getirir. Bulunan nesne yoksa null döndürür.
+            return await _dbSet.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id && !e.IsDeleted); // FindAsync, Entity Framework'te birincil anahtar (primary key) değerine dayalı olarak bir nesneyi asenkron bir şekilde bulmak için kullanılan bir metottur. Bu metod, bir varlık sınıfının birincil anahtar değerine göre veritabanında bir nesneyi arar ve bulursa o nesneyi getirir. Bulunan nesne yoksa null döndürür.
         }
 
         public void Remove(T entity)
         {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity), "Entity cannot be null");
+            }
+
             // async si neden yok çükü db den silmez sadece o entity nin statini delete olarak işaretliyoruz flag koyuyoruz
             // savechange metodunu çağırınca ef core o deleted flagleri bulup gidip db den onları siliyor 
             //_context.Entry(entity).State = EntityState.Deleted; alt daki kod ile bu aynı şey
             // async ye gerek yok çünkü memory deki state sadece enum değer atıyoruz yüklü bir işlem değil
-            _dbSet.Remove(entity); // Remove, Entity Framework'te bir varlık nesnesini veritabanından silmek için kullanılan bir metottur. Bu metod, bir varlık nesnesini veritabanından kaldırmak ve ilişkili verileri de silmek için kullanılır.
+            entity.IsDeleted = true;
+
+            _dbSet.Update(entity);
+            // SoftDelete olamasın direk ilsin dersek aşşağıdaki in kullanacağız ama ilşkisellik varsa silmez
+            //_dbSet.Remove(entity);
+            // Remove, Entity Framework'te bir varlık nesnesini veritabanından silmek için kullanılan bir metottur. Bu metod, bir varlık nesnesini veritabanından kaldırmak ve ilişkili verileri de silmek için kullanılır.
 
         }
 
         public void RemoveRange(IEnumerable<T> entities)
         {
-            _dbSet.RemoveRange(entities); // RemoveRange, Entity Framework'te bir koleksiyon veya IEnumerable türünden birden fazla varlık nesnesini veritabanından silmek için kullanılan bir metottur. Bu metot, belirtilen varlık nesnelerinin hepsini veya belirli bir koşulu sağlayan varlık nesnelerini toplu halde silmek için kullanılır.
+            if (entities == null)
+            {
+                throw new ArgumentNullException(nameof(entities), "Entity cannot be null");
+            }
+
+            foreach (var entity in entities)
+            {
+                entity.IsDeleted = true;
+            }
+            _dbSet.UpdateRange(entities);
+            //_dbSet.RemoveRange(entities); // RemoveRange, Entity Framework'te bir koleksiyon veya IEnumerable türünden birden fazla varlık nesnesini veritabanından silmek için kullanılan bir metottur. Bu metot, belirtilen varlık nesnelerinin hepsini veya belirli bir koşulu sağlayan varlık nesnelerini toplu halde silmek için kullanılır.
         }
 
         public void Update(T entity)
         {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity), "Entity cannot be null");
+            }
+
+            entity.IsDeleted = false;
             _dbSet.Update(entity); // Update metodunun Entity Framework Core'da kullanımı, bir varlık nesnesinin veritabanındaki karşılığını güncellemek için kullanılır. Bu metot, belirtilen varlık nesnesinin durumunu "değiştirilmiş" (Modified) olarak işaretler ve sonraki SaveChanges çağrısında veritabanında güncellenmesini sağlar.
         }
 
         public IQueryable<T> Where(Expression<Func<T, bool>> expression)
         {
-            return _dbSet.Where(expression); // Bu Where metodunun görevi, LINQ sorgusu üzerinde filtreleme yapmak için kullanılır. Expression<Func<T, bool>> olarak ifade edilen parametre, filtreleme koşulunu tanımlayan bir lambda ifadesini alır.
+            return _dbSet.Where(expression).Where(e => !e.IsDeleted); // Bu Where metodunun görevi, LINQ sorgusu üzerinde filtreleme yapmak için kullanılır. Expression<Func<T, bool>> olarak ifade edilen parametre, filtreleme koşulunu tanımlayan bir lambda ifadesini alır.
                                              //  LINQ sorgusu kod örneği products.Where(p => p.Price > 20); // Fiyatı 20'den büyük ürünleri filtrele
 
             // doğru dan SQL sorgusu kullanmaya Native SQL denir

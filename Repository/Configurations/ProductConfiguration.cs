@@ -14,9 +14,10 @@ namespace Repository.Configurations
             builder.Property(x => x.Price).IsRequired().HasColumnType("decimal(18,2)");
             builder.Property(x => x.Stock).HasDefaultValue(0);
             builder.Property(x => x.Description).HasMaxLength(500);
+            builder.Property(x => x.IsDeleted).IsRequired();
 
             builder.ToTable("Products");
-            // ğer silmek istediğin bir ürün başka bir tabloda kullanılıyor ise bu silme işlemini yapmaz
+            // eğer silmek istediğin bir ürün başka bir tabloda kullanılıyor ise bu silme işlemini yapmaz
             // başka bir kullanıcı favoride veya baskette kullandısya bunu ürünü silmez relationların hepsini koparıp silmek gerek
             // İlişkileri ekleyin
             builder.HasOne(x => x.Category)

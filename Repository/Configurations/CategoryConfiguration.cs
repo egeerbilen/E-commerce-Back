@@ -12,6 +12,7 @@ namespace Repository.Configurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).UseIdentityColumn(); // id değeri 1 er birer artar bir şey belirtmezsek
             builder.Property(x=>x.Name).IsRequired().HasMaxLength(50);
+            builder.Property(x=>x.IsDeleted).IsRequired();
 
             builder.ToTable("Categories"); // -> bunu vermezsek default olarak propert değerini alır
         }
