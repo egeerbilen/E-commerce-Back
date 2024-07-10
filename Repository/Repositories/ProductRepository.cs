@@ -24,9 +24,7 @@ namespace NLayer.Repository.Repositories
             // ToListAsync() IQueryable sorgusundan elde edilen sonuçları List<T> türüne dönüştürmek için kullanılır.
         }
 
-
-
-        public async Task<List<Product>> GetUserProducts(int userId)
+        public async Task<List<Product>> GetUserProductsAsync(int userId)
         {
             return await _context.Products.Where(x => x.UserId == userId).AsNoTracking().ToListAsync();
         }

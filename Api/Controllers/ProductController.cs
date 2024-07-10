@@ -57,12 +57,11 @@ namespace API.Controllers
             return CreateActionResult(result);
         }
 
-        //[Authorize(Roles = "Admin")]
         [ServiceFilter(typeof(NotFoundFilter<Product>))]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteProductWithDependenciesAsync(int id)
         {
-            var result = await _service.RemoveAsync(id);
+            var result = await _service.DeleteProductWithDependenciesAsync(id);
             return CreateActionResult(result);
         }
 

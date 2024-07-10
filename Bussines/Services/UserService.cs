@@ -58,7 +58,7 @@ namespace Bussines.Services
             return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status200OK);
         }
 
-        public async Task<CustomResponseDto<NoContentDto>> RemoveUserAsync(int userId)
+        public async Task<CustomResponseDto<NoContentDto>> DeleteUserWithDependenciesAsync(int userId)
         {
             var entity = await _userRepository.GetByIdAsync(userId);
             // id değeri zaten midle varede kontrol ediliyor o yüzden burada kontrole gerek yok
@@ -67,11 +67,9 @@ namespace Bussines.Services
             //    return CustomResponseDto<NoContentDto>.Fail(StatusCodes.Status404NotFound, "User not found");
             //}
 
-            var userProducts = await _productRepository.GetUserProducts(userId);
+            var userProducts = await _productRepository.GetUserProductsAsync(userId);
             _productRepository.RemoveRange(userProducts);
             await _unitOfWork.CommitAsync();
-
-
 
             _userRepository.Remove(entity);
             await _unitOfWork.CommitAsync();

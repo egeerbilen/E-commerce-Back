@@ -4,6 +4,7 @@ using Core.Repositories;
 using Core.Services;
 using Core.UnitOfWorks;
 using Entity.Model;
+using Entity.Repositories;
 using Microsoft.AspNetCore.Http;
 using NLayer.Core.DTOs;
 using NLayer.Core.Repositories;
@@ -14,10 +15,14 @@ namespace Service.Services
     {
         // Direk olarak ProductRepository e erişmek için aşağodaki kodu yazdık
         private readonly IProductRepository _productRepository;
+        private readonly IBasketRepository _basketRepository;
+        private readonly IFavoritesRepository _favoritesRepository;
 
-        public ProductService(IGenericRepository<Product> repository, IUnitOfWork unitOfWork, IMapper mapper, IProductRepository productRepository) : base(repository, unitOfWork, mapper)
+        public ProductService(IGenericRepository<Product> repository, IUnitOfWork unitOfWork, IMapper mapper, IProductRepository productRepository, IBasketRepository basketRepository, IFavoritesRepository favoritesRepository) : base(repository, unitOfWork, mapper)
         {
             _productRepository = productRepository;
+            _favoritesRepository = favoritesRepository;
+            _basketRepository = basketRepository;
         }
 
         public async Task<CustomResponseDto<ProductDto>> AddAsync(ProductCreateDto dto)
@@ -28,7 +33,6 @@ namespace Service.Services
             var newDto = _mapper.Map<ProductDto>(newEntity);
             return CustomResponseDto<ProductDto>.Success(StatusCodes.Status200OK, newDto);
         }
-
 
         public async Task<CustomResponseDto<List<ProductWithCategoryDto>>> GetProductsWitCategoryAsync()
         {
@@ -41,7 +45,7 @@ namespace Service.Services
 
         public async Task<CustomResponseDto<List<ProductDto>>> GetUserProducts(int userId)
         {
-            var products = await _productRepository.GetUserProducts(userId);
+            var products = await _productRepository.GetUserProductsAsync(userId);
 
             var productsDto = _mapper.Map<List<ProductDto>>(products);
             return CustomResponseDto<List<ProductDto>>.Success(200, productsDto);
@@ -51,6 +55,22 @@ namespace Service.Services
         {
             var entity = _mapper.Map<Product>(dto);
             _productRepository.Update(entity);
+            await _unitOfWork.CommitAsync();
+            return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status200OK);
+        }
+
+        public async Task<CustomResponseDto<NoContentDto>> DeleteProductWithDependenciesAsync(int productId)
+        {
+            var product = await _productRepository.GetByIdAsync(productId);
+            var userFavorites = await _favoritesRepository.GetUserFavoritesByIdAsync(product.UserId);
+
+            foreach (var userFavorite in userFavorites)
+            {
+                await _favoritesRepository.DeleteUserFavoriteProductAsync(userFavorite.UserId, product.Id);
+                await _unitOfWork.CommitAsync();
+            }
+
+            _productRepository.Remove(product);
             await _unitOfWork.CommitAsync();
             return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status200OK);
         }
