@@ -34,14 +34,14 @@ namespace YourNamespace.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateUserFavoriteProduct(FavoritesDto favorites)
         {
-            return CreateActionResult(await _userFavoritesServices.CreateUserFavoriteProductsAsync(favorites));
+            return CreateActionResult(await _userFavoritesServices.CreateUserFavoriteProductAsync(favorites));
         }
 
         [ServiceFilter(typeof(NotFoundFilter<User>))]
         [HttpDelete("{userId}/{productId}")]
         public async Task<IActionResult> DeleteUserFavoriteProduct(int userId, int productId)
         {
-            return CreateActionResult(await _userFavoritesServices.DeleteUserFavoriteProductsAsync(userId, productId));
+            return CreateActionResult(await _userFavoritesServices.DeleteUserFavoriteProductAsync(userId, productId));
         }
     }
 }

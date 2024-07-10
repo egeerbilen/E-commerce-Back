@@ -31,16 +31,16 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUserBasketProductsAsync(BasketDto basket)
+        public async Task<IActionResult> CreateUserBasketProductAsync(BasketDto basket)
         {
-            return CreateActionResult(await _userBasketServices.CreateUserBasketProductsAsync(basket));
+            return CreateActionResult(await _userBasketServices.CreateUserBasketProductAsync(basket));
         }
 
         [ServiceFilter(typeof(NotFoundFilter<User>))]
         [HttpDelete("{userId}/{productId}")]
-        public async Task<IActionResult> DeleteUserBasketProductsAsync(int userId, int productId)
+        public async Task<IActionResult> DeleteUserBasketProductAsync(int userId, int productId)
         {
-            return CreateActionResult(await _userBasketServices.DeleteUserBasketProductsAsync(userId, productId));
+            return CreateActionResult(await _userBasketServices.DeleteUserBasketProductAsync(userId, productId));
         }
     }
 }

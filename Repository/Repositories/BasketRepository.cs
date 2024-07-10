@@ -17,7 +17,7 @@ namespace DataAccess.Repositories
             _dbSet = _context.Set<Basket>();
         }
 
-        public async Task<Basket> CreateUserBasketProductsAsync(Basket basket)
+        public async Task<Basket> CreateUserBasketProductAsync(Basket basket)
         {
             _context.Baskets.AddAsync(basket);
 
@@ -30,7 +30,7 @@ namespace DataAccess.Repositories
             return updatedUserBasket;
         }
 
-        public async Task<bool> DeleteUserBasketProductsAsync(int userId, int productId)
+        public async Task<bool> DeleteUserBasketProductAsync(int userId, int productId)
         {
             var userBasketProduct = await _context.Baskets.FirstOrDefaultAsync(u => u.UserId == userId && u.ProductId == productId);
 

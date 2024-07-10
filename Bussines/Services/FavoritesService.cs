@@ -18,17 +18,17 @@ namespace Bussines.Services
             _favoritesRepository = userFavoritesProductsRepository;
         }
 
-        public async Task<CustomResponseDto<NoContentDto>> CreateUserFavoriteProductsAsync(FavoritesDto favorites)
+        public async Task<CustomResponseDto<NoContentDto>> CreateUserFavoriteProductAsync(FavoritesDto favorites)
         {
             var newDto = _mapper.Map<Favorite>(favorites);
-            await _favoritesRepository.CreateUserFavoriteProductsAsync(newDto);
+            await _favoritesRepository.CreateUserFavoriteProductAsync(newDto);
             await _unitOfWork.CommitAsync(); // Unitofwork üzerinden save change metodunu çağırıyoruz
 
             return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status200OK);
         }
-        public async Task<CustomResponseDto<NoContentDto>> DeleteUserFavoriteProductsAsync(int userId, int productId)
+        public async Task<CustomResponseDto<NoContentDto>> DeleteUserFavoriteProductAsync(int userId, int productId)
         {
-            var result = await _favoritesRepository.DeleteUserFavoriteProductsAsync(userId, productId);
+            var result = await _favoritesRepository.DeleteUserFavoriteProductAsync(userId, productId);
             if (result)
             {
                 await _unitOfWork.CommitAsync(); // Unitofwork üzerinden save change metodunu çağırıyoruz

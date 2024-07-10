@@ -9,8 +9,8 @@ namespace Entity.Services
     {
         Task<CustomResponseDto<bool>> IsFavoriteProduct(int userId, int productId);
         Task<CustomResponseDto<List<ProductDto>>> GetUserFavoritesById(int userId);
-        Task<CustomResponseDto<NoContentDto>> CreateUserFavoriteProductsAsync(FavoritesDto favorites);
-        Task<CustomResponseDto<NoContentDto>> DeleteUserFavoriteProductsAsync(int userId, int productId);
+        Task<CustomResponseDto<NoContentDto>> CreateUserFavoriteProductAsync(FavoritesDto favorites);
+        Task<CustomResponseDto<NoContentDto>> DeleteUserFavoriteProductAsync(int userId, int productId);
 
     }
 }

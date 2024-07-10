@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace NLayer.API.Filters
 {
+    // Bu NotFoundFilter<T> filtresi, belirli bir ID'ye sahip bir varlık (entity) olup olmadığını kontrol eder.
+    // Eğer bu ID'ye sahip bir varlık bulunamazsa, filtre bir 404 Not Found hatası döndürür. 
     public class NotFoundFilter<T> : IAsyncActionFilter where T : BaseEntity
     {
 

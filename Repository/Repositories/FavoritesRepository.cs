@@ -19,7 +19,7 @@ namespace DataAccess.Repositories
             _context = context;
             _dbSet = _context.Set<Favorite>();
         }
-        public async Task<Favorite> CreateUserFavoriteProductsAsync(Favorite favorites)
+        public async Task<Favorite> CreateUserFavoriteProductAsync(Favorite favorites)
         {
             // Yeni favori ürünü ekle
             _context.Favorites.AddAsync(favorites);
@@ -35,7 +35,7 @@ namespace DataAccess.Repositories
             return updatedUserFavorite;
         }
 
-        public async Task<bool> DeleteUserFavoriteProductsAsync(int userId, int productId)
+        public async Task<bool> DeleteUserFavoriteProductAsync(int userId, int productId)
         {
             var userFavoriteProduct = await _context.Favorites.FirstOrDefaultAsync(u => u.UserId == userId && u.ProductId == productId);
 

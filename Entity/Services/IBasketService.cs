@@ -7,7 +7,7 @@ namespace Entity.Services
     {
         Task<CustomResponseDto<bool>> IsBasketProduct(int userId, int productId);
         Task<CustomResponseDto<List<ProductDto>>> GetUserBasketsById(int userId);
-        Task<CustomResponseDto<NoContentDto>> CreateUserBasketProductsAsync(BasketDto basket);
-        Task<CustomResponseDto<NoContentDto>> DeleteUserBasketProductsAsync(int userId, int productId);
+        Task<CustomResponseDto<NoContentDto>> CreateUserBasketProductAsync(BasketDto basket);
+        Task<CustomResponseDto<NoContentDto>> DeleteUserBasketProductAsync(int userId, int productId);
     }
 }
