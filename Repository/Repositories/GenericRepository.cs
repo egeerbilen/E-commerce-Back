@@ -3,7 +3,6 @@ using Core.Repositories;
 using Entity.Interface;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using System.Security.Principal;
 
 namespace Repository.Repositories
 {

@@ -1,14 +1,15 @@
 ﻿
 using Core.DTOs;
-using Entity.DTOs;
 
 namespace Entity.Services
 {
-    public interface IGenericManyToManyService
+    public interface IGenericManyToManyService<TEntity, TDto> where TEntity : class where TDto : class
     {
-        Task<CustomResponseDto<bool>> IsBasketProduct(int userId, int productId);
-        Task<CustomResponseDto<List<ProductDto>>> GetUserBasketsById(int userId);
-        Task<CustomResponseDto<NoContentDto>> CreateUserBasketProductAsync(BasketDto basket);
-        Task<CustomResponseDto<NoContentDto>> DeleteUserBasketProductAsync(int userId, int productId);
+        Task<CustomResponseDto<bool>> IsRelatedEntityAsync(int firstEntityId, int secondEntityId);
+        Task<CustomResponseDto<List<TDto>>> GetRelatedEntitiesByFirstEntityIdAsync(int firstEntityId, string propertyName);
+        Task<CustomResponseDto<NoContentDto>> CreateRelatedEntityAsync(TDto dto);
+        Task<CustomResponseDto<NoContentDto>> DeleteRelatedEntityAsync(int firstEntityId, int secondEntityId);
+
+
     }
 }
