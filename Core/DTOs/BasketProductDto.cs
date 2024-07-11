@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Core.DTOs
+﻿namespace Core.DTOs
 {
-    internal class BasketProductDto
+    public class BasketProductDto
     {
+        public int BasketId { get; set; }
+        public int ProductId { get; set; }
     }
 }
