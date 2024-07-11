@@ -4,7 +4,7 @@ using Entity.Services;
 
 namespace Bussines.Services
 {
-    public class UserRoleService : IUserRoleServices
+    public class UserRoleService : IUserRoleService
     {
         private readonly IUserRoleRepository _userRoleRepository;
 

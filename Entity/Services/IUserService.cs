@@ -6,7 +6,7 @@ using JwtInDotnetCore;
 
 namespace Entity.Services
 {
-    public interface IUserServices : IGenericService<User, UserDto>
+    public interface IUserService : IGenericService<User, UserDto>
     {
         Task<CustomResponseDto<NoContentDto>> DeleteUserWithDependenciesAsync(int id);
         Task<CustomResponseDto<BaseDto>> AddUserAsync(UserCreateDto dto);

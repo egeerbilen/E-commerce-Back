@@ -2,7 +2,7 @@
 
 namespace Entity.Services
 {
-    public interface IUserRoleServices
+    public interface IUserRoleService
     {
         Task<CustomResponseDto<bool>> AddUserRoleAsync(int basketId, int productId);
         Task<CustomResponseDto<bool>> RemoveUserRoleAsync(int basketId, int productId);

@@ -8,9 +8,9 @@ namespace Api.Controllers
 {
     public class UserRolesController : CustomBaseController
     {
-        private readonly IUserRoleServices _userRoleService;
+        private readonly IUserRoleService _userRoleService;
 
-        public UserRolesController(IUserRoleServices userRoleService)
+        public UserRolesController(IUserRoleService userRoleService)
         {
             _userRoleService = userRoleService;
         }

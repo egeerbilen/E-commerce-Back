@@ -19,7 +19,7 @@ using System.Text;
 
 namespace Bussines.Services
 {
-    public class UserService : GenericService<User, UserDto>, IUserServices
+    public class UserService : GenericService<User, UserDto>, IUserService
     {
         private IConfiguration _config;
         private readonly IUserRepository _userRepository;

@@ -12,9 +12,9 @@ namespace Api.Controllers
 {
     public class UserController : CustomBaseController
     {
-        private readonly IUserServices _service;
+        private readonly IUserService _service;
 
-        public UserController(IUserServices service)
+        public UserController(IUserService service)
         {
             _service = service;
         }

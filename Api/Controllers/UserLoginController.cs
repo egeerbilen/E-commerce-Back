@@ -10,11 +10,11 @@ namespace JwtInDotnetCore.Controllers
 {
     public class UserLoginController : CustomBaseController
     {
-        private readonly IUserServices _userService;
+        private readonly IUserService _userService;
         private readonly IMemoryCache _cache;
         private static readonly TimeSpan CacheDuration = TimeSpan.FromSeconds(10);
 
-        public UserLoginController(IUserServices service, IMemoryCache memoryCache)
+        public UserLoginController(IUserService service, IMemoryCache memoryCache)
         {
             _userService = service;
             _cache = memoryCache;

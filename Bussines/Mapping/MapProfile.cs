@@ -29,7 +29,7 @@ namespace Service.Mapping
             CreateMap<Basket, BasketDto>().ReverseMap();
             CreateMap<Favorite, FavoritesDto>().ReverseMap();
             CreateMap<BasketProductDto, BasketProduct>().ReverseMap();
-
+            CreateMap<Role, RoleDto>().ReverseMap();
         }
     }
 }

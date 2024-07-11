@@ -4,7 +4,7 @@ using Entity.Model;
 
 namespace Entity.Services
 {
-    public interface IRoleServices : IGenericService<Role, RoleDto>
+    public interface IRoleService : IGenericService<Role, RoleDto>
     {
     }
 }
