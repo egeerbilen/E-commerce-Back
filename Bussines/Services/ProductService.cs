@@ -62,7 +62,6 @@ namespace Service.Services
         public async Task<CustomResponseDto<NoContentDto>> DeleteProductWithDependenciesAsync(int productId)
         {
             var userFavorites = await _favoritesRepository.GetProductFavoritesByIdAsync(productId);
-            // Sonrasında DeleteUserFavoriteProductAsync ile for la dönerek dataları sildataları sil 
 
             foreach (var userFavorite in userFavorites)
             {
