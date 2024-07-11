@@ -22,7 +22,7 @@ namespace Api.Controllers
             return CreateActionResult(result);
         }
 
-        [HttpGet("{userId}/baskets")]
+        [HttpGet("{userId}")]
         public async Task<IActionResult> GetUserBasketsByIdAsync(int userId)
         {
             var result = await _basketProductService.GetBasketProductsByIdAsync(userId);
@@ -30,16 +30,16 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUserBasketProductAsync([FromBody] BasketProductDto basket)
+        public async Task<IActionResult> CreateBasketProductAsync([FromBody] BasketProductDto basket)
         {
             var result = await _basketProductService.CreateBasketProductAsync(basket);
             return CreateActionResult(result);
         }
 
-        [HttpDelete("{userId}/products/{productId}")]
-        public async Task<IActionResult> DeleteUserBasketProductAsync(int userId, int productId)
+        [HttpDelete("userId/{userId}/products/{productId}")]
+        public async Task<IActionResult> DeleteBasketProductAsync(int userId, int productId)
         {
-            var result = await _basketProductService.DeleteUserBasketProductAsync(userId, productId);
+            var result = await _basketProductService.DeleteBasketProductAsync(userId, productId);
             return CreateActionResult(result);
         }
     }

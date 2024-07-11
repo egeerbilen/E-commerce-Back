@@ -29,7 +29,7 @@ namespace Bussines.Services
             return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status200OK);
         }
 
-        public async Task<CustomResponseDto<NoContentDto>> DeleteUserBasketProductAsync(int userId, int productId)
+        public async Task<CustomResponseDto<NoContentDto>> DeleteBasketProductAsync(int userId, int productId)
         {
             var result = await _basketProductRepository.DeleteBasketProductAsync(userId, productId);
             if (result)
