@@ -28,7 +28,7 @@ namespace Service.Mapping
             CreateMap<UserUpdateDto, User>().ReverseMap();
             CreateMap<Basket, BasketDto>().ReverseMap();
             CreateMap<Favorite, FavoritesDto>().ReverseMap();
-
+            CreateMap<BasketProductDto, BasketProduct>().ReverseMap();
 
         }
     }

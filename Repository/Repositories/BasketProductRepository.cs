@@ -8,29 +8,23 @@ namespace DataAccess.Repositories
     public class BasketProductRepository : IBasketProductRepository
     {
         protected readonly AppDbContext _context;
-        private readonly DbSet<Basket> _dbSet;
+        private readonly DbSet<BasketProduct> _dbSet;
 
         public BasketProductRepository(AppDbContext context)
         {
             _context = context;
-            _dbSet = _context.Set<Basket>();
+            _dbSet = _context.Set<BasketProduct>();
         }
 
-        public async Task<Basket> CreateUserBasketProductAsync(Basket basket)
+        public async Task CreateBasketProductAsync(BasketProduct basket)
         {
             await _dbSet.AddAsync(basket);
             await _context.SaveChangesAsync();
-
-            var updatedUserBasket = await _dbSet
-                .Where(u => u.UserId == basket.UserId)
-                .FirstOrDefaultAsync();
-
-            return updatedUserBasket;
         }
 
-        public async Task<bool> DeleteUserBasketProductAsync(int userId, int basketId)
+        public async Task<bool> DeleteBasketProductAsync(int userId, int basketId)
         {
-            var userBasketProduct = await _dbSet.FirstOrDefaultAsync(u => u.UserId == userId && u.Id == basketId);
+            var userBasketProduct = await _dbSet.FirstOrDefaultAsync(u => u.BasketId == userId && u.ProductId == basketId);
 
             if (userBasketProduct != null)
             {
@@ -45,21 +39,19 @@ namespace DataAccess.Repositories
         public async Task<List<Product>> GetUserBasketsByIdAsync(int userId)
         {
             var userBaskets = await _dbSet
-                .Where(ufp => ufp.UserId == userId)
-                .Include(ufp => ufp.BasketProducts)
-                    .ThenInclude(bp => bp.Product)
+                .Where(ufp => ufp.BasketId == userId)
+                .Include(ufp => ufp.Product)
                 .AsNoTracking()
                 .ToListAsync();
 
-            return userBaskets.SelectMany(ufp => ufp.BasketProducts.Select(bp => bp.Product)).ToList();
+            return userBaskets.Select(ufp => ufp.Product).ToList();
         }
 
         public async Task<bool> IsBasketProductAsync(int userId, int productId)
         {
             return await _dbSet
-                .Where(x => x.UserId == userId)
-                .SelectMany(b => b.BasketProducts)
-                .AnyAsync(bp => bp.ProductId == productId);
+                .Where(x => x.BasketId == userId && x.ProductId == productId)
+                .AnyAsync();
         }
     }
 }

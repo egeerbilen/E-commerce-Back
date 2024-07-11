@@ -6,7 +6,7 @@ namespace Entity.Repositories
     {
         Task<bool> IsBasketProductAsync(int userId, int productId);
         Task<List<Product>> GetUserBasketsByIdAsync(int userId);
-        Task<Basket> CreateUserBasketProductAsync(Basket basket);
-        Task<bool> DeleteUserBasketProductAsync(int userId, int productId);
+        Task CreateBasketProductAsync(BasketProduct basket);
+        Task<bool> DeleteBasketProductAsync(int userId, int productId);
     }
 }
