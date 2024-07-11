@@ -37,7 +37,7 @@ namespace API.Controllers
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetUserProducts(int userId)
         {
-            var result = await _service.GetUserProducts(userId);
+            var result = await _service.GetUserProductsAsync(userId);
             return CreateActionResult(result);
         }
          
@@ -45,7 +45,7 @@ namespace API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ProductCreateDto productDto)
         {
-            var result = await _service.AddAsync(productDto);
+            var result = await _service.AddProductAsync(productDto);
             return CreateActionResult(result);
         }
 
@@ -53,7 +53,7 @@ namespace API.Controllers
         [HttpPut]
         public async Task<IActionResult> Update(ProductUpdateDto productDto)
         {
-            var result = await _service.UpdateAsync(productDto);
+            var result = await _service.UpdateProductAsync(productDto);
             return CreateActionResult(result);
         }
 

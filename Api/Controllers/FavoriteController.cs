@@ -21,27 +21,27 @@ namespace YourNamespace.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserFavoritesById(int id)
         {
-            return CreateActionResult(await _userFavoritesServices.GetUserFavoritesByIdAsync(id));
+            return CreateActionResult(await _userFavoritesServices.GetFavoritesByUserIdAsync(id));
         }
 
         [ServiceFilter(typeof(NotFoundFilter<User>))]
         [HttpGet("{userId}/{productId}")]
         public async Task<IActionResult> IsFavoriteProduct(int userId, int productId)
         {
-            return CreateActionResult(await _userFavoritesServices.IsFavoriteProductAsync(userId, productId));
+            return CreateActionResult(await _userFavoritesServices.IsFavoriteAsync(userId, productId));
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateUserFavoriteProduct(FavoritesDto favorites)
         {
-            return CreateActionResult(await _userFavoritesServices.CreateUserFavoriteProductAsync(favorites));
+            return CreateActionResult(await _userFavoritesServices.CreateFavoriteAsync(favorites));
         }
 
         [ServiceFilter(typeof(NotFoundFilter<User>))]
         [HttpDelete("{userId}/{productId}")]
         public async Task<IActionResult> DeleteUserFavoriteProduct(int userId, int productId)
         {
-            return CreateActionResult(await _userFavoritesServices.DeleteUserFavoriteProductAsync(userId, productId));
+            return CreateActionResult(await _userFavoritesServices.DeleteFavoriteAsync(userId, productId));
         }
     }
 }

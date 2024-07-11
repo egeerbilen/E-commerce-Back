@@ -25,7 +25,7 @@ namespace Service.Services
             _basketRepository = basketRepository;
         }
 
-        public async Task<CustomResponseDto<ProductDto>> AddAsync(ProductCreateDto dto)
+        public async Task<CustomResponseDto<ProductDto>> AddProductAsync(ProductCreateDto dto)
         {
             var newEntity = _mapper.Map<Product>(dto);
             await _productRepository.AddAsync(newEntity);
@@ -43,15 +43,15 @@ namespace Service.Services
             return CustomResponseDto<List<ProductWithCategoryDto>>.Success(200, productsDto);
         }
 
-        public async Task<CustomResponseDto<List<ProductDto>>> GetUserProducts(int userId)
+        public async Task<CustomResponseDto<List<ProductDto>>> GetUserProductsAsync(int userId)
         {
-            var products = await _productRepository.GetUserProductsAsync(userId);
+            var products = await _productRepository.GetProductsByUserIdAsync(userId);
 
             var productsDto = _mapper.Map<List<ProductDto>>(products);
             return CustomResponseDto<List<ProductDto>>.Success(200, productsDto);
         }
 
-        public async Task<CustomResponseDto<NoContentDto>> UpdateAsync(ProductUpdateDto dto)
+        public async Task<CustomResponseDto<NoContentDto>> UpdateProductAsync(ProductUpdateDto dto)
         {
             var entity = _mapper.Map<Product>(dto);
             _productRepository.Update(entity);
@@ -61,11 +61,11 @@ namespace Service.Services
 
         public async Task<CustomResponseDto<NoContentDto>> DeleteProductWithDependenciesAsync(int productId)
         {
-            var userFavorites = await _favoritesRepository.GetProductFavoritesByIdAsync(productId);
+            var userFavorites = await _favoritesRepository.GetFavoritesByProductIdAsync(productId);
 
             foreach (var userFavorite in userFavorites)
             {
-                await _favoritesRepository.DeleteUserFavoriteProductAsync(userFavorite.UserId, productId);
+                await _favoritesRepository.DeleteFavoriteAsync(userFavorite.UserId, productId);
                 await _unitOfWork.CommitAsync();
             }
 

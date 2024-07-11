@@ -4,9 +4,9 @@ namespace Entity.Services
 {
     public interface IBasketProductService
     {
-        Task<CustomResponseDto<bool>> IsBasketProductAsync(int userId, int productId);
-        Task<CustomResponseDto<List<ProductDto>>> GetBasketProductsByIdAsync(int userId);
-        Task<CustomResponseDto<NoContentDto>> CreateBasketProductAsync(BasketProductDto basket);
-        Task<CustomResponseDto<NoContentDto>> DeleteBasketProductAsync(int userId, int productId);
+        Task<CustomResponseDto<bool>> IsProductInBasketAsync(int basketId, int productId);
+        Task<CustomResponseDto<List<ProductDto>>> GetProductsByBasketIdAsync(int basketId);
+        Task<CustomResponseDto<NoContentDto>> AddProductToBasketAsync(BasketProductDto basket);
+        Task<CustomResponseDto<NoContentDto>> RemoveProductFromBasketAsync(int basketId, int productId);
     }
 }

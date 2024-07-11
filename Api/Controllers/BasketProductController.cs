@@ -18,28 +18,28 @@ namespace Api.Controllers
         [HttpGet("{userId}/products/{productId}")]
         public async Task<IActionResult> IsBasketProductAsync(int userId, int productId)
         {
-            var result = await _basketProductService.IsBasketProductAsync(userId, productId);
+            var result = await _basketProductService.IsProductInBasketAsync(userId, productId);
             return CreateActionResult(result);
         }
 
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetUserBasketsByIdAsync(int userId)
         {
-            var result = await _basketProductService.GetBasketProductsByIdAsync(userId);
+            var result = await _basketProductService.GetProductsByBasketIdAsync(userId);
             return CreateActionResult(result);
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateBasketProductAsync([FromBody] BasketProductDto basket)
         {
-            var result = await _basketProductService.CreateBasketProductAsync(basket);
+            var result = await _basketProductService.AddProductToBasketAsync(basket);
             return CreateActionResult(result);
         }
 
         [HttpDelete("userId/{userId}/products/{productId}")]
         public async Task<IActionResult> DeleteBasketProductAsync(int userId, int productId)
         {
-            var result = await _basketProductService.DeleteBasketProductAsync(userId, productId);
+            var result = await _basketProductService.RemoveProductFromBasketAsync(userId, productId);
             return CreateActionResult(result);
         }
     }

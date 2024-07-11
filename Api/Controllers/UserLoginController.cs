@@ -27,7 +27,7 @@ namespace JwtInDotnetCore.Controllers
 
             if (!_cache.TryGetValue(cacheKey, out CustomResponseDto<string> jwtToken))
             {
-                jwtToken = await _userService.createJwtToken(userLoginRequest);
+                jwtToken = await _userService.GenerateJwtTokenAsync(userLoginRequest);
                 if (jwtToken.Data == null) {
                     return CreateActionResult(CustomResponseDto<string>.Fail(401, jwtToken.Errors));
                 }

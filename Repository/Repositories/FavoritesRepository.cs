@@ -19,7 +19,7 @@ namespace DataAccess.Repositories
             _context = context;
             _dbSet = _context.Set<Favorite>();
         }
-        public async Task<Favorite> CreateUserFavoriteProductAsync(Favorite favorites)
+        public async Task<Favorite> CreateFavoriteAsync(Favorite favorites)
         {
             // Yeni favori ürünü ekle
             _context.Favorites.AddAsync(favorites);
@@ -35,7 +35,7 @@ namespace DataAccess.Repositories
             return updatedUserFavorite;
         }
 
-        public async Task<bool> DeleteUserFavoriteProductAsync(int userId, int productId)
+        public async Task<bool> DeleteFavoriteAsync(int userId, int productId)
         {
             var userFavoriteProduct = await _context.Favorites.FirstOrDefaultAsync(u => u.UserId == userId && u.ProductId == productId);
 
@@ -49,7 +49,7 @@ namespace DataAccess.Repositories
             return false;
         }
 
-        public async Task<List<Product>> GetUserFavoritesByIdAsync(int userId)
+        public async Task<List<Product>> GetFavoritesByUserIdAsync(int userId)
         {
             var userFavorites = await _context.Favorites
                 .Where(ufp => ufp.UserId == userId)
@@ -60,7 +60,7 @@ namespace DataAccess.Repositories
             return userFavorites.Select(ufp => ufp.Product).ToList();
         }
 
-        public async Task<List<Favorite>> GetProductFavoritesByIdAsync(int productId)
+        public async Task<List<Favorite>> GetFavoritesByProductIdAsync(int productId)
         {
             return  await _context.Favorites
                 .Where(f => f.ProductId == productId)
@@ -68,7 +68,7 @@ namespace DataAccess.Repositories
                 .ToListAsync();
         }
 
-        public async Task<bool> IsFavoriteProductAsync(int userId, int productId)
+        public async Task<bool> IsFavoriteAsync(int userId, int productId)
         {
             return await _context.Favorites
                                  .Where(x => x.UserId == userId)

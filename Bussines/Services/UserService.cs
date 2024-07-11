@@ -39,7 +39,7 @@ namespace Bussines.Services
             _config = config;
         }
 
-        public async Task<CustomResponseDto<BaseDto>> AddAsync(UserCreateDto dto)
+        public async Task<CustomResponseDto<BaseDto>> AddUserAsync(UserCreateDto dto)
         {
             dto.Password = PasswordHelper.HashPassword(dto.Password);
             var newEntity = _mapper.Map<User>(dto);
@@ -49,7 +49,7 @@ namespace Bussines.Services
             return CustomResponseDto<BaseDto>.Success(StatusCodes.Status200OK, newDto);
         }
 
-        public async Task<CustomResponseDto<NoContentDto>> UpdateAsync(UserUpdateDto dto)
+        public async Task<CustomResponseDto<NoContentDto>> UpdateUserAsync(UserUpdateDto dto)
         {
             dto.Password = PasswordHelper.HashPassword(dto.Password);
             var entity = _mapper.Map<User>(dto);
@@ -67,7 +67,7 @@ namespace Bussines.Services
             //    return CustomResponseDto<NoContentDto>.Fail(StatusCodes.Status404NotFound, "User not found");
             //}
 
-            var userProducts = await _productRepository.GetUserProductsAsync(userId);
+            var userProducts = await _productRepository.GetProductsByUserIdAsync(userId);
             _productRepository.RemoveRange(userProducts);
             await _unitOfWork.CommitAsync();
 
@@ -77,9 +77,9 @@ namespace Bussines.Services
             return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status200OK);
         }
 
-        public async Task<CustomResponseDto<string>> createJwtToken(UserLoginRequestDto dto)
+        public async Task<CustomResponseDto<string>> GenerateJwtTokenAsync(UserLoginRequestDto dto)
         {
-            var user = await _userRepository.FindUserByEmailWithUserRoles(dto);
+            var user = await _userRepository.FindUserByEmailWithRolesAsync(dto);
 
             if (user == null || PasswordHelper.HashPassword(dto.Password) != user.Password)
             {

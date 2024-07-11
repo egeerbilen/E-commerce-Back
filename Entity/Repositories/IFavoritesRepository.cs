@@ -6,10 +6,10 @@ namespace Entity.Repositories
 {
     public interface IFavoritesRepository
     {
-        Task<bool> IsFavoriteProductAsync(int userId, int productId);
-        Task<List<Product>> GetUserFavoritesByIdAsync(int userId);
-        Task<Favorite> CreateUserFavoriteProductAsync(Favorite favorites);
-        Task<bool> DeleteUserFavoriteProductAsync(int userId, int productId);
-        Task<List<Favorite>> GetProductFavoritesByIdAsync(int productId);
+        Task<bool> IsFavoriteAsync(int userId, int productId);
+        Task<List<Product>> GetFavoritesByUserIdAsync(int userId);
+        Task<Favorite> CreateFavoriteAsync(Favorite favorites);
+        Task<bool> DeleteFavoriteAsync(int userId, int productId);
+        Task<List<Favorite>> GetFavoritesByProductIdAsync(int productId);
     }
 }

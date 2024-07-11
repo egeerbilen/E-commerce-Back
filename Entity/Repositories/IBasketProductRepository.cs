@@ -4,9 +4,9 @@ namespace Entity.Repositories
 {
     public interface IBasketProductRepository
     {
-        Task<bool> IsBasketProductAsync(int basketId, int productId);
-        Task<List<Product>> GetUserBasketsByIdAsync(int basketId);
-        Task CreateBasketProductAsync(BasketProduct basket);
-        Task<bool> DeleteBasketProductAsync(int basketId, int productId);
+        Task<bool> IsProductInBasketAsync(int basketId, int productId);
+        Task<List<Product>> GetProductsByBasketIdAsync(int basketId);
+        Task AddProductToBasketAsync(BasketProduct basket);
+        Task<bool> RemoveProductFromBasketAsync(int basketId, int productId);
     }
 }

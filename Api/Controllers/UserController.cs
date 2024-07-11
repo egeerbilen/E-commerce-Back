@@ -35,14 +35,14 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(UserCreateDto userCreateDto)
         {
-            return CreateActionResult(await _service.AddAsync(userCreateDto));
+            return CreateActionResult(await _service.AddUserAsync(userCreateDto));
         }
 
         [ServiceFilter(typeof(NotFoundFilter<User>))]
         [HttpPut]
         public async Task<IActionResult> Update(UserUpdateDto userUpdateDto)
         {
-            return CreateActionResult(await _service.UpdateAsync(userUpdateDto));
+            return CreateActionResult(await _service.UpdateUserAsync(userUpdateDto));
         }
 
 
