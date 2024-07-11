@@ -1,6 +1,5 @@
 ﻿using Core.DTOs;
 using Core.Repositories;
-using Entity.DTOs;
 using Entity.Model;
 using JwtInDotnetCore;
 

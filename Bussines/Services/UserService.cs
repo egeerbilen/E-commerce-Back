@@ -9,7 +9,6 @@ using Entity.Repositories;
 using Entity.Services;
 using JwtInDotnetCore;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using NLayer.Core.Repositories;
@@ -66,7 +65,8 @@ namespace Bussines.Services
             //{
             //    return CustomResponseDto<NoContentDto>.Fail(StatusCodes.Status404NotFound, "User not found");
             //}
-
+            // user silindiğinde favorileri ve basketleri silmedim bilerek vazgeçme süresü kona
+            // bilir ki kullanıcı vazgeçerse favoriler ve basketler dursun
             var userProducts = await _productRepository.GetProductsByUserIdAsync(userId);
             _productRepository.RemoveRange(userProducts);
             await _unitOfWork.CommitAsync();

@@ -1,6 +1,7 @@
-﻿namespace Entity.DTOs
+﻿
+namespace Core.DTOs
 {
-    public class UserRolesDto
+    public class RoleDto : BaseDto
     {
         public string RoleName { get; set; }
     }
