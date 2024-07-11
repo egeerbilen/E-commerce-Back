@@ -61,16 +61,16 @@ namespace Service.Services
 
         public async Task<CustomResponseDto<NoContentDto>> DeleteProductWithDependenciesAsync(int productId)
         {
-            var product = await _productRepository.GetByIdAsync(productId);
-            var userFavorites = await _favoritesRepository.GetAllByProductId(product.UserId);
+            var userFavorites = await _favoritesRepository.GetProductFavoritesByIdAsync(productId);
             // Sonrasında DeleteUserFavoriteProductAsync ile for la dönerek dataları sildataları sil 
 
             foreach (var userFavorite in userFavorites)
             {
-                await _favoritesRepository.DeleteUserFavoriteProductAsync(userFavorite.UserId, product.Id);
+                await _favoritesRepository.DeleteUserFavoriteProductAsync(userFavorite.UserId, productId);
                 await _unitOfWork.CommitAsync();
             }
 
+            var product = await _productRepository.GetByIdAsync(productId);
             _productRepository.Remove(product);
             await _unitOfWork.CommitAsync();
             return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status200OK);

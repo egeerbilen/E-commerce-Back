@@ -60,6 +60,14 @@ namespace DataAccess.Repositories
             return userFavorites.Select(ufp => ufp.Product).ToList();
         }
 
+        public async Task<List<Favorite>> GetProductFavoritesByIdAsync(int productId)
+        {
+            return  await _context.Favorites
+                .Where(f => f.ProductId == productId)
+                .AsNoTracking()
+                .ToListAsync();
+        }
+
         public async Task<bool> IsFavoriteProductAsync(int userId, int productId)
         {
             return await _context.Favorites

@@ -10,5 +10,6 @@ namespace Entity.Repositories
         Task<List<Product>> GetUserFavoritesByIdAsync(int userId);
         Task<Favorite> CreateUserFavoriteProductAsync(Favorite favorites);
         Task<bool> DeleteUserFavoriteProductAsync(int userId, int productId);
+        Task<List<Favorite>> GetProductFavoritesByIdAsync(int productId);
     }
 }
