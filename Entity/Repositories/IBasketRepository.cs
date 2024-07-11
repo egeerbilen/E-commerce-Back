@@ -1,12 +1,11 @@
-﻿using Entity.Model;
+﻿using Core.Repositories;
+using Core.Services;
+using Entity.DTOs;
+using Entity.Model;
 
 namespace Entity.Repositories
 {
-    public interface IBasketRepository
+    public interface IBasketRepository : IGenericRepository<Basket>
     {
-        Task<bool> IsBasketProductAsync(int userId, int productId);
-        Task<List<Product>> GetUserBasketsByIdAsync(int userId);
-        Task<Basket> CreateUserBasketProductAsync(Basket basket);
-        Task<bool> DeleteUserBasketProductAsync(int userId, int productId);
     }
 }

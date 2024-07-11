@@ -20,6 +20,7 @@ namespace Repository
         // Product nesnesi üzerinden eklemesi için
         //public DbSet<Product> Products { get; set; }
         //public DbSet<UserBasket> UserBaskets{ get; set; }
+        public DbSet<BasketProduct> BasketProducts{ get; set; }
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<Basket> Baskets{ get; set; }
         public DbSet<Product> Products { get; set; } // ProductFeatures Bu şekilde eklersek bağımsız olarak ProductFeatures satırlarını bağımsız olarak ekleye bilirim veya güncelleye bilirim

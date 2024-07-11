@@ -1,13 +1,10 @@
-﻿using Core.DTOs;
+﻿using Core.Services;
 using Entity.DTOs;
+using Entity.Model;
 
 namespace Entity.Services
 {
-    public interface IBasketService
+    public interface IBasketService : IGenericService<Basket, BasketDto>
     {
-        Task<CustomResponseDto<bool>> IsBasketProductAsync(int userId, int productId);
-        Task<CustomResponseDto<List<ProductDto>>> GetUserBasketsByIdAsync(int userId);
-        Task<CustomResponseDto<NoContentDto>> CreateUserBasketProductAsync(BasketDto basket);
-        Task<CustomResponseDto<NoContentDto>> DeleteUserBasketProductAsync(int userId, int productId);
     }
 }

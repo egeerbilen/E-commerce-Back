@@ -1,8 +1,9 @@
-﻿namespace Entity.DTOs
+﻿using Core.DTOs;
+
+namespace Entity.DTOs
 {
-    public class BasketDto
+    public class BasketDto : BaseDto
     {
         public int UserId { get; set; }
-        public int ProductId { get; set; }
     }
 }

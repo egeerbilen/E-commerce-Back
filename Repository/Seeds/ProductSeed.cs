@@ -36,7 +36,7 @@ namespace Repository.Seeds
                     Stock = 2,
                     CreatedDate = DateTime.Now,
                     ImageData = ConvertImageToByteArray(imagePaths[0]),
-                    IsDeleted = false
+                    IsDeleted = false,
                 },
                 new Product
                 {
