@@ -23,15 +23,21 @@ namespace Bussines.Services
         public async Task<CustomResponseDto<NoContentDto>> CreateBasketProductAsync(BasketProductDto basket)
         {
             var newDto = _mapper.Map<BasketProduct>(basket);
+            var isProductAvailable = await IsBasketProductAsync(newDto.BasketId, newDto.ProductId);  
+            if (isProductAvailable.Data)  
+            {
+                return CustomResponseDto<NoContentDto>.Fail(StatusCodes.Status200OK, "The relevant product is already available in the basket");
+            }
             await _basketProductRepository.CreateBasketProductAsync(newDto);
             await _unitOfWork.CommitAsync(); // Unitofwork üzerinden save change metodunu çağırıyoruz
 
             return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status200OK);
         }
 
-        public async Task<CustomResponseDto<NoContentDto>> DeleteBasketProductAsync(int userId, int productId)
+
+        public async Task<CustomResponseDto<NoContentDto>> DeleteBasketProductAsync(int basketId, int productId)
         {
-            var result = await _basketProductRepository.DeleteBasketProductAsync(userId, productId);
+            var result = await _basketProductRepository.DeleteBasketProductAsync(basketId, productId);
             if (result)
             {
                 await _unitOfWork.CommitAsync(); // Unitofwork üzerinden save change metodunu çağırıyoruz
@@ -41,16 +47,16 @@ namespace Bussines.Services
             return CustomResponseDto<NoContentDto>.Fail(StatusCodes.Status404NotFound, "User favorite product not found.");
         }
 
-        public async Task<CustomResponseDto<List<ProductDto>>> GetBasketProductsByIdAsync(int userId)
+        public async Task<CustomResponseDto<List<ProductDto>>> GetBasketProductsByIdAsync(int basketId)
         {
-            var baskets = await _basketProductRepository.GetUserBasketsByIdAsync(userId);
+            var baskets = await _basketProductRepository.GetUserBasketsByIdAsync(basketId);
             var dtos = _mapper.Map<List<ProductDto>>(baskets);
             return CustomResponseDto<List<ProductDto>>.Success(StatusCodes.Status200OK, dtos);
         }
 
-        public async Task<CustomResponseDto<bool>> IsBasketProductAsync(int userId, int productId)
+        public async Task<CustomResponseDto<bool>> IsBasketProductAsync(int basketId, int productId)
         {
-            var baskets = await _basketProductRepository.IsBasketProductAsync(userId, productId);
+            var baskets = await _basketProductRepository.IsBasketProductAsync(basketId, productId);
             return CustomResponseDto<bool>.Success(StatusCodes.Status200OK, baskets);
         }
     }
