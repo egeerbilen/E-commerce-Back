@@ -1,4 +1,5 @@
-﻿using Entity.Model;
+﻿using Core.DTOs;
+using Entity.Model;
 using Entity.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Repository;
@@ -22,9 +23,9 @@ namespace DataAccess.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> RemoveProductFromBasketAsync(int userId, int basketId)
+        public async Task<bool> RemoveProductFromBasketAsync(int basketId, int productId)
         {
-            var userBasketProduct = await _dbSet.FirstOrDefaultAsync(u => u.BasketId == userId && u.ProductId == basketId);
+            var userBasketProduct = await _dbSet.FirstOrDefaultAsync(u => u.BasketId == basketId && u.ProductId == productId);
 
             if (userBasketProduct != null)
             {
@@ -36,10 +37,10 @@ namespace DataAccess.Repositories
             return false;
         }
 
-        public async Task<List<Product>> GetProductsByBasketIdAsync(int userId)
+        public async Task<List<Product>> GetProductsByBasketIdAsync(int basketId)
         {
             var userBaskets = await _dbSet
-                .Where(ufp => ufp.BasketId == userId)
+                .Where(ufp => ufp.BasketId == basketId)
                 .Include(ufp => ufp.Product)
                 .AsNoTracking()
                 .ToListAsync();
@@ -52,6 +53,15 @@ namespace DataAccess.Repositories
             return await _dbSet
                 .Where(x => x.BasketId == userId && x.ProductId == productId)
                 .AnyAsync();
+        }
+        public async Task<List<BasketProduct>> GetBasketIdsByProductIdAsync(int productId)
+        {
+            var basketsProducts = await _dbSet
+                .Where(bp => bp.ProductId == productId)
+                .AsNoTracking()
+                .ToListAsync();
+
+            return basketsProducts;
         }
     }
 }

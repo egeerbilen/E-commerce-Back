@@ -15,14 +15,15 @@ namespace Service.Services
     {
         // Direk olarak ProductRepository e erişmek için aşağodaki kodu yazdık
         private readonly IProductRepository _productRepository;
-        private readonly IBasketRepository _basketRepository;
+        private readonly IBasketProductRepository _basketProductRepository;
         private readonly IFavoritesRepository _favoritesRepository;
 
-        public ProductService(IGenericRepository<Product> repository, IUnitOfWork unitOfWork, IMapper mapper, IProductRepository productRepository, IBasketRepository basketRepository, IFavoritesRepository favoritesRepository) : base(repository, unitOfWork, mapper)
+        public ProductService(IGenericRepository<Product> repository, IUnitOfWork unitOfWork, IMapper mapper, 
+            IProductRepository productRepository, IBasketProductRepository basketProductRepository, IFavoritesRepository favoritesRepository) : base(repository, unitOfWork, mapper)
         {
             _productRepository = productRepository;
             _favoritesRepository = favoritesRepository;
-            _basketRepository = basketRepository;
+            _basketProductRepository = basketProductRepository;
         }
 
         public async Task<CustomResponseDto<ProductDto>> AddProductAsync(ProductCreateDto dto)
@@ -62,6 +63,7 @@ namespace Service.Services
         public async Task<CustomResponseDto<NoContentDto>> DeleteProductWithDependenciesAsync(int productId)
         {
             var userFavorites = await _favoritesRepository.GetFavoritesByProductIdAsync(productId);
+            var basketProducts = await _basketProductRepository.GetBasketIdsByProductIdAsync(productId);
 
             foreach (var userFavorite in userFavorites)
             {
@@ -69,10 +71,17 @@ namespace Service.Services
                 await _unitOfWork.CommitAsync();
             }
 
-            var product = await _productRepository.GetByIdAsync(productId);
-            _productRepository.Remove(product);
+            foreach (var basketProduct in basketProducts)
+            {
+                await _basketProductRepository.RemoveProductFromBasketAsync(basketProduct.BasketId, productId);
+                await _unitOfWork.CommitAsync();
+            }
+
+            var productEntity = await _productRepository.GetByIdAsync(productId);
+            _productRepository.Remove(productEntity);
             await _unitOfWork.CommitAsync();
             return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status200OK);
         }
+
     }
 }

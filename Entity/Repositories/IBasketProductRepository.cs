@@ -1,4 +1,5 @@
-﻿using Entity.Model;
+﻿using Core.DTOs;
+using Entity.Model;
 
 namespace Entity.Repositories
 {
@@ -6,6 +7,7 @@ namespace Entity.Repositories
     {
         Task<bool> IsProductInBasketAsync(int basketId, int productId);
         Task<List<Product>> GetProductsByBasketIdAsync(int basketId);
+        Task<List<BasketProduct>> GetBasketIdsByProductIdAsync(int basketId);
         Task AddProductToBasketAsync(BasketProduct basket);
         Task<bool> RemoveProductFromBasketAsync(int basketId, int productId);
     }
