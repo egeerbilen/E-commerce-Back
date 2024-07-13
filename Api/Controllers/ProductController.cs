@@ -16,7 +16,7 @@ namespace API.Controllers
             _service = service;
         }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Seller")]
         [HttpGet]
         public async Task<IActionResult> GetProducts()
         {

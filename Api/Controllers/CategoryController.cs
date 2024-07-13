@@ -41,9 +41,9 @@ namespace API.Controllers
             return CreateActionResult(result);
         }
 
-        [HttpDelete]
         [ServiceFilter(typeof(NotFoundFilter<Category>))]
-        public async Task<IActionResult> DelteCategory(int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCategory(int id)
         {
             return CreateActionResult(await _service.RemoveAsync(id));
         }
