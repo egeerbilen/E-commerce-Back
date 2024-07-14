@@ -8,6 +8,7 @@ using Entity.Model;
 using Entity.Repositories;
 using Entity.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bussines.Services
 {
@@ -23,8 +24,8 @@ namespace Bussines.Services
         public async Task<CustomResponseDto<NoContentDto>> AddProductToBasketAsync(BasketProductDto basket)
         {
             var newDto = _mapper.Map<BasketProduct>(basket);
-            var isProductAvailable = await IsProductInBasketAsync(newDto.BasketId, newDto.ProductId);  
-            if (isProductAvailable.Data)  
+            var isProductAvailable = await IsProductInBasketAsync(newDto.BasketId, newDto.ProductId);
+            if (isProductAvailable.Data)
             {
                 return CustomResponseDto<NoContentDto>.Fail(StatusCodes.Status200OK, "The relevant product is already available in the basket");
             }
@@ -33,7 +34,6 @@ namespace Bussines.Services
 
             return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status200OK);
         }
-
 
         public async Task<CustomResponseDto<NoContentDto>> RemoveProductFromBasketAsync(int basketId, int productId)
         {
@@ -56,8 +56,29 @@ namespace Bussines.Services
 
         public async Task<CustomResponseDto<bool>> IsProductInBasketAsync(int basketId, int productId)
         {
-            var baskets = await _basketProductRepository.IsProductInBasketAsync(basketId, productId);
-            return CustomResponseDto<bool>.Success(StatusCodes.Status200OK, baskets);
+            var isInBasket = await _basketProductRepository.IsProductInBasketAsync(basketId, productId);
+            return CustomResponseDto<bool>.Success(StatusCodes.Status200OK, isInBasket);
         }
+
+        public async Task<CustomResponseDto<NoContentDto>> UpdateBasketIdsByProductIdAsync(BasketProductDto basket)
+        {
+            var existingBasketProduct = await _basketProductRepository.IsProductInBasketAsync(basket.BasketId, basket.ProductId);
+
+            if (!existingBasketProduct)
+            {
+                // Ürün sepet içerisinde değilse, ürünü eklemek için AddProductToBasketAsync metodunu çağır.
+                return await AddProductToBasketAsync(basket);
+            }
+
+            // Ürün sepet içerisindeyse, gelen NumberOfProducts değerini güncelle.
+            var newDto = _mapper.Map<BasketProduct>(basket);
+            newDto.NumberOfProducts = basket.NumberOfProducts;
+
+            await _basketProductRepository.UpdateBasketIdsByProductIdAsync(newDto);
+            await _unitOfWork.CommitAsync();
+
+            return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status200OK);
+        }
+
     }
 }

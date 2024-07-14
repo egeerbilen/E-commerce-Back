@@ -41,6 +41,7 @@ namespace DataAccess.Repositories
         {
             var userBaskets = await _dbSet
                 .Where(ufp => ufp.BasketId == basketId)
+                .Where(ufp => ufp.NumberOfProducts != 0)
                 .Include(ufp => ufp.Product)
                 .AsNoTracking()
                 .ToListAsync();
@@ -62,6 +63,23 @@ namespace DataAccess.Repositories
                 .ToListAsync();
 
             return basketsProducts;
+        }
+
+        public async Task UpdateProductInBasketAsync(BasketProduct basket)
+        {
+        }
+
+        public async Task UpdateBasketIdsByProductIdAsync(BasketProduct basket)
+        {
+            var existingBasketProduct = await _dbSet.FirstOrDefaultAsync(bp => bp.BasketId == basket.BasketId && bp.ProductId == basket.ProductId);
+
+            if (existingBasketProduct != null)
+            {
+                existingBasketProduct.NumberOfProducts = basket.NumberOfProducts;
+                _context.Entry(existingBasketProduct).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
+
         }
     }
 }

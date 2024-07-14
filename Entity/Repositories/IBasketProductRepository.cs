@@ -10,5 +10,6 @@ namespace Entity.Repositories
         Task<List<BasketProduct>> GetBasketIdsByProductIdAsync(int basketId);
         Task AddProductToBasketAsync(BasketProduct basket);
         Task<bool> RemoveProductFromBasketAsync(int basketId, int productId);
+        Task UpdateBasketIdsByProductIdAsync(BasketProduct basket);
     }
 }

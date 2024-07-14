@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class BasketProductController : CustomBaseController
     {
         private readonly IBasketProductService _basketProductService;
@@ -41,6 +41,13 @@ namespace Api.Controllers
         public async Task<IActionResult> DeleteBasketProduct(int userId, int productId)
         {
             var result = await _basketProductService.RemoveProductFromBasketAsync(userId, productId);
+            return CreateActionResult(result);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateBasketProduct([FromBody] BasketProductDto basket)
+        {
+            var result = await _basketProductService.UpdateBasketIdsByProductIdAsync(basket);
             return CreateActionResult(result);
         }
     }
