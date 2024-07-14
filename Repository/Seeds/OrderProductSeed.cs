@@ -12,27 +12,32 @@ namespace DataAccess.Seeds
                 new OrderProduct
                 {
                     OrderId = 1,
-                    ProductId = 1
+                    ProductId = 1,
+                    NumberOfProducts = 1,
                 },
                 new OrderProduct
                 {
                     OrderId = 1,
-                    ProductId = 2
+                    ProductId = 2,
+                    NumberOfProducts = 2,
                 },
                 new OrderProduct
                 {
                     OrderId = 2,
-                    ProductId = 1
+                    ProductId = 1,
+                    NumberOfProducts = 12,
                 },
                 new OrderProduct
                 {
                     OrderId = 2,
-                    ProductId = 3
+                    ProductId = 3,
+                    NumberOfProducts = 23,
                 },
                 new OrderProduct
                 {
                     OrderId = 3,
-                    ProductId = 2
+                    ProductId = 2,
+                    NumberOfProducts = 9
                 }
             );
         }

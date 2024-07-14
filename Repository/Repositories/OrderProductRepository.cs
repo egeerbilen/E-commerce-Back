@@ -7,16 +7,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Repository;
+using Repository.Repositories;
 
 namespace DataAccess.Repositories
 {
-    public class OrderProductRepository : IOrderProductRepository
+    public class OrderProductRepository : GenericRepository<OrderProduct>, IOrderProductRepository
     {
         private readonly AppDbContext _context;
 
-        public OrderProductRepository(AppDbContext context)
+        public OrderProductRepository(AppDbContext context) : base(context)
         {
-            _context = context;
         }
 
         public async Task<NoContentDto> CreateOrderProductAsync(List<OrderProduct> orderProducts)
