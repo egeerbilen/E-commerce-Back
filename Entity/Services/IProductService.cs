@@ -1,7 +1,5 @@
 ﻿using Core.DTOs;
-using Entity.DTOs;
 using Entity.Model;
-using NLayer.Core.DTOs;
 
 namespace Core.Services
 {
