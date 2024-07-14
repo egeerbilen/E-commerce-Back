@@ -8,6 +8,6 @@ namespace Entity.Repositories
     public interface IOrderProductRepository
     {
         Task<NoContentDto> CreateOrderProductAsync(List<OrderProduct> orderProducts);
-        Task<List<Product>> GetUserOrders(int userId);
+        Task<List<Order>> GetUserOrderProducts(int userId);
     }
 }

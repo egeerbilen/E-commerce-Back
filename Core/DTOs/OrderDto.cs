@@ -1,8 +1,8 @@
 ﻿
 namespace Core.DTOs
 {
-    public class OrderDto : BaseDto
+    public class OrderDto
     {
-        public int UserId { get; set; }
+        public List<OrderProductDto> OrderProducts { get; set; }
     }
 }

@@ -29,16 +29,14 @@ namespace DataAccess.Repositories
             return new NoContentDto();
         }
 
-        public async Task<List<Product>> GetUserOrders(int userId)
+        public async Task<List<Order>> GetUserOrderProducts(int userId)
         {
-
-            var userOrders = await _context.Orders
-                .Where(order => order.UserId == userId)
-                .AsNoTracking()
-                .ToListAsync();
-            throw new NotImplementedException();
-
-
+            return await _context.Orders
+                       .Where(order => order.UserId == userId)
+                       .Include(order => order.OrderProducts)
+                       .ThenInclude(op => op.Product)
+                       .ToListAsync();
         }
+
     }
 }

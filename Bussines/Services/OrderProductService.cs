@@ -31,7 +31,7 @@ namespace Business.Services
 
         public async Task<CustomResponseDto<List<OrderDto>>> GetUserOrders(int userId)
         {
-            var orders = await _orderProductRepository.GetUserOrders(userId);
+            var orders = await _orderProductRepository.GetUserOrderProducts(userId);
             var orderDtos = _mapper.Map<List<OrderDto>>(orders);
             return CustomResponseDto<List<OrderDto>>.Success(StatusCodes.Status200OK, orderDtos);
         }
