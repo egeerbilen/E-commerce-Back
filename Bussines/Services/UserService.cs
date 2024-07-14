@@ -96,7 +96,7 @@ namespace Bussines.Services
 
             if (user == null || PasswordHelper.HashPassword(dto.Password) != user.Password)
             {
-                return CustomResponseDto<string>.Fail(StatusCodes.Status401Unauthorized, "Email or Password is not correct");
+                return CustomResponseDto<string>.Fail(StatusCodes.Status403Forbidden, "Email or Password is not correct");
             }
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));

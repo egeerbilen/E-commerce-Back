@@ -27,7 +27,7 @@ namespace JwtInDotnetCore.Controllers
             {
                 jwtToken = await _userService.GenerateJwtTokenAsync(userLoginRequest);
                 if (jwtToken.Data == null) {
-                    return CreateActionResult(CustomResponseDto<string>.Fail(401, jwtToken.Errors));
+                    return CreateActionResult(CustomResponseDto<string>.Fail(StatusCodes.Status203NonAuthoritative, jwtToken.Errors));
                 }
 
                 var cacheEntryOptions = new MemoryCacheEntryOptions
