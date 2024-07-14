@@ -12,6 +12,15 @@ namespace DataAccess.Configurations
 
             builder.HasKey(o => o.Id);
 
+            builder.HasOne(o => o.User)
+                .WithMany(u => u.Orders)
+                .HasForeignKey(o => o.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasMany(o => o.OrderProducts)
+                .WithOne(op => op.Order)
+                .HasForeignKey(op => op.OrderId)
+                .OnDelete(DeleteBehavior.NoAction); // Döngüleri ve çoklu zincirleme yolları önlemek için
         }
     }
 }

@@ -12,30 +12,35 @@ namespace DataAccess.Seeds
                 new Order
                 {
                     Id = 1, 
+                    UserId = 1, 
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 },
                 new Order
                 {
-                    Id = 2, 
+                    Id = 2,
+                    UserId = 1,
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 },
                 new Order
                 {
-                    Id = 3, 
+                    Id = 3,
+                    UserId = 1,
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 },
                 new Order
                 {
-                    Id = 4, 
+                    Id = 4,
+                    UserId = 2,
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 },
                 new Order
                 {
-                    Id = 5, 
+                    Id = 5,
+                    UserId = 2,
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 }

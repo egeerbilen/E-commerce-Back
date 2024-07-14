@@ -13,5 +13,6 @@ namespace Entity.Model
         public ICollection<Product> Products{ get; set; }
         public ICollection<Favorite> Favorites { get; set; }
         public ICollection<Basket> Baskets{ get; set; }
+        public ICollection<Order> Orders{ get; set; }
     }
 }

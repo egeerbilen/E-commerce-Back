@@ -14,12 +14,14 @@ namespace DataAccess.Configurations
             builder
                 .HasOne(op => op.Order)
                 .WithMany(o => o.OrderProducts)
-                .HasForeignKey(op => op.OrderId);
+                .HasForeignKey(op => op.OrderId)
+                .OnDelete(DeleteBehavior.Cascade); // Döngüleri ve çoklu zincirleme yolları önlemek için
 
             builder
                 .HasOne(op => op.Product)
                 .WithMany(p => p.OrderProducts)
-                .HasForeignKey(op => op.ProductId);
+                .HasForeignKey(op => op.ProductId)
+                .OnDelete(DeleteBehavior.NoAction); // Döngüleri ve çoklu zincirleme yolları önlemek için
         }
     }
 }
