@@ -14,12 +14,15 @@ namespace Business.Services
     public class OrderProductService : GenericService<OrderProduct, OrderProductDto>, IOrderProductService
     {
         private readonly IOrderProductRepository _orderProductRepository;
+        private readonly IOrderRepository _orderRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public OrderProductService(IGenericRepository<OrderProduct> repository, IOrderProductRepository orderProductRepository, IUnitOfWork unitOfWork, IMapper mapper) : base(repository, unitOfWork, mapper)
+        public OrderProductService(IGenericRepository<OrderProduct> repository, IOrderProductRepository orderProductRepository,
+            IOrderRepository orderRepository,IUnitOfWork unitOfWork, IMapper mapper) : base(repository, unitOfWork, mapper)
         {
             _orderProductRepository = orderProductRepository;
+            _orderRepository = orderRepository;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }

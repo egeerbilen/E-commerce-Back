@@ -9,7 +9,7 @@ namespace DataAccess.Configurations
         public void Configure(EntityTypeBuilder<OrderProduct> builder)
         {
             builder.ToTable("OrdersProducts");
-            builder.HasKey(op => new { op.OrderId, op.ProductId });
+            builder.HasKey(op => op.Id);
 
             builder
                 .HasOne(op => op.Order)

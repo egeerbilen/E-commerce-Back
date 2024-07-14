@@ -39,6 +39,12 @@ namespace Api.Controllers
             return CreateActionResult(await _service.AddAsync(orderDto));
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CreateList(List<OrderDto> orderDto)
+        {
+            return CreateActionResult(await _service.AddRangeAsync(orderDto));
+        }
+
         [ServiceFilter(typeof(NotFoundFilter<Order>))]
         [HttpPut]
         public async Task<IActionResult> Update(OrderDto orderDto)
