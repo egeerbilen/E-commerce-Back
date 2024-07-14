@@ -35,6 +35,8 @@ namespace Service.Mapping
             CreateMap<Order, OrderDto>().ReverseMap();
             CreateMap<OrderProductDto, OrderProduct>().ReverseMap();
             CreateMap<OrderDto, Order>().ReverseMap();
+            CreateMap<OrderProduct, OrderProductDto>().ReverseMap();
+            CreateMap<OrderProduct, ProductDto>().ReverseMap();
         }
     }
 }

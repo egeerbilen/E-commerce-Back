@@ -22,23 +22,23 @@ namespace DataAccess.Repositories
         public async Task<NoContentDto> CreateOrderProductAsync(List<OrderProduct> orderProducts)
         {
             // Yeni OrderProduct öğelerini veritabanına ekleme
-            await _context.OrderProducts.AddRangeAsync(orderProducts);
+            await _context.OrdersProducts.AddRangeAsync(orderProducts);
             await _context.SaveChangesAsync();
 
             // İşlemin başarılı olduğunu belirtmek için NoContentDto döndürüyoruz
             return new NoContentDto();
         }
 
-        public async Task<List<Order>> GetUserOrders(int userId)
+        public async Task<List<Product>> GetUserOrders(int userId)
         {
-            // Belirtilen kullanıcıya ait siparişleri getirme
-            var orders = await _context.Orders
-                .Include(o => o.OrderProducts)
-                .ThenInclude(op => op.Product)
-                .Where(o => o.UserId == userId)
-                .ToListAsync();
 
-            return orders;
+            var userOrders = await _context.Orders
+                .Where(order => order.UserId == userId)
+                .AsNoTracking()
+                .ToListAsync();
+            throw new NotImplementedException();
+
+
         }
     }
 }

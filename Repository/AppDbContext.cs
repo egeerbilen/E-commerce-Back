@@ -28,7 +28,7 @@ namespace Repository
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderProduct> OrderProducts { get; set; }
+        public DbSet<OrderProduct> OrdersProducts { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
