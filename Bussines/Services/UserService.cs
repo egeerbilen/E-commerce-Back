@@ -3,6 +3,7 @@ using Core;
 using Core.DTOs;
 using Core.Repositories;
 using Core.UnitOfWorks;
+using DataAccess.Repositories;
 using Entity.DTOs;
 using Entity.Model;
 using Entity.Repositories;
@@ -27,22 +28,34 @@ namespace Bussines.Services
         private readonly IBasketRepository _basketRepository;
         private readonly IFavoritesRepository _favoritesRepository;
         private readonly IRoleRepository _roleRepository;
+        private readonly IUserRoleRepository _userRoleRepository;
         public UserService(IGenericRepository<User> repository, IRoleRepository roleRepository, IConfiguration config, IFavoritesRepository favoritesRepository, IBasketRepository basketRepository,
-        IUnitOfWork unitOfWork, IMapper mapper, IUserRepository userRepository, IProductRepository productRepository) : base(repository, unitOfWork, mapper)
+                           IUserRoleRepository userRoleRepository, IUnitOfWork unitOfWork, IMapper mapper, IUserRepository userRepository, IProductRepository productRepository) : base(repository, unitOfWork, mapper)
         {
             _userRepository = userRepository;
             _roleRepository = roleRepository;
             _basketRepository = basketRepository;
             _favoritesRepository = favoritesRepository;
             _productRepository = productRepository;
+            _userRoleRepository = userRoleRepository;
             _config = config;
         }
 
         public async Task<CustomResponseDto<BaseDto>> AddUserAsync(UserCreateDto dto)
         {
+            var userLoginDto = _mapper.Map<UserLoginRequestDto>(dto);
+            var user = await _userRepository.FindUserByEmailWithRolesAsync(userLoginDto);
+
+            if (user != null)
+            {
+                return CustomResponseDto<BaseDto>.Fail(StatusCodes.Status400BadRequest, "Email is available in system");
+            }
+
             dto.Password = PasswordHelper.HashPassword(dto.Password);
             var newEntity = _mapper.Map<User>(dto);
             await _userRepository.AddAsync(newEntity);
+            await _unitOfWork.CommitAsync();
+            await _userRoleRepository.AddUserRoleAsync(newEntity.Id, 4); // 4 read yetkisi şuanlık statik ileride bir dosya yapılıp oradan alınır seed e de ordan yazdırır sın
             await _unitOfWork.CommitAsync();
             var newDto = _mapper.Map<BaseDto>(newEntity);
             return CustomResponseDto<BaseDto>.Success(StatusCodes.Status200OK, newDto);

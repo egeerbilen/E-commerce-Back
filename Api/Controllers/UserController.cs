@@ -11,7 +11,6 @@ using NLayer.API.Filters;
 
 namespace Api.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class UserController : CustomBaseController
     {
         private readonly IUserService _service;
@@ -21,12 +20,14 @@ namespace Api.Controllers
             _service = service;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             return CreateActionResult(await _service.GetAllAsync());
         }
 
+        [Authorize]
         [ServiceFilter(typeof(NotFoundFilter<User>))]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
@@ -40,6 +41,7 @@ namespace Api.Controllers
             return CreateActionResult(await _service.AddUserAsync(userCreateDto));
         }
 
+        [Authorize]
         [ServiceFilter(typeof(NotFoundFilter<User>))]
         [HttpPut]
         public async Task<IActionResult> Update(UserUpdateDto userUpdateDto)
@@ -47,7 +49,7 @@ namespace Api.Controllers
             return CreateActionResult(await _service.UpdateUserAsync(userUpdateDto));
         }
 
-
+        [Authorize]
         [ServiceFilter(typeof(NotFoundFilter<User>))]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)

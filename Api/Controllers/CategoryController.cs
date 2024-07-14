@@ -16,7 +16,7 @@ namespace API.Controllers
             _service = service;
         }
 
-        [Authorize(Roles = "Admin, Read")]
+        //[AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetCategories()
         {

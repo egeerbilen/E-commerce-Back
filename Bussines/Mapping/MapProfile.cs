@@ -3,6 +3,7 @@ using Core.DTOs;
 
 using Entity.DTOs;
 using Entity.Model;
+using JwtInDotnetCore;
 using NLayer.Core.DTOs;
 
 namespace Service.Mapping
@@ -30,6 +31,8 @@ namespace Service.Mapping
             CreateMap<Favorite, FavoritesDto>().ReverseMap();
             CreateMap<BasketProductDto, BasketProduct>().ReverseMap();
             CreateMap<Role, RoleDto>().ReverseMap();
+            CreateMap<UserCreateDto, UserLoginRequestDto>().ReverseMap();
+
         }
     }
 }
