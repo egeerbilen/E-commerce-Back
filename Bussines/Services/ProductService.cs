@@ -73,7 +73,8 @@ namespace Service.Services
 
             foreach (var basketProduct in basketProducts)
             {
-                await _basketProductRepository.RemoveProductFromBasketAsync(basketProduct.BasketId, productId);
+                basketProduct.NumberOfProducts = 0;
+                await _basketProductRepository.UpdateBasketIdsByProductIdAsync(basketProduct);
                 await _unitOfWork.CommitAsync();
             }
 

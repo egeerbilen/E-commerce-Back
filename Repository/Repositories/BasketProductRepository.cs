@@ -23,20 +23,6 @@ namespace DataAccess.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> RemoveProductFromBasketAsync(int basketId, int productId)
-        {
-            var userBasketProduct = await _dbSet.FirstOrDefaultAsync(u => u.BasketId == basketId && u.ProductId == productId);
-
-            if (userBasketProduct != null)
-            {
-                _dbSet.Remove(userBasketProduct);
-                await _context.SaveChangesAsync();
-                return true;
-            }
-
-            return false;
-        }
-
         public async Task<List<Product>> GetProductsByBasketIdAsync(int basketId)
         {
             var userBaskets = await _dbSet
@@ -49,11 +35,11 @@ namespace DataAccess.Repositories
             return userBaskets.Select(ufp => ufp.Product).ToList();
         }
 
-        public async Task<bool> IsProductInBasketAsync(int userId, int productId)
+        public async Task<BasketProduct> IsProductInBasketAsync(int basketId, int productId)
         {
             return await _dbSet
-                .Where(x => x.BasketId == userId && x.ProductId == productId)
-                .AnyAsync();
+                .Where(x => x.BasketId == basketId && x.ProductId == productId)
+                .FirstOrDefaultAsync();
         }
         public async Task<List<BasketProduct>> GetBasketIdsByProductIdAsync(int productId)
         {
