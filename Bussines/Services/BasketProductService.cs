@@ -35,11 +35,21 @@ namespace Bussines.Services
             return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status200OK);
         }
 
-        public async Task<CustomResponseDto<List<ProductDto>>> GetProductsByBasketIdAsync(int basketId)
+        public async Task<CustomResponseDto<List<ProductWithQuantityDto>>> GetProductsByBasketIdAsync(int basketId)
         {
-            var baskets = await _basketProductRepository.GetProductsByBasketIdAsync(basketId);
-            var dtos = _mapper.Map<List<ProductDto>>(baskets);
-            return CustomResponseDto<List<ProductDto>>.Success(StatusCodes.Status200OK, dtos);
+            var basketProducts = await _basketProductRepository.GetProductsByBasketIdAsync(basketId);
+            var productDtos = new List<ProductWithQuantityDto>();
+
+            foreach (var product in basketProducts)
+            {
+                var productInBasket = await _basketProductRepository.IsProductInBasketAsync(basketId, product.Id);
+                var productDto = _mapper.Map<ProductWithQuantityDto>(product);
+                productDto.NumberOfProducts = productInBasket.NumberOfProducts;
+                productDtos.Add(productDto);
+            }
+
+            return CustomResponseDto<List<ProductWithQuantityDto>>.Success(StatusCodes.Status200OK, productDtos);
+
         }
 
         public async Task<CustomResponseDto<BasketProduct>> IsProductInBasketAsync(int basketId, int productId)

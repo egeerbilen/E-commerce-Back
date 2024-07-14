@@ -37,6 +37,10 @@ namespace Service.Mapping
             CreateMap<OrderDto, Order>().ReverseMap();
             CreateMap<OrderProduct, OrderProductDto>().ReverseMap();
             CreateMap<OrderProduct, ProductDto>().ReverseMap();
+
+            CreateMap<Product, ProductWithQuantityDto>()
+                .ForMember(dest => dest.NumberOfProducts, opt => opt.Ignore()); // Eğer NumberOfProducts otomatik olarak ayarlanmayacaksa.
+
         }
     }
 }
