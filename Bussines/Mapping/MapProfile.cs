@@ -32,7 +32,7 @@ namespace Service.Mapping
             CreateMap<BasketProductDto, BasketProduct>().ReverseMap();
             CreateMap<Role, RoleDto>().ReverseMap();
             CreateMap<UserCreateDto, UserLoginRequestDto>().ReverseMap();
-
+            CreateMap<Order, OrderDto>().ReverseMap(); 
         }
     }
 }

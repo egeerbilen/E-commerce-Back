@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Api.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class OrderController : CustomBaseController
     {
         private readonly IOrderService _service;
