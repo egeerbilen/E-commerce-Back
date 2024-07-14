@@ -11,9 +11,9 @@ namespace DataAccess.Configurations
 
             builder.ToTable("Baskets");
 
-            builder.HasKey(b => b.UserId);
+            builder.HasKey(b => b.Id);
 
-            builder.Property(b => b.UserId).IsRequired();
+            builder.Property(b => b.Id).IsRequired();
 
             builder.HasOne(b => b.User)
                    .WithMany(u => u.Baskets)
