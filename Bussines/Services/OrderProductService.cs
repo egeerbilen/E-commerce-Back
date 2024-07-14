@@ -36,11 +36,11 @@ namespace Business.Services
             return CustomResponseDto<List<OrderDto>>.Success(StatusCodes.Status200OK, orderDtos);
         }
 
-        public async Task<CustomResponseDto<List<Product>>> GetOrderProductsAsync(int orderId)
+        public async Task<CustomResponseDto<List<ProductDto>>> GetOrderProductsAsync(int orderId)
         {
             var orders = await _orderProductRepository.GetOrderProductsAsync(orderId);
-            var orderDtos = _mapper.Map<List<Product>>(orders);
-            return CustomResponseDto<List<Product>>.Success(StatusCodes.Status200OK, orderDtos);
+            var orderDtos = _mapper.Map<List<ProductDto>>(orders);
+            return CustomResponseDto<List<ProductDto>>.Success(StatusCodes.Status200OK, orderDtos);
         }
     }
 }
