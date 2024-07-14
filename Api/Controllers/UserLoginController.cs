@@ -3,8 +3,6 @@ using Core.DTOs;
 using Entity.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using System;
-using System.Threading.Tasks;
 
 namespace JwtInDotnetCore.Controllers
 {

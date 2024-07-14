@@ -3,6 +3,7 @@ using Core.DTOs;
 using Entity.DTOs;
 using Entity.Model;
 using Entity.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NLayer.API.Filters;
 
@@ -10,6 +11,7 @@ using NLayer.API.Filters;
 
 namespace Api.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UserController : CustomBaseController
     {
         private readonly IUserService _service;

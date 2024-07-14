@@ -1,13 +1,14 @@
 ﻿using API.Controllers;
-using Autofac.Core;
 using Entity.DTOs;
 using Entity.Model;
 using Entity.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NLayer.API.Filters;
 
 namespace YourNamespace.Controllers
 {
+    [Authorize]
     public class FavoriteController : CustomBaseController
     {
         private readonly IFavoritesService _userFavoritesServices;

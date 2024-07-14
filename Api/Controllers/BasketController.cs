@@ -7,6 +7,7 @@ using NLayer.API.Filters;
 
 namespace Api.Controllers
 {
+    [Authorize]
     public class BasketController : CustomBaseController
     {
         private readonly IBasketService _userBasketServices;
@@ -16,7 +17,6 @@ namespace Api.Controllers
             _userBasketServices = basketService;
         }
 
-        [Authorize(Roles = "Seller")]
         [ServiceFilter(typeof(NotFoundFilter<User>))]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(int id)

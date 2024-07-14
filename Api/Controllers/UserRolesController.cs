@@ -1,11 +1,11 @@
 ﻿using API.Controllers;
-using Core.DTOs;
 using Entity.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace Api.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UserRolesController : CustomBaseController
     {
         private readonly IUserRoleService _userRoleService;

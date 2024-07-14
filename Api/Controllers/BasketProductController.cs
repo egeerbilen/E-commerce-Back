@@ -1,11 +1,12 @@
 ﻿using API.Controllers;
 using Core.DTOs;
-using Entity.DTOs;
 using Entity.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    [Authorize]
     public class BasketProductController : CustomBaseController
     {
         private readonly IBasketProductService _basketProductService;

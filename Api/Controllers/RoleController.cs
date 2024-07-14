@@ -3,13 +3,15 @@ using Core.DTOs;
 using Entity.DTOs;
 using Entity.Model;
 using Entity.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NLayer.API.Filters;
 using System.Threading.Tasks;
 
 namespace Api.Controllers
 {
-    [ApiController]
+
+    [Authorize(Roles = "Admin")]
     public class RoleController : CustomBaseController
     {
         private readonly IRoleService _service;
