@@ -4,5 +4,6 @@
     {
         public int BasketId { get; set; }
         public int ProductId { get; set; }
+        public int NumberOfProducts { get; set; }
     }
 }
