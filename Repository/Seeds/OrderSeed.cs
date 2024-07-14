@@ -14,6 +14,7 @@ namespace DataAccess.Seeds
                     Id = 1, 
                     UserId = 1, 
                     CreatedDate = DateTime.Now,
+                    TotalOrders = 2,
                     IsDeleted = false
                 },
                 new Order
@@ -21,6 +22,7 @@ namespace DataAccess.Seeds
                     Id = 2,
                     UserId = 1,
                     CreatedDate = DateTime.Now,
+                    TotalOrders = 2,
                     IsDeleted = false
                 },
                 new Order
@@ -28,6 +30,7 @@ namespace DataAccess.Seeds
                     Id = 3,
                     UserId = 1,
                     CreatedDate = DateTime.Now,
+                    TotalOrders = 2,
                     IsDeleted = false
                 },
                 new Order
@@ -35,6 +38,7 @@ namespace DataAccess.Seeds
                     Id = 4,
                     UserId = 2,
                     CreatedDate = DateTime.Now,
+                    TotalOrders = 2,
                     IsDeleted = false
                 },
                 new Order
@@ -42,6 +46,7 @@ namespace DataAccess.Seeds
                     Id = 5,
                     UserId = 2,
                     CreatedDate = DateTime.Now,
+                    TotalOrders = 2,
                     IsDeleted = false
                 }
             );
