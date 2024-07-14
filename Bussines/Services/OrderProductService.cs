@@ -29,11 +29,18 @@ namespace Business.Services
             return CustomResponseDto<NoContentDto>.Success(StatusCodes.Status200OK);
         }
 
-        public async Task<CustomResponseDto<List<OrderDto>>> GetUserOrders(int userId)
+        public async Task<CustomResponseDto<List<OrderDto>>> GetUserOrdersAsync(int userId)
         {
-            var orders = await _orderProductRepository.GetUserOrderProducts(userId);
+            var orders = await _orderProductRepository.GetUserOrderProductsAsync(userId);
             var orderDtos = _mapper.Map<List<OrderDto>>(orders);
             return CustomResponseDto<List<OrderDto>>.Success(StatusCodes.Status200OK, orderDtos);
+        }
+
+        public async Task<CustomResponseDto<List<Product>>> GetOrderProductsAsync(int orderId)
+        {
+            var orders = await _orderProductRepository.GetOrderProductsAsync(orderId);
+            var orderDtos = _mapper.Map<List<Product>>(orders);
+            return CustomResponseDto<List<Product>>.Success(StatusCodes.Status200OK, orderDtos);
         }
     }
 }

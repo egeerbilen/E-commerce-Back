@@ -29,7 +29,18 @@ namespace DataAccess.Repositories
             return new NoContentDto();
         }
 
-        public async Task<List<Order>> GetUserOrderProducts(int userId)
+        public async Task<List<Product>> GetOrderProductsAsync(int orderId)
+        {
+            var orderProducts = await _context.OrdersProducts
+                .Where(op => op.OrderId == orderId)
+                .Include(op => op.Product) // İlişkili Product nesnesini dahil ediyoruz
+                .Select(op => op.Product) // Sadece Product nesnesini seçiyoruz
+                .ToListAsync();
+
+            return orderProducts;
+        }
+
+        public async Task<List<Order>> GetUserOrderProductsAsync(int userId)
         {
             return await _context.Orders
                        .Where(order => order.UserId == userId)

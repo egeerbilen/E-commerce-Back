@@ -26,7 +26,14 @@ namespace Api.Controllers
         [HttpGet("User/{userId}")]
         public async Task<IActionResult> GetUserOrders(int userId)
         {
-            var result = await _orderProductService.GetUserOrders(userId);
+            var result = await _orderProductService.GetUserOrdersAsync(userId);
+            return CreateActionResult(result);
+        }
+
+        [HttpGet("Order/{orderId}")]
+        public async Task<IActionResult> GetOrderProducts(int orderId)
+        {
+            var result = await _orderProductService.GetOrderProductsAsync(orderId);
             return CreateActionResult(result);
         }
     }
