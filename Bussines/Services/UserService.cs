@@ -93,6 +93,7 @@ namespace Bussines.Services
         public async Task<CustomResponseDto<string>> GenerateJwtTokenAsync(UserLoginRequestDto dto)
         {
             var user = await _userRepository.FindUserByEmailWithRolesAsync(dto);
+            var basket = await _basketRepository.GetByIdAsync(user.Id);
 
             if (user == null || PasswordHelper.HashPassword(dto.Password) != user.Password)
             {
@@ -107,7 +108,8 @@ namespace Bussines.Services
                 new Claim("email", user.Email),
                 new Claim("firstName", user.FirstName),
                 new Claim("lastName", user.LastName),
-                new Claim("userId", user.Id.ToString())
+                new Claim("userId", user.Id.ToString()),
+                new Claim("basketId", basket.Id.ToString())
             };
 
             foreach (var userRole in user.UserRoles)
