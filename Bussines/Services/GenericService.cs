@@ -21,24 +21,24 @@ namespace Service.Services
             _repository = repository;
         }
 
-        public async Task<CustomResponseDto<BaseDto>> AddAsync(Dto dto)
+        public async Task<CustomResponseDto<Dto>> AddAsync(Dto dto)
         {
             Entity newEntity = _mapper.Map<Entity>(dto);
             await _repository.AddAsync(newEntity);
             await _unitOfWork.CommitAsync(); // Unitofwork üzerinden save change metodunu çağırıyoruz
-            var newDto = _mapper.Map<BaseDto>(dto);
+            var newDto = _mapper.Map<Dto>(newEntity);
 
-            return CustomResponseDto<BaseDto>.Success(StatusCodes.Status200OK, newDto);
+            return CustomResponseDto<Dto>.Success(StatusCodes.Status200OK, newDto);
         }
 
-        public async Task<CustomResponseDto<IEnumerable<BaseDto>>> AddRangeAsync(IEnumerable<Dto> dtos) // servis tarafında liste tipinde bir arama sıralama filtreleme gibi işlemler olabileceği için Ienumerable kullandık
+        public async Task<CustomResponseDto<IEnumerable<Dto>>> AddRangeAsync(IEnumerable<Dto> dtos) // servis tarafında liste tipinde bir arama sıralama filtreleme gibi işlemler olabileceği için Ienumerable kullandık
         {
             var newEntities = _mapper.Map<IEnumerable<Entity>>(dtos);
             await _repository.AddRangeAsync(newEntities);
             await _unitOfWork.CommitAsync();
-            var newDtos = _mapper.Map<IEnumerable<BaseDto>>(dtos);
+            var newDtos = _mapper.Map<IEnumerable<Dto>>(newEntities);
 
-            return CustomResponseDto<IEnumerable<BaseDto>>.Success(StatusCodes.Status200OK, newDtos);
+            return CustomResponseDto<IEnumerable<Dto>>.Success(StatusCodes.Status200OK, newDtos);
         }
 
         public async Task<CustomResponseDto<bool>> AnyAsync(Expression<Func<Entity, bool>> expression)

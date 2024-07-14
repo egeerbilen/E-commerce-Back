@@ -1,6 +1,7 @@
 ﻿using API.Controllers;
 using Entity.Model;
 using Entity.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NLayer.API.Filters;
 
@@ -15,6 +16,7 @@ namespace Api.Controllers
             _userBasketServices = basketService;
         }
 
+        [Authorize(Roles = "Seller")]
         [ServiceFilter(typeof(NotFoundFilter<User>))]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(int id)

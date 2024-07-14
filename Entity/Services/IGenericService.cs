@@ -19,8 +19,8 @@ namespace Core.Services
                                                                                                    // Özellikle LINQ sorgularında, Expression yapısı, sorgunun SQL veya diğer sorgu dillerine çevrilmesini sağlar.
                                                                                                    // Bu sayede sorgu ifadeleri çalışma zamanında yürütülebilir ve çeşitli optimizasyonlar yapılabilir.
         Task<CustomResponseDto<bool>> AnyAsync(Expression<Func<Entity, bool>> expression);// productRepository.where(x=>x.id>5) bu şekilde bir sorgu yazdığımızda dönüş tipi bool olacak ama async olarak dönmesini istediğimiz için AnyAsync isminni verdik
-        Task<CustomResponseDto<BaseDto>> AddAsync(Dto dto); // BaseDto olmazda  Dto ola bilir ama burada ben kullanıcı zaten verileri gönderdiği için sadece BaseDto değerlerini göndermeyi uygun gördüm zaten diğerleri kullanıcıdan geldi
-        Task<CustomResponseDto<IEnumerable<BaseDto>>> AddRangeAsync(IEnumerable<Dto> dtos);// birden fazla kaydede bilirim aldığımız nokta -> IEnumerable alıyoruz List almıyoruz çünkü mümkün olduğunca soyut nesneler ile çalışmak önemli interface veya abstract gibi
+        Task<CustomResponseDto<Dto>> AddAsync(Dto dto); // BaseDto olmazda  Dto ola bilir ama burada ben kullanıcı zaten verileri gönderdiği için sadece BaseDto değerlerini göndermeyi uygun gördüm zaten diğerleri kullanıcıdan geldi
+        Task<CustomResponseDto<IEnumerable<Dto>>> AddRangeAsync(IEnumerable<Dto> dtos);// birden fazla kaydede bilirim aldığımız nokta -> IEnumerable alıyoruz List almıyoruz çünkü mümkün olduğunca soyut nesneler ile çalışmak önemli interface veya abstract gibi
         // new anahtar sözcüğü kullanarak nesne örneği alamayız. soyutnesneleri istediğim bir tipe dönüştüre bilirim IEnumerable interface ini implement etmiş bir class a caste yapa bilirim
         Task<CustomResponseDto<NoContentDto>> UpdateAsync(Dto dto);// task diyerek async ye gönüştürüyoruz
         Task<CustomResponseDto<NoContentDto>> RemoveAsync(int id);
