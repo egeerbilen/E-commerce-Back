@@ -21,7 +21,7 @@ namespace DataAccess.Repositories
 
         public async Task<List<User>> GetAllUsersWithRolesAsync()
         {
-            return await _context.Users.Include(x => x.UserRoles).ThenInclude(ur => ur.Role).AsNoTracking().ToListAsync();
+            return await _context.Users.Include(x => x.UserRoles).ThenInclude(ur => ur.Role).AsNoTracking().Where(u => !u.IsDeleted).ToListAsync();
         }
 
     }
