@@ -1,5 +1,5 @@
-// .Net6 da Startup dosyasý ortadan kalktý starup dosyasýndaki kodlar program.cs dosyasýna geldi
-// ibr þey global ise Program.cs dosyasý içerisine yazmamýz gerekiyor
+// .Net6 da Startup dosyasï¿½ ortadan kalktï¿½ starup dosyasï¿½ndaki kodlar program.cs dosyasï¿½na geldi
+// ibr ï¿½ey global ise Program.cs dosyasï¿½ iï¿½erisine yazmamï¿½z gerekiyor
 
 using AspNetCoreRateLimit;
 using Autofac;
@@ -18,6 +18,8 @@ using Serilog;
 using Service.Mapping;
 using System.Reflection;
 using System.Text;
+using Microsoft.AspNetCore.SignalR;
+using Api.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -83,6 +85,7 @@ builder.Services.AddCors(options =>
 });
 // CORS configuration ends here
 
+builder.Services.AddSignalR();
 
 //bizim bu iþ için kendi filtýr ýmýz var diyoruz
 //builder.Services.Configure<ApiBehaviorOptions>(options =>
@@ -95,7 +98,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 // Cache eklemek istiyorsan aþaðýdaki commenti aç
 builder.Services.AddMemoryCache();
-
 
 // Configure Rate Limiting
 builder.Services.Configure<IpRateLimitOptions>(options =>
@@ -125,9 +127,7 @@ builder.Services.AddInMemoryRateLimiting();
 // Filtreleme iþlemlarimizi burada yaptýk
 builder.Services.AddScoped(typeof(NotFoundFilter<>)); // Generic olduðu için typeof ile içine giriyorum NotFoundFilter diyoruz generic olduðu içide <> kapadýk
 
-
 builder.Services.AddAutoMapper(typeof(MapProfile));
-
 
 builder.Services.AddDbContext<AppDbContext>(x =>
 {
@@ -152,7 +152,6 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerB
 // update-database
 // Drop-Database ->table sil
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -168,5 +167,13 @@ app.UseHttpsRedirection(); // https yönledirmesi
 app.UseMiddleware<LowercaseResponseMiddleware>();
 app.UseCustomException(); // bu bizim eklediðimiz hata katmaný bu hata katmanýnýn üst tarafta olmasý önemli
 app.UseIpRateLimiting();
-app.MapControllers();
+app.UseRouting();
+
+// SignalR hub'ý burada yapýlandýrýn
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    endpoints.MapHub<ChatHub>("/chatHub");
+});
+
 app.Run();
