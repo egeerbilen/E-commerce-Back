@@ -28,8 +28,7 @@ namespace Api.Controllers
         }
 
 
-        //[Authorize(Roles = "SuperUser")]
-        [AllowAnonymous]
+        [Authorize(Roles = "SuperUser")]
         [HttpGet]
         public async Task<IActionResult> GetAllUsersWithRoles()
         {

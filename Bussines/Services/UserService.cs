@@ -57,6 +57,16 @@ namespace Bussines.Services
             await _unitOfWork.CommitAsync();
             await _userRoleRepository.AddUserRoleAsync(newEntity.Id, 6); // 4 read yetkisi şuanlık statik ileride bir dosya yapılıp oradan alınır seed e de ordan yazdırır sın
             await _unitOfWork.CommitAsync();
+
+            // Yeni sepet oluştur ve kullanıcı ile ilişkilendir
+            var newBasket = new Basket
+            {
+                UserId = newEntity.Id,
+                User = newEntity
+            };
+            await _basketRepository.AddAsync(newBasket);
+            await _unitOfWork.CommitAsync();
+
             var newDto = _mapper.Map<BaseDto>(newEntity);
             return CustomResponseDto<BaseDto>.Success(StatusCodes.Status200OK, newDto);
         }
