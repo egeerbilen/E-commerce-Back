@@ -15,15 +15,15 @@ namespace Api.Controllers
             _userRoleService = userRoleService;
         }
 
-        [HttpPost()]
-        public async Task<IActionResult> AddUserRoleAsync([FromQuery] int userId, [FromQuery] int roleId)
+        [HttpPost("userId/{userId}/roleId/{roleId}")]
+        public async Task<IActionResult> AddUserRoleAsync(int userId, int roleId)
         {
             var response = await _userRoleService.AddUserRoleAsync(userId, roleId);
             return CreateActionResult(response);
         }
 
-        [HttpDelete()]
-        public async Task<IActionResult> RemoveUserRoleAsync([FromQuery] int userId, [FromQuery] int roleId)
+        [HttpDelete("userId/{userId}/roleId/{roleId}")]
+        public async Task<IActionResult> RemoveUserRoleAsync(int userId, int roleId)
         {
             var response = await _userRoleService.RemoveUserRoleAsync(userId, roleId);
             return CreateActionResult(response);
