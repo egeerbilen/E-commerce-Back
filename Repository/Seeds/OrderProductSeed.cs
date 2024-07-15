@@ -53,52 +53,7 @@ namespace DataAccess.Seeds
                     NumberOfProducts = 9,
                     CreatedDate = DateTime.UtcNow,
                     IsDeleted = false
-                },
-                new OrderProduct
-                {
-                    Id = 6,
-                    OrderId = 3,
-                    ProductId = 3,
-                    NumberOfProducts = 5,
-                    CreatedDate = DateTime.UtcNow,
-                    IsDeleted = false
-                },
-                new OrderProduct
-                {
-                    Id = 7,
-                    OrderId = 4,
-                    ProductId = 1,
-                    NumberOfProducts = 10,
-                    CreatedDate = DateTime.UtcNow,
-                    IsDeleted = false
-                },
-                new OrderProduct
-                {
-                    Id = 8,
-                    OrderId = 4,
-                    ProductId = 2,
-                    NumberOfProducts = 4,
-                    CreatedDate = DateTime.UtcNow,
-                    IsDeleted = false
-                },
-                new OrderProduct
-                {
-                    Id = 9,
-                    OrderId = 5,
-                    ProductId = 3,
-                    NumberOfProducts = 7,
-                    CreatedDate = DateTime.UtcNow,
-                    IsDeleted = false
-                },
-                new OrderProduct
-                {
-                    Id = 10,
-                    OrderId = 5,
-                    ProductId = 1,
-                    NumberOfProducts = 15,
-                    CreatedDate = DateTime.UtcNow,
-                    IsDeleted = false
-                }
+                }                
             );
         }
     }

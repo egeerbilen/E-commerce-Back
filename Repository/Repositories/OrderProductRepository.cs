@@ -29,7 +29,7 @@ namespace DataAccess.Repositories
         public async Task<List<Product>> GetOrderProductsAsync(int orderId)
         {
             var orderProducts = await _context.OrdersProducts
-                .Where(op => op.OrderId == orderId)
+                .Where(op => op.Id == orderId)
                 .Include(op => op.Product) // İlişkili Product nesnesini dahil ediyoruz
                 .Select(op => op.Product) // Sadece Product nesnesini seçiyoruz
                 .ToListAsync();
