@@ -55,7 +55,7 @@ namespace Bussines.Services
             var newEntity = _mapper.Map<User>(dto);
             await _userRepository.AddAsync(newEntity);
             await _unitOfWork.CommitAsync();
-            await _userRoleRepository.AddUserRoleAsync(newEntity.Id, 4); // 4 read yetkisi şuanlık statik ileride bir dosya yapılıp oradan alınır seed e de ordan yazdırır sın
+            await _userRoleRepository.AddUserRoleAsync(newEntity.Id, 6); // 4 read yetkisi şuanlık statik ileride bir dosya yapılıp oradan alınır seed e de ordan yazdırır sın
             await _unitOfWork.CommitAsync();
             var newDto = _mapper.Map<BaseDto>(newEntity);
             return CustomResponseDto<BaseDto>.Success(StatusCodes.Status200OK, newDto);

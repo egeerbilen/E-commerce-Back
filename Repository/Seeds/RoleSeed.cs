@@ -12,34 +12,48 @@ namespace Repository.Seeds
                 new Role
                 {
                     Id = 1,
-                    RoleName = "Admin",
+                    RoleName = "SuperUser",
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 },
                 new Role
                 {
                     Id = 2,
-                    RoleName = "Create",
+                    RoleName = "Admin",
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 },
                 new Role
                 {
                     Id = 3,
-                    RoleName = "Update",
+                    RoleName = "User",
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 },
                 new Role
                 {
                     Id = 4,
-                    RoleName = "Read",
+                    RoleName = "Create",
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 },
                 new Role
                 {
                     Id = 5,
+                    RoleName = "Update",
+                    CreatedDate = DateTime.Now,
+                    IsDeleted = false
+                },
+                new Role
+                {
+                    Id = 6,
+                    RoleName = "Read",
+                    CreatedDate = DateTime.Now,
+                    IsDeleted = false
+                },
+                new Role
+                {
+                    Id = 7,
                     RoleName = "Delete",
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
