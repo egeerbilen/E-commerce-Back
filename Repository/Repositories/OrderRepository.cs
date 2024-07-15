@@ -11,5 +11,12 @@ namespace DataAccess.Repositories
         public OrderRepository(AppDbContext context) : base(context)
         {
         }
+
+        public async Task<List<int>> SaveAndReturnIdsAsync(List<Order> orders)
+        {
+            await _context.Set<Order>().AddRangeAsync(orders);
+            await _context.SaveChangesAsync();
+            return orders.Select(order => order.Id).ToList();
+        }
     }
 }

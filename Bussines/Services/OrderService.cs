@@ -17,5 +17,13 @@ namespace Bussines.Services
         {
             _orderRepository = orderRepository;
         }
+
+
+        public async Task<CustomResponseDto<List<int>>> SaveOrdersAndReturnIdsAsync(List<OrderDto> orderDtos)
+        {
+            var orders = _mapper.Map<List<Order>>(orderDtos);
+            var ids = await _orderRepository.SaveAndReturnIdsAsync(orders);
+            return CustomResponseDto<List<int>>.Success(200, ids);
+        }
     }
 }

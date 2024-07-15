@@ -8,5 +8,7 @@ namespace Entity.Services
 {
     public interface IOrderService : IGenericService<Order, OrderDto>
     {
+        Task<CustomResponseDto<List<int>>> SaveOrdersAndReturnIdsAsync(List<OrderDto> orderDtos);
+
     }
 }

@@ -13,8 +13,6 @@ namespace DataAccess.Repositories
 {
     public class OrderProductRepository : GenericRepository<OrderProduct>, IOrderProductRepository
     {
-        private readonly AppDbContext _context;
-
         public OrderProductRepository(AppDbContext context) : base(context)
         {
         }
@@ -25,7 +23,6 @@ namespace DataAccess.Repositories
             await _context.OrdersProducts.AddRangeAsync(orderProducts);
             await _context.SaveChangesAsync();
 
-            // İşlemin başarılı olduğunu belirtmek için NoContentDto döndürüyoruz
             return new NoContentDto();
         }
 

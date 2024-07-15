@@ -6,6 +6,7 @@ using Entity.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NLayer.API.Filters;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Api.Controllers
@@ -57,6 +58,13 @@ namespace Api.Controllers
         public async Task<IActionResult> Remove(int id)
         {
             return CreateActionResult(await _service.RemoveAsync(id));
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAndReturnIds(List<OrderDto> orderDtos)
+        {
+            return CreateActionResult(await _service.SaveOrdersAndReturnIdsAsync(orderDtos));
         }
     }
 }
