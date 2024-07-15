@@ -41,7 +41,7 @@ namespace API.Controllers
             return CreateActionResult(result);
         }
 
-
+        [Authorize(Roles = "SuperUser")]
         [Authorize(Roles = "Admin, Create")]
         [HttpPost]
         public async Task<IActionResult> Create(ProductCreateDto productDto)
@@ -50,6 +50,7 @@ namespace API.Controllers
             return CreateActionResult(result);
         }
 
+        [Authorize(Roles = "SuperUser")]
         [Authorize(Roles = "Admin, Update")]
         [HttpPut]
         public async Task<IActionResult> Update(ProductUpdateDto productDto)
@@ -58,6 +59,7 @@ namespace API.Controllers
             return CreateActionResult(result);
         }
 
+        [Authorize(Roles = "SuperUser")]
         [Authorize(Roles = "Admin, Delete")]
         [ServiceFilter(typeof(NotFoundFilter<Product>))]
         [HttpDelete("{id}")]
@@ -67,6 +69,7 @@ namespace API.Controllers
             return CreateActionResult(result);
         }
 
+        [Authorize(Roles = "SuperUser")]
         [Authorize(Roles = "Admin, Create")]
         [HttpPost]
         public async Task<IActionResult> CreateAll(List<ProductDto> productDtos)

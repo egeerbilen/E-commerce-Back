@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Api.Controllers
 {
 
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "SuperUser")]
     public class RoleController : CustomBaseController
     {
         private readonly IRoleService _service;

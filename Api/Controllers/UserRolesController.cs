@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "SuperUser")]
     public class UserRolesController : CustomBaseController
     {
         private readonly IUserRoleService _userRoleService;

@@ -23,21 +23,21 @@ namespace API.Controllers
             return CreateActionResult(await _service.GetAllAsync());
         }
 
-        [Authorize(Roles = "Admin, Create")]
+        [Authorize(Roles = "SuperUser")]
         [HttpPost]
         public async Task<IActionResult> CreateCategory(CategoryDto category)
         {
             return CreateActionResult(await _service.AddAsync(category));
         }
 
-        [Authorize(Roles = "Admin, Create")]
+        [Authorize(Roles = "SuperUser")]
         [HttpPost]
         public async Task<IActionResult> CreateCategories(List<CategoryDto> categoryDto)
         {
             return CreateActionResult(await _service.AddRangeAsync(categoryDto));
         }
 
-        [Authorize(Roles = "Admin, Update")]
+        [Authorize(Roles = "SuperUser")]
         [ServiceFilter(typeof(NotFoundFilter<Category>))]
         [HttpPut]
         public async Task<IActionResult> Update(CategoryDto categoryDto)
@@ -46,7 +46,7 @@ namespace API.Controllers
             return CreateActionResult(result);
         }
 
-        [Authorize(Roles = "Admin, Delete")]
+        [Authorize(Roles = "SuperUser")]
         [ServiceFilter(typeof(NotFoundFilter<Category>))]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory(int id)
@@ -54,7 +54,7 @@ namespace API.Controllers
             return CreateActionResult(await _service.RemoveAsync(id));
         }
 
-        [Authorize(Roles = "Admin, Delete")]
+        [Authorize(Roles = "SuperUser")]
         [HttpDelete]
         public async Task<IActionResult> DeleteCategories(List<int> ids)
         {

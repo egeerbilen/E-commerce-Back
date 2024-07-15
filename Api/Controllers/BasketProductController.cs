@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class BasketProductController : CustomBaseController
     {
         private readonly IBasketProductService _basketProductService;

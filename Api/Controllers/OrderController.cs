@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace Api.Controllers
 {
-    //[Authorize(Roles = "Admin")]
     public class OrderController : CustomBaseController
     {
         private readonly IOrderService _service;
@@ -22,11 +21,13 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "SuperUser, Admin")]
         public async Task<IActionResult> GetAll()
         {
             return CreateActionResult(await _service.GetAllAsync());
         }
 
+        [Authorize(Roles = "SuperUser, Admin")]
         [ServiceFilter(typeof(NotFoundFilter<Order>))]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
@@ -34,18 +35,21 @@ namespace Api.Controllers
             return CreateActionResult(await _service.GetByIdAsync(id));
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(OrderDto orderDto)
         {
             return CreateActionResult(await _service.AddAsync(orderDto));
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateList(List<OrderDto> orderDto)
         {
             return CreateActionResult(await _service.AddRangeAsync(orderDto));
         }
 
+        [Authorize(Roles = "SuperUser, Admin")]
         [ServiceFilter(typeof(NotFoundFilter<Order>))]
         [HttpPut]
         public async Task<IActionResult> Update(OrderDto orderDto)
@@ -53,6 +57,7 @@ namespace Api.Controllers
             return CreateActionResult(await _service.UpdateAsync(orderDto));
         }
 
+        [Authorize(Roles = "SuperUser, Admin")]
         [ServiceFilter(typeof(NotFoundFilter<Order>))]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
@@ -61,6 +66,7 @@ namespace Api.Controllers
         }
 
 
+        [Authorize(Roles = "SuperUser, Admin")]
         [HttpPost]
         public async Task<IActionResult> CreateAndReturnIds(List<OrderDto> orderDtos)
         {

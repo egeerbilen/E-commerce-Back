@@ -20,7 +20,7 @@ namespace Api.Controllers
             _service = service;
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperUser")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {

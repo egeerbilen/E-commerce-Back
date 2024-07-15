@@ -4,6 +4,7 @@ using Entity.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Controllers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Api.Controllers
 {
@@ -23,6 +24,7 @@ namespace Api.Controllers
             return CreateActionResult(result);
         }
 
+        [Authorize(Roles = "SuperUser, Admin")]
         [HttpGet("User/{userId}")]
         public async Task<IActionResult> GetUserOrders(int userId)
         {
@@ -30,6 +32,7 @@ namespace Api.Controllers
             return CreateActionResult(result);
         }
 
+        [Authorize(Roles = "SuperUser, Admin")]
         [HttpGet("Order/{orderId}")]
         public async Task<IActionResult> GetOrderProducts(int orderId)
         {
