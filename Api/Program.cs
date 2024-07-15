@@ -1,6 +1,3 @@
-// .Net6 da Startup dosyasï¿½ ortadan kalktï¿½ starup dosyasï¿½ndaki kodlar program.cs dosyasï¿½na geldi
-// ibr ï¿½ey global ise Program.cs dosyasï¿½ iï¿½erisine yazmamï¿½z gerekiyor
-
 using AspNetCoreRateLimit;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -20,10 +17,11 @@ using System.Reflection;
 using System.Text;
 using Microsoft.AspNetCore.SignalR;
 using Api.Middlewares;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//Jwt configuration starts here
+// Jwt configuration starts here
 var jwtIssuer = builder.Configuration.GetSection("Jwt:Issuer").Get<string>();
 var jwtKey = builder.Configuration.GetSection("Jwt:Key").Get<string>();
 
@@ -47,20 +45,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
          IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
      };
  });
-//Jwt configuration ends here
+// Jwt configuration ends here
 
 IConfiguration configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: false, reloadOnChange: true).Build();
 
-//LoggerConfiguration
+// LoggerConfiguration
 Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
 
 builder.Host.UseSerilog();
 
 // Add services to the container.
-// ValidateFilterAttribute deðerini her bir controllessa tek tek eklemek yerine AddControllers(options => options.Filters.Add(new ValidateFilterAttribute()))
-// þeklinde ekleye biliriz
-// arrow functionlarda eðer tek satýr varsa {} lere ihtiyaç yoktur
-
 builder.Services.AddControllers(options => options.Filters.Add(new ValidateFilterAttribute()))
     .AddFluentValidation(x =>
     {
@@ -87,16 +81,15 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddSignalR();
 
-//bizim bu iþ için kendi filtýr ýmýz var diyoruz
-//builder.Services.Configure<ApiBehaviorOptions>(options =>
-//{
-//    options.SuppressModelStateInvalidFilter = true; //Frame workün kendi dönmüþ olduðu SuppressModelStateInvalidFilter baskýladýk
-//});
+// API Behaviour options
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true; // Framework'ün kendi SuppressModelStateInvalidFilter'ýný baskýladýk
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-// Cache eklemek istiyorsan aþaðýdaki commenti aç
 builder.Services.AddMemoryCache();
 
 // Configure Rate Limiting
@@ -124,8 +117,8 @@ builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>()
 builder.Services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
 builder.Services.AddInMemoryRateLimiting();
 
-// Filtreleme iþlemlarimizi burada yaptýk
-builder.Services.AddScoped(typeof(NotFoundFilter<>)); // Generic olduðu için typeof ile içine giriyorum NotFoundFilter diyoruz generic olduðu içide <> kapadýk
+// Filtreleme iþlemlerimizi burada yaptýk
+builder.Services.AddScoped(typeof(NotFoundFilter<>)); // Generic olduðu için typeof ile içine giriyoruz NotFoundFilter diyoruz ve generic olduðu için <> ile kapadýk
 
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
@@ -145,10 +138,10 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerB
 // Migration oluþturmak için kullanmamýz gereken komutlar
 // 1- Package manager Consolu aç 
 // 2- Default project: Repository seçili olsun
-// solition sað týk properity den API seçili olsun (Microsoft.EntityFrameworkCore.Desig ekli olmasý gerek bunu sadece 1 kere ekliyoruz dbcontext assebly den ayrý bir yerde olduðu için gerekli)
+// Solution sað týk property den API seçili olsun (Microsoft.EntityFrameworkCore.Design ekli olmasý gerek bunu sadece 1 kere ekliyoruz dbcontext assembly den ayrý bir yerde olduðu için gerekli)
 // add-migration initial
 // Migration dosyasý oluþturur sonrasýnda
-// snapshot dosyasý ile karþýlaþtýrýr (bu öndceden add-migration dediðmizde snapshot alýr sonra eklenen table sütunu varsa bulup ekler)
+// snapshot dosyasý ile karþýlaþtýrýr (bu önceden add-migration dediðimizde snapshot alýr sonra eklenen table sütunu varsa bulup ekler)
 // update-database
 // Drop-Database ->table sil
 
@@ -161,15 +154,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowSpecificOrigin");
-app.UseAuthorization(); // bir request geldiðinde token doðrulamasý bu midleware de gerçekleþir
-app.UseHttpsRedirection(); // https yönledirmesi
-app.UseMiddleware<LowercaseResponseMiddleware>();
-app.UseCustomException(); // bu bizim eklediðimiz hata katmaný bu hata katmanýnýn üst tarafta olmasý önemli
-app.UseIpRateLimiting();
+app.UseHttpsRedirection();
 app.UseRouting();
+app.UseCors("AllowSpecificOrigin");
+app.UseAuthentication(); // Kimlik doðrulama middleware'i
+app.UseAuthorization(); // Yetkilendirme middleware'i
+app.UseMiddleware<LowercaseResponseMiddleware>();
+app.UseCustomException(); // Bu bizim eklediðimiz hata katmaný bu hata katmanýnýn üst tarafta olmasý önemli
+app.UseIpRateLimiting();
 
-// SignalR hub'ý burada yapýlandýrýn
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
