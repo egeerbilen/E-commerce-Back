@@ -41,6 +41,13 @@ namespace Service.Mapping
             CreateMap<Product, ProductWithQuantityDto>()
                 .ForMember(dest => dest.NumberOfProducts, opt => opt.Ignore()); // Eğer NumberOfProducts otomatik olarak ayarlanmayacaksa.
 
+            CreateMap<User, UserWithRolesDto>()
+                .ForMember(dest => dest.Roles, opt => opt.MapFrom(src => src.UserRoles.Select(ur => new UserRolesDto { RoleId = ur.RoleId, RoleName = ur.Role.RoleName }).ToList()));
+            CreateMap<UserRole, UserRolesDto>()
+                .ForMember(dest => dest.RoleId, opt => opt.MapFrom(src => src.RoleId))
+                .ForMember(dest => dest.RoleName, opt => opt.MapFrom(src => src.Role.RoleName));
+
+
         }
     }
 }

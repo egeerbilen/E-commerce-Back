@@ -7,6 +7,8 @@ namespace Entity.Repositories
 {
     public interface IUserRepository : IGenericRepository<User>
     {
-        Task<User> FindUserByEmailWithRolesAsync(UserLoginRequestDto dto);
+        Task<User> FindUserByEmailWithRolesAsync(UserLoginRequestDto dto); 
+        Task<List<User>> GetAllUsersWithRolesAsync();
+
     }
 }

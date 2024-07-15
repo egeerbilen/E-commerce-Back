@@ -8,6 +8,7 @@ namespace Entity.Services
 {
     public interface IUserService : IGenericService<User, UserDto>
     {
+        Task<CustomResponseDto<List<UserWithRolesDto>>> GetAllUsersWithRolesAsync();
         Task<CustomResponseDto<NoContentDto>> DeleteUserWithDependenciesAsync(int id);
         Task<CustomResponseDto<BaseDto>> AddUserAsync(UserCreateDto dto);
         Task<CustomResponseDto<string>> GenerateJwtTokenAsync(UserLoginRequestDto dto);

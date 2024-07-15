@@ -27,6 +27,15 @@ namespace Api.Controllers
             return CreateActionResult(await _service.GetAllAsync());
         }
 
+
+        //[Authorize(Roles = "SuperUser")]
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> GetAllUsersWithRoles()
+        {
+            return CreateActionResult(await _service.GetAllUsersWithRolesAsync());
+        }
+
         [Authorize]
         [ServiceFilter(typeof(NotFoundFilter<User>))]
         [HttpGet("{id}")]

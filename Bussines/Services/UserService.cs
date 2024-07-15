@@ -132,5 +132,13 @@ namespace Bussines.Services
 
             return CustomResponseDto<string>.Success(StatusCodes.Status200OK, token);
         }
+
+        public async Task<CustomResponseDto<List<UserWithRolesDto>>> GetAllUsersWithRolesAsync()
+        {
+            var users = await _userRepository.GetAllUsersWithRolesAsync();
+            var userDtos = _mapper.Map<List<UserWithRolesDto>>(users);
+            return CustomResponseDto<List<UserWithRolesDto>>.Success(StatusCodes.Status200OK, userDtos);
+        }
+
     }
 }

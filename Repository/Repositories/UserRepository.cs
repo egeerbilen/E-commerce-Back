@@ -18,5 +18,11 @@ namespace DataAccess.Repositories
         {
             return await _context.Users.Include(x => x.UserRoles).Where(x => x.Email == dto.Email && !x.IsDeleted).AsNoTracking().SingleOrDefaultAsync();
         }
+
+        public async Task<List<User>> GetAllUsersWithRolesAsync()
+        {
+            return await _context.Users.Include(x => x.UserRoles).ThenInclude(ur => ur.Role).AsNoTracking().ToListAsync();
+        }
+
     }
 }
