@@ -103,12 +103,18 @@ namespace Bussines.Services
         public async Task<CustomResponseDto<string>> GenerateJwtTokenAsync(UserLoginRequestDto dto)
         {
             var user = await _userRepository.FindUserByEmailWithRolesAsync(dto);
-            var basket = await _basketRepository.GetByIdAsync(user.Id);
 
-            if (user == null || PasswordHelper.HashPassword(dto.Password) != user.Password)
+            if (user == null)
             {
                 return CustomResponseDto<string>.Fail(StatusCodes.Status403Forbidden, "Email or Password is not correct");
             }
+
+            if (PasswordHelper.HashPassword(dto.Password) != user.Password)
+            {
+                return CustomResponseDto<string>.Fail(StatusCodes.Status403Forbidden, "Email or Password is not correct");
+            }
+
+            var basket = await _basketRepository.GetByIdAsync(user.Id);
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -119,7 +125,7 @@ namespace Bussines.Services
                 new Claim("firstName", user.FirstName),
                 new Claim("lastName", user.LastName),
                 new Claim("userId", user.Id.ToString()),
-                new Claim("basketId", basket.Id.ToString())
+                new Claim("basketId", basket?.Id.ToString() ?? string.Empty)
             };
 
             foreach (var userRole in user.UserRoles)
